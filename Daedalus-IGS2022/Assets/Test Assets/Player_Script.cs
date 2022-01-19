@@ -28,6 +28,7 @@ public class Player_Script : MonoBehaviour
     private Vector3 hookSpot;
     public float grappleForce;
     public LineRenderer rope;
+    public float grappleRange;
 
     // Unused variable (for detecting the ground)
     public LayerMask ground;
@@ -79,9 +80,9 @@ public class Player_Script : MonoBehaviour
             anm.Play("Falling");
 
         // Flips the player if they move in a direction
-        if (xVel > 0)
+        if (xVel > 0.1f)
             transform.eulerAngles = Vector3.zero;
-        else if (xVel < 0)
+        else if (xVel < -0.1f)
             transform.eulerAngles = Vector3.up * 180;
 
         // Player's horizontal movement when grounded & ungrounded
@@ -98,25 +99,32 @@ public class Player_Script : MonoBehaviour
         }
 
         // Jump mechanic
-        if (jump > 0 && grounded)
+        if (jump > 0)
         {
-            if (!jumped)
+            if (grounded)
             {
-                rb.AddForce(Vector2.up * jumpForce * 2, ForceMode2D.Impulse);
-                jumped = true;
-            }
+                if (!jumped)
+                {
+                    rb.AddForce(Vector2.up * jumpForce * 2, ForceMode2D.Impulse);
+                    jumped = true;
+                }
 
-            rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
-            StartCoroutine(Unground());
+                rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+                StartCoroutine(Unground());
+            }
+            else if (!canGrapple && GroundCheck())
+            {
+                rb.AddForce(Vector2.up * jumpForce * 5, ForceMode2D.Impulse);
+            }
         }
 
-        // Grapple shot
+        // Grapple shot mechanic
         if (Input.GetAxis("Fire2") > 0)
         {
             if (canGrapple)
             {
                 var mousepos = cam.GetComponent<Camera>().ScreenToWorldPoint(Input.mousePosition);
-                RaycastHit2D ray = Physics2D.Raycast(this.transform.position, mousepos - this.transform.position, 20, ground);
+                RaycastHit2D ray = Physics2D.Raycast(this.transform.position, mousepos - this.transform.position, grappleRange, ground);
                 if (ray.collider != null)
                 {
                     if (grounded)
@@ -134,8 +142,14 @@ public class Player_Script : MonoBehaviour
             }
 
         }
-        else
+        else if (!canGrapple)
+        {
+            if (GroundCheck())
+                Ground();
+            rope.SetPosition(0, Vector3.zero);
+            rope.SetPosition(1, Vector3.zero);
             canGrapple = true;
+        }
     }
 
     // Coroutine allows for variable jump height by delaying the falsification of the grounded variable
@@ -151,7 +165,10 @@ public class Player_Script : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D col)
     {
         // This statement checks whether or not there is ground underneath the player whenever they hit an object
-        GroundCheck();
+        if (GroundCheck() && canGrapple)
+        {
+            Ground();
+        }
     }
 
 
@@ -160,10 +177,9 @@ public class Player_Script : MonoBehaviour
     private void OnCollisionExit2D(Collision2D col)
     {
         // This statement checks whether or not there is ground underneath the player whenever they leave contact with an object
-        if (Physics2D.BoxCast(new Vector2(this.transform.position.x, this.transform.position.y) - new Vector2(0, 1.06f), new Vector2(0.75f, 0.1f), 0, Vector2.zero))
+        if (GroundCheck() && canGrapple)
         {
-            grounded = true;
-            jumped = true;
+            Ground();
         }
         else
         {
@@ -172,12 +188,15 @@ public class Player_Script : MonoBehaviour
         }
     }
 
-    private void GroundCheck()
+    // Checks if the player is on solid ground or not
+    private bool GroundCheck()
     {
-        if (Physics2D.BoxCast(new Vector2(this.transform.position.x, this.transform.position.y) - new Vector2(0, 1.2f), new Vector2(0.75f, 0.1f), 0, Vector2.zero))
-        {
-            grounded = true;
-            jumped = false;
-        }
+        return (Physics2D.BoxCast(new Vector2(this.transform.position.x, this.transform.position.y) - new Vector2(0, 1.06f), new Vector2(0.75f, 0.1f), 0, Vector2.zero));
+    }
+
+    private void Ground()
+    {
+        grounded = true;
+        jumped = false;
     }
 }
