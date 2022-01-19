@@ -10,8 +10,9 @@ public class Player_Script : MonoBehaviour
 
     // The rigidbody for handling player movement
     public Rigidbody2D rb;
-    // The camera in the scene
+    // The camera in the scene + mouse position
     public GameObject cam;
+    private Vector3 mousePos;
     // The animator component on the player
     public Animator anm;
     // Player speed & force applied by jump
@@ -64,6 +65,9 @@ public class Player_Script : MonoBehaviour
 
         // Sets camera position relative to player
         cam.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, -10);
+
+        // Variable stores mouse position (in world position)
+        mousePos = cam.GetComponent<Camera>().ScreenToWorldPoint(Input.mousePosition);
 
         // Animator controls
         if (grounded)
@@ -123,8 +127,7 @@ public class Player_Script : MonoBehaviour
         {
             if (canGrapple)
             {
-                var mousepos = cam.GetComponent<Camera>().ScreenToWorldPoint(Input.mousePosition);
-                RaycastHit2D ray = Physics2D.Raycast(this.transform.position, mousepos - this.transform.position, grappleRange, ground);
+                RaycastHit2D ray = Physics2D.Raycast(this.transform.position, mousePos - this.transform.position, grappleRange, ground);
                 if (ray.collider != null)
                 {
                     if (grounded)
