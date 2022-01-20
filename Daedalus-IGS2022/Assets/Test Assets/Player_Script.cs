@@ -42,7 +42,7 @@ public class Player_Script : MonoBehaviour
     private float xVel = 0.0f;
     private float xVelAbs;
 
-
+    public float totalVel;
 
     // Called once when a scene is loaded
     void Start()
@@ -62,6 +62,9 @@ public class Player_Script : MonoBehaviour
         jump = Input.GetAxis("Jump");
         xVel = rb.velocity.x;
         xVelAbs = Mathf.Abs(xVel);
+
+        //calculates the speed of the player
+        totalVel = rb.velocity.magnitude;
 
         // Sets camera position relative to player
         cam.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, -10);
@@ -123,15 +126,14 @@ public class Player_Script : MonoBehaviour
         }
 
         // Grapple shot mechanic
-        if (Input.GetAxis("Fire2") > 0)
+        if (Input.GetAxis("Fire2") > 0 && CursorScript.Instance.grappleActive)
         {
             if (canGrapple)
             {
                 RaycastHit2D ray = Physics2D.Raycast(this.transform.position, mousePos - this.transform.position, grappleRange, ground);
                 if (ray.collider != null)
                 {
-                    if (grounded)
-                        grounded = false;
+                    grounded = false;
                     canGrapple = false;
                     hookSpot = ray.point;
                 }
