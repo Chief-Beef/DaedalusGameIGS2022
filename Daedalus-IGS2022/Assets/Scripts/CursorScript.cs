@@ -34,12 +34,14 @@ public class CursorScript : MonoBehaviour
         cursors[0] = fireGun;
         cursors[1] = iceGun;
         cursors[2] = poisonGun;
-      
+
         active = 0;
 
         //on start grapple active, can change to whatever
         Cursor.SetCursor(grappleCursor, mouseOffset, CursorMode.ForceSoftware);
+        grappleActive = true;
     }
+
 
     // Update is called once per frame
     void Update()

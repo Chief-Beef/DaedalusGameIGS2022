@@ -8,6 +8,8 @@ public class Player_Script : MonoBehaviour
      * Cameron's test player script *
      ********************************/
 
+    public static Player_Script Instance;
+
     // The rigidbody for handling player movement
     public Rigidbody2D rb;
     // The camera in the scene + mouse position
@@ -31,6 +33,14 @@ public class Player_Script : MonoBehaviour
     public LineRenderer rope;
     public float grappleRange;
 
+    //Gun variables
+    public float shootRange;
+    private Vector3 targetSpot;
+    public ParticleSystem sparks;
+
+    //player position
+    public Vector2 playerPos;
+
     // Unused variable (for detecting the ground)
     public LayerMask ground;
 
@@ -47,6 +57,8 @@ public class Player_Script : MonoBehaviour
     // Called once when a scene is loaded
     void Start()
     {
+        Instance = this;
+
         if (cam == null)
             cam = GameObject.FindGameObjectWithTag("MainCamera");
     }
@@ -56,6 +68,8 @@ public class Player_Script : MonoBehaviour
     // Update called once per physics update
     void FixedUpdate()
     {
+        playerPos = new Vector2(this.transform.position.x, this.transform.position.y);
+
         // Storing the input axes as floats for rerence in the script as well as the x axis velocity
         xMove = Input.GetAxis("Horizontal");
         yMove = Input.GetAxis("Vertical");
@@ -125,7 +139,20 @@ public class Player_Script : MonoBehaviour
             }
         }
 
-        // Grapple shot mechanic
+
+        //shoot gun mechanic currently only makes sparks if u shoot the ground
+        if(Input.GetButtonDown("Fire1"))
+        {
+            RaycastHit2D ray = Physics2D.Raycast(this.transform.position, mousePos - this.transform.position, shootRange, ground);
+            if (ray.collider != null)
+            {
+                targetSpot = ray.point;
+                Instantiate(sparks, targetSpot, Quaternion.identity);
+            }
+        }
+
+
+        // Grapple shot mechanic        only fires grapple if grapple is active weapon
         if (Input.GetAxis("Fire2") > 0 && CursorScript.Instance.grappleActive)
         {
             if (canGrapple)
