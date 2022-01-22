@@ -8,13 +8,10 @@ public class Player_Script : MonoBehaviour
      * Cameron's test player script *
      ********************************/
 
-    public static Player_Script Instance;
-
     // The rigidbody for handling player movement
     public Rigidbody2D rb;
-    // The camera in the scene + mouse position
+    // The camera in the scene
     public GameObject cam;
-    private Vector3 mousePos;
     // The animator component on the player
     public Animator anm;
     // Player speed & force applied by jump
@@ -33,14 +30,6 @@ public class Player_Script : MonoBehaviour
     public LineRenderer rope;
     public float grappleRange;
 
-    //Gun variables
-    public float shootRange;
-    private Vector3 targetSpot;
-    public ParticleSystem sparks;
-
-    //player position
-    public Vector2 playerPos;
-
     // Unused variable (for detecting the ground)
     public LayerMask ground;
 
@@ -52,13 +41,14 @@ public class Player_Script : MonoBehaviour
     private float xVel = 0.0f;
     private float xVelAbs;
 
-    public float totalVel;
+    public Transform boxcastA;
+    public Transform boxcastB;
+
+
 
     // Called once when a scene is loaded
     void Start()
     {
-        Instance = this;
-
         if (cam == null)
             cam = GameObject.FindGameObjectWithTag("MainCamera");
     }
@@ -68,8 +58,6 @@ public class Player_Script : MonoBehaviour
     // Update called once per physics update
     void FixedUpdate()
     {
-        playerPos = new Vector2(this.transform.position.x, this.transform.position.y);
-
         // Storing the input axes as floats for rerence in the script as well as the x axis velocity
         xMove = Input.GetAxis("Horizontal");
         yMove = Input.GetAxis("Vertical");
@@ -77,14 +65,8 @@ public class Player_Script : MonoBehaviour
         xVel = rb.velocity.x;
         xVelAbs = Mathf.Abs(xVel);
 
-        //calculates the speed of the player
-        totalVel = rb.velocity.magnitude;
-
         // Sets camera position relative to player
         cam.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, -10);
-
-        // Variable stores mouse position (in world position)
-        mousePos = cam.GetComponent<Camera>().ScreenToWorldPoint(Input.mousePosition);
 
         // Animator controls
         if (grounded)
@@ -139,28 +121,17 @@ public class Player_Script : MonoBehaviour
             }
         }
 
-
-        //shoot gun mechanic currently only makes sparks if u shoot the ground
-        if(Input.GetButtonDown("Fire1"))
-        {
-            RaycastHit2D ray = Physics2D.Raycast(this.transform.position, mousePos - this.transform.position, shootRange, ground);
-            if (ray.collider != null)
-            {
-                targetSpot = ray.point;
-                Instantiate(sparks, targetSpot, Quaternion.identity);
-            }
-        }
-
-
-        // Grapple shot mechanic        only fires grapple if grapple is active weapon
-        if (Input.GetAxis("Fire2") > 0 && CursorScript.Instance.grappleActive)
+        // Grapple shot mechanic
+        if (Input.GetAxis("Fire2") > 0)
         {
             if (canGrapple)
             {
-                RaycastHit2D ray = Physics2D.Raycast(this.transform.position, mousePos - this.transform.position, grappleRange, ground);
+                var mousepos = cam.GetComponent<Camera>().ScreenToWorldPoint(Input.mousePosition);
+                RaycastHit2D ray = Physics2D.Raycast(this.transform.position, mousepos - this.transform.position, grappleRange, ground);
                 if (ray.collider != null)
                 {
-                    grounded = false;
+                    if (grounded)
+                        grounded = false;
                     canGrapple = false;
                     hookSpot = ray.point;
                 }
@@ -223,7 +194,7 @@ public class Player_Script : MonoBehaviour
     // Checks if the player is on solid ground or not
     private bool GroundCheck()
     {
-        return (Physics2D.BoxCast(new Vector2(this.transform.position.x, this.transform.position.y) - new Vector2(0, 1.06f), new Vector2(0.75f, 0.1f), 0, Vector2.zero));
+        return Physics2D.OverlapArea(boxcastA.position, boxcastB.position);
     }
 
     private void Ground()
