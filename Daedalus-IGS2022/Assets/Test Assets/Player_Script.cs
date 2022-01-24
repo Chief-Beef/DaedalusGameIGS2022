@@ -11,7 +11,9 @@ public class Player_Script : MonoBehaviour
     // The rigidbody for handling player movement
     public Rigidbody2D rb;
     // The camera in the scene
-    public GameObject cam;
+    public Camera cam;
+    private float lastVelocity;
+
     // The animator component on the player
     public Animator anm;
     // Player speed & force applied by jump
@@ -43,13 +45,14 @@ public class Player_Script : MonoBehaviour
 
     private bool canFire = true;
     public GameObject bullet;
+    public int weaponType;
 
 
     // Called once when a scene is loaded
     void Start()
     {
         if (cam == null)
-            cam = GameObject.FindGameObjectWithTag("MainCamera");
+            cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
     }
 
 
@@ -57,6 +60,10 @@ public class Player_Script : MonoBehaviour
     // Update called once per physics update
     void FixedUpdate()
     {
+        var vel = rb.velocity.magnitude;
+        cam.GetComponent<Camera>().orthographicSize = 10 + (Mathf.Lerp(vel, lastVelocity, 0.15f)) / 2.5f;
+        lastVelocity = vel;
+
         // Storing the input axes as floats for rerence in the script as well as the x axis velocity
         xMove = Input.GetAxis("Horizontal");
         yMove = Input.GetAxis("Vertical");
@@ -215,5 +222,11 @@ public class Player_Script : MonoBehaviour
     {
         grounded = true;
         jumped = false;
+    }
+
+    private float ShootAngle()
+    {
+        float num = 0f;
+        return num;
     }
 }

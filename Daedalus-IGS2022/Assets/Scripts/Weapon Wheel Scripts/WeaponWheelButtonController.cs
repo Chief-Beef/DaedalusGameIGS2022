@@ -28,6 +28,7 @@ public class WeaponWheelButtonController : MonoBehaviour
             selectedItem.sprite = icon;
             itemText.text = itemName;
 
+            
         }
     }
 
