@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2488596291976520863}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BoxcastA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8602639014508673060}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BoxcastB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,10 +74,10 @@ GameObject:
   - component: {fileID: 3193559472410470517}
   - component: {fileID: 3193559472410470516}
   - component: {fileID: 3193559472410470514}
-  - component: {fileID: 8057646406071891023}
-  m_Layer: 0
+  - component: {fileID: 9211816773329263883}
+  m_Layer: 9
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -125,6 +125,7 @@ MonoBehaviour:
     m_Bits: 256
   boxcastA: {fileID: 2488596291976520863}
   boxcastB: {fileID: 8602639014508673060}
+  bullet: {fileID: 8767031244373720160, guid: 2f38a0f952a63894e8f5f945a411bb91, type: 3}
 --- !u!50 &3193559472410470518
 Rigidbody2D:
   serializedVersion: 4
@@ -312,8 +313,8 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!70 &8057646406071891023
-CapsuleCollider2D:
+--- !u!61 &9211816773329263883
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -326,8 +327,18 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
   m_Size: {x: 1, y: 2}
-  m_Direction: 0
+  m_EdgeRadius: 0
 --- !u!1 &3193559472434921359
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,7 +349,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3193559472434921352}
   - component: {fileID: 3193559472434921353}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Char_Placeholder (1)_7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -420,7 +431,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3193559473748459629}
   - component: {fileID: 3193559473748459630}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Char_Legs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -502,7 +513,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3193559474016404562}
   - component: {fileID: 3193559474016404563}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Char_Front_Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -585,7 +596,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3193559474025746079}
   - component: {fileID: 3193559474025746072}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Char_Back_Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -666,7 +677,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3193559474233675762}
   - component: {fileID: 3193559474233675763}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Char_Torso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
