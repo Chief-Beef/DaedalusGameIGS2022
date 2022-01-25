@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class The_Forbidden_One : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
