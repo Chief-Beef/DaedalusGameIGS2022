@@ -578,7 +578,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 15
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1287,12 +1287,12 @@ PrefabInstance:
     - target: {fileID: 3193559472410470513, guid: 6c7e3a22c4a294c42b146152d40c87db,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -47.752502
+      value: -65.6
       objectReference: {fileID: 0}
     - target: {fileID: 3193559472410470513, guid: 6c7e3a22c4a294c42b146152d40c87db,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9.784044
+      value: 27.6
       objectReference: {fileID: 0}
     - target: {fileID: 3193559472410470513, guid: 6c7e3a22c4a294c42b146152d40c87db,
         type: 3}
@@ -1342,7 +1342,7 @@ PrefabInstance:
     - target: {fileID: 3193559472410470519, guid: 6c7e3a22c4a294c42b146152d40c87db,
         type: 3}
       propertyPath: grappleRange
-      value: 99999
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c7e3a22c4a294c42b146152d40c87db, type: 3}

@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/AOT_Clone/AOT season 5.unity
+    guid: 1129a476f399ae840bd9d83056e3c8bf
   m_configObjects: {}
