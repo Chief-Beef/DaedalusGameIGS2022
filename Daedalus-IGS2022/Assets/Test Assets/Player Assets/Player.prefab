@@ -319,7 +319,7 @@ MonoBehaviour:
   currentStamina: 0
   ground:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   grapple:
     serializedVersion: 2
     m_Bits: 18688

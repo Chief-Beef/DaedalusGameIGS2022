@@ -121,7 +121,7 @@ public class Player_Script : MonoBehaviour
         {
             rb.AddForce(new Vector2(xMove * airSpeed, 0));
         }
-        else if (!canGrapple && rb.velocity.x < 20) // Airborn movement
+        else if (!canGrapple) // Airborn movement
         {
             rb.AddForce(new Vector2(xMove, yMove) * airSpeed);
         }
@@ -194,17 +194,17 @@ public class Player_Script : MonoBehaviour
             }
 
         }
-        // This statement 
+        // This statement is executed when the grapple is finished
         else if (!canGrapple)
         {
-            if (GroundCheck()) // Checks if player is on ground when done grappling
-                Ground();
-
             Destroy(grappleSpotPos.gameObject); // Destroys instantiated grappleSpot
             canGrapple = true; // Resets grappleshot
             isGrappling = false; // Allows game to grapple again
             canFire = false; // Prevents player from firing another grapple shot until they release the keybind
             StartCoroutine(CanReloadGrapple()); // Coroutine to prevent grapple spamming
+
+            if (GroundCheck()) // Checks if player is on ground when done grappling
+                Ground();
         }
         else if (Input.GetAxis("Fire2") == 0 && canReload)
             canFire = true;
@@ -256,9 +256,7 @@ public class Player_Script : MonoBehaviour
     {
         // This statement checks whether or not there is ground underneath the player whenever they hit an object
         if (GroundCheck() && canGrapple)
-        {
             Ground();
-        }
     }
 
 
@@ -268,10 +266,8 @@ public class Player_Script : MonoBehaviour
     {
         // This statement checks whether or not there is ground underneath the player whenever they leave contact with an object
         if (GroundCheck() && canGrapple)
-        {
             Ground();
-        }
-        else
+        else if (!canGrapple)
         {
             grounded = false;
             jumped = true;
