@@ -20,6 +20,7 @@ public class Player_Script : MonoBehaviour
     // Player speed & force applied by jump
     public float speed;
     public float airSpeed;
+    public float maneuverSpeed;
     public float jumpForce;
 
     private bool grounded = true; // Boolean true if player is on the ground
@@ -117,13 +118,13 @@ public class Player_Script : MonoBehaviour
         {
             rb.AddForce(new Vector2(xMove * speed, 0));
         }
-        else if (canGrapple)
+        else if (canGrapple) // Airborn movement (no grapple)
         {
             rb.AddForce(new Vector2(xMove * airSpeed, 0));
         }
-        else if (!canGrapple) // Airborn movement
+        else if (!canGrapple) // Airborn movement while grappling
         {
-            rb.AddForce(new Vector2(xMove, yMove) * airSpeed);
+            rb.AddForce(new Vector2(xMove, yMove) * maneuverSpeed);
         }
 
         // Jump mechanic
