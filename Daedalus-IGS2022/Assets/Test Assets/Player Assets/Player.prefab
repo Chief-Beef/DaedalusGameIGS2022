@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1302266086612698468}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5, y: -1.05, z: 0}
+  m_LocalPosition: {x: -0.45, y: -1.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3193559472410470513}
@@ -54,7 +54,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1357216685006738844}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: -1.15, z: 0}
+  m_LocalPosition: {x: 0.45, y: -1.15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3193559472410470513}
@@ -308,7 +308,7 @@ MonoBehaviour:
   anm: {fileID: 3193559472410470517}
   speed: 25
   airSpeed: 5
-  maneuverSpeed: 25
+  maneuverSpeed: 15
   jumpForce: 1
   grappleForce: 3.5
   rope: {fileID: 3193559472410470514}

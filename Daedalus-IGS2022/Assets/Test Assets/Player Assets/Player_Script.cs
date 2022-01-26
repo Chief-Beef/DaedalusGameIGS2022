@@ -244,7 +244,7 @@ public class Player_Script : MonoBehaviour
         grounded = false;
     }
 
-
+    // Coroutine stops grapple spamming
     IEnumerator CanReloadGrapple()
     {
         yield return new WaitForSeconds(0.2f);
