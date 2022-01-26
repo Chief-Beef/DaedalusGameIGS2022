@@ -308,6 +308,7 @@ MonoBehaviour:
   anm: {fileID: 3193559472410470517}
   speed: 25
   airSpeed: 5
+  maneuverSpeed: 25
   jumpForce: 1
   grappleForce: 3.5
   rope: {fileID: 3193559472410470514}
