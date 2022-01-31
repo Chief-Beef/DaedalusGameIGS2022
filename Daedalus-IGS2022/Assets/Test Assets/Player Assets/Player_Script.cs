@@ -268,7 +268,7 @@ public class Player_Script : MonoBehaviour
         // This statement checks whether or not there is ground underneath the player whenever they leave contact with an object
         if (GroundCheck() && canGrapple)
             Ground();
-        else if (!canGrapple)
+        else
         {
             grounded = false;
             jumped = true;
