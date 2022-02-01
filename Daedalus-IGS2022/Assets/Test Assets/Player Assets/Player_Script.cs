@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player_Script : MonoBehaviour
 {
     /********************************
-     * Cameron's test player script *
+     *         Player script        *
      ********************************/
 
     // The rigidbody for handling player movement
