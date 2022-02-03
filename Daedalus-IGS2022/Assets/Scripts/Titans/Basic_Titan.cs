@@ -29,11 +29,16 @@ public class Basic_Titan : MonoBehaviour
     // Attacking
     private bool isAttacking = false;
 
+    private bool alive = true;
+    public SpriteRenderer[] pieces;
+    private float opacity = 1.0f;
+
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+
         if (player.transform.position.x < this.transform.position.x)
             chaseDirection = -1;
         else
@@ -47,8 +52,10 @@ public class Basic_Titan : MonoBehaviour
             float playerDirection = player.transform.position.x - this.transform.position.x;
             var distanceFromPlayer = Mathf.Abs(playerDirection);
 
+            // Will approach player if not attacking & player is within engagement distance
             if (distanceFromPlayer < engageDistance && !isAttacking)
             {
+                // Prevents titan from simply walking into player
                 if (distanceFromPlayer > 5)
                 {
                     // Player is in front of titan (left-facing)
@@ -67,11 +74,13 @@ public class Basic_Titan : MonoBehaviour
                 else
                     anm.SetBool("isWalking", false);
 
+                // Reverses direction if player is behind titan
                 if (player.transform.position.x > this.transform.position.x && chaseDirection == -1)
                 {
                     StopCoroutine(ReverseDirection());
                     StartCoroutine(ReverseDirection());
                 }
+                // Reverses direction if player is behind titan
                 else if (player.transform.position.x < this.transform.position.x && chaseDirection == 1)
                 {
                     StopCoroutine(ReverseDirection());
@@ -79,42 +88,47 @@ public class Basic_Titan : MonoBehaviour
                 }
             }
             else
-                anm.SetBool("isWalking", false);
+                anm.SetBool("isWalking", false); // Will stop animator if player is not within range
         }
         else
-            anm.SetBool("isWalking", false);
+            anm.SetBool("isWalking", false); // Will stop animator if player is dead
     }
 
     private void OnTriggerStay2D(Collider2D trigger)
     {
+        // Will attack player if attack is not already occurring
         if (!isAttacking)
         {
             Attack();
         }
     }
     
+    // Function called by animator when attack ends to reset animation state and clear isAttacking boolean
     public void EndAttack()
     {
         isAttacking = false;
         anm.SetBool("attackingHigh", false);
         anm.SetBool("attackingLow", false);
         anm.SetBool("attackingFeet", false);
-        Debug.Log("end");
     }
 
+    // Triggered when player enters titan's attack zone
     private void Attack()
     {
         isAttacking = true;
         StopCoroutine(ReverseDirection());
+        // Attacks high when player is higher up
         if (player.transform.position.y > this.transform.position.y)
         {
             anm.SetBool("attackingHigh", true);
         }
-        else if (player.transform.position.y <= this.transform.position.y && player.transform.position.y > this.transform.position.y - 10f)
+        // Attacks low when player is lower down
+        else if (player.transform.position.y <= this.transform.position.y && player.transform.position.y > this.transform.position.y - 12f)
         {
             anm.SetBool("attackingLow", true);
         }
-        else if (player.transform.position.y <= this.transform.position.y - 10f)
+        // Kicks at player if they're really low
+        else if (player.transform.position.y <= this.transform.position.y - 12f)
         {
             anm.SetBool("attackingFeet", true);
         }
@@ -123,9 +137,35 @@ public class Basic_Titan : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (!alive)
+        {
+            if (opacity > 0)
+            {
+                opacity -= Time.deltaTime * 0.15f;
+                for (int i = 0; i < pieces.Length; i++)
+                {
+                    pieces[i].color = new Color(255, 255, 255, opacity);
+                }
+            }
+            else
+            {
+                Destroy(this.gameObject);
+            }
+        }
     }
 
+    public void InitKill()
+    {
+        Destroy(this.GetComponent<BoxCollider2D>());
+    }
+
+    // Triggered at end of death animation
+    public void Kill()
+    {
+        alive = false;
+    }
+
+    // A coroutine for flipping the titan around to prevent them from instantly turning around
     IEnumerator ReverseDirection()
     {
         yield return new WaitForSeconds(turnTime);
