@@ -26,6 +26,8 @@ public class Basic_Titan : MonoBehaviour
     private int chaseDirection = -1;
     // Time it takes for titan to turn around fully
     public float turnTime;
+    // Attacking
+    private bool isAttacking = false;
 
 
     // Start is called before the first frame update
@@ -40,59 +42,81 @@ public class Basic_Titan : MonoBehaviour
 
     private void FixedUpdate()
     {
-        float playerDirection = player.transform.position.x - this.transform.position.x;
-        var distanceFromPlayer = Mathf.Abs(playerDirection);
-
-        if (distanceFromPlayer < engageDistance)
+        if (player != null)
         {
-            // Player is in front of titan (left-facing)
-            if (player.transform.position.x < this.transform.position.x && chaseDirection == -1)
+            float playerDirection = player.transform.position.x - this.transform.position.x;
+            var distanceFromPlayer = Mathf.Abs(playerDirection);
+
+            if (distanceFromPlayer < engageDistance && !isAttacking)
             {
-                rb.velocity = new Vector2(-speed, rb.velocity.y);
+                if (distanceFromPlayer > 5)
+                {
+                    // Player is in front of titan (left-facing)
+                    if (player.transform.position.x < this.transform.position.x && chaseDirection == -1)
+                    {
+                        rb.velocity = new Vector2(-speed, rb.velocity.y);
+                        anm.SetBool("isWalking", true);
+                    }
+                    // Player is in front of titan (right-facing)
+                    else if (player.transform.position.x > this.transform.position.x && chaseDirection == 1)
+                    {
+                        rb.velocity = new Vector2(speed, rb.velocity.y);
+                        anm.SetBool("isWalking", true);
+                    }
+                }
+                else
+                    anm.SetBool("isWalking", false);
+
+                if (player.transform.position.x > this.transform.position.x && chaseDirection == -1)
+                {
+                    StopCoroutine(ReverseDirection());
+                    StartCoroutine(ReverseDirection());
+                }
+                else if (player.transform.position.x < this.transform.position.x && chaseDirection == 1)
+                {
+                    StopCoroutine(ReverseDirection());
+                    StartCoroutine(ReverseDirection());
+                }
             }
-            // Player is in front of titan (right-facing)
-            else if ((player.transform.position.x > this.transform.position.x && chaseDirection == 1))
-            {
-                rb.velocity = new Vector2(speed, rb.velocity.y);
-            }
+            else
+                anm.SetBool("isWalking", false);
         }
+        else
+            anm.SetBool("isWalking", false);
     }
 
-    private void OnTriggerEnter2D(Collider2D trigger)
+    private void OnTriggerStay2D(Collider2D trigger)
     {
-        // Titan is facing left
-        if (chaseDirection == -1)
+        if (!isAttacking)
         {
-            // Player is behind titan (turn around)
-            if (player.transform.position.x > this.transform.position.x)
-            {
-                Debug.Log("player is behind!");
-                StopCoroutine(ReverseDirection());
-                StartCoroutine(ReverseDirection());
-            }
-            // Player is in front of titan (attack player)
-            else if (player.transform.position.x < this.transform.position.x)
-            {
-                Debug.Log("player is in front!");
-                // Do attack animation
-            }
+            Attack();
         }
-        // Titan is facing right
-        else
+    }
+    
+    public void EndAttack()
+    {
+        isAttacking = false;
+        anm.SetBool("attackingHigh", false);
+        anm.SetBool("attackingLow", false);
+        anm.SetBool("attackingFeet", false);
+        Debug.Log("end");
+    }
+
+    private void Attack()
+    {
+        isAttacking = true;
+        StopCoroutine(ReverseDirection());
+        if (player.transform.position.y > this.transform.position.y)
         {
-            // Player is behind titan (turn around)
-            if (player.transform.position.x < this.transform.position.x)
-            {
-                Debug.Log("player is behind!");
-                StopCoroutine(ReverseDirection());
-                StartCoroutine(ReverseDirection());
-            }
-            // Player is in front of titan (attack player)
-            else if (player.transform.position.x > this.transform.position.x)
-            {
-                Debug.Log("player is in front!");
-                // Do attack animation
-            }
+            anm.SetBool("attackingHigh", true);
+        }
+        else if (player.transform.position.y <= this.transform.position.y && player.transform.position.y > this.transform.position.y - 10f)
+        {
+            anm.SetBool("attackingLow", true);
+        }
+        else if (player.transform.position.y <= this.transform.position.y - 10f)
+        {
+            anm.SetBool("attackingFeet", true);
         }
     }
 
@@ -106,11 +130,14 @@ public class Basic_Titan : MonoBehaviour
     {
         yield return new WaitForSeconds(turnTime);
 
-        if ((player.transform.position.x > this.transform.position.x && chaseDirection == -1) ||
-            (player.transform.position.x < this.transform.position.x && chaseDirection == 1))
+        if (!isAttacking)
         {
-            transform.eulerAngles += Vector3.up * 180;
-            chaseDirection *= -1;
+            if ((player.transform.position.x > this.transform.position.x && chaseDirection == -1) ||
+                (player.transform.position.x < this.transform.position.x && chaseDirection == 1))
+            {
+                transform.eulerAngles += Vector3.up * 180;
+                chaseDirection *= -1;
+            }
         }
     }
 }
