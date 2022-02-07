@@ -6,7 +6,7 @@ TagManager:
   tags:
   - Bullet
   - PlayerAttack
-  - FlyingEnemy1
+  - TitanAttack
   layers:
   - Default
   - TransparentFX

@@ -310,7 +310,7 @@ MonoBehaviour:
   airSpeed: 5
   maneuverSpeed: 15
   jumpForce: 1
-  grappleForce: 3.5
+  grappleForce: 3
   rope: {fileID: 3193559472410470514}
   grappleRange: 45
   staminaBar: {fileID: 6358945192514104127}
