@@ -260,7 +260,11 @@ public class Player_Script : MonoBehaviour
             Ground();
     }
 
-
+    private void OnTriggerEnter2D(Collider2D trigger)
+    {
+        if (trigger.gameObject.tag == "TitanAttack")
+            Destroy(this.gameObject);
+    }
 
     // Triggered whenever ending collision with object
     private void OnCollisionExit2D(Collision2D col)
