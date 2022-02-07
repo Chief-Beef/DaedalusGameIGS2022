@@ -1167,6 +1167,9 @@ MonoBehaviour:
   - {fileID: 7860391418665933164}
   - {fileID: 7860391419002559286}
   - {fileID: 7860391418884130905}
+  grappleSpots:
+  - {fileID: 3120149882145965937}
+  - {fileID: 4853718694327036980}
 --- !u!95 &7860391418139569026
 Animator:
   serializedVersion: 3
