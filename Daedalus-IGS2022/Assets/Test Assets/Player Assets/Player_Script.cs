@@ -41,7 +41,10 @@ public class Player_Script : MonoBehaviour
     public GameObject grappleSpot; // The ojbect that gets instantiated when a grappleshot lands
     private GameObject grappleSpotPos; // The variable that keeps track of the grappleSpot to allow grappling to a moving object
 
-
+    //Gunnar Code Attempt 2
+    public ParticleSystem farticleEffect;
+    public Vector3 farticleEffectRotation;
+    public bool activeFart;
 
     public float grappleStamina; // Total stamina
     public float currentStamina; // Current stamina
@@ -127,7 +130,7 @@ public class Player_Script : MonoBehaviour
             rb.AddForce(new Vector2(xMove, yMove) * maneuverSpeed);
         }
 
-        // Jump mechanic
+        // Fart mechanic
         if (jump > 0)
         {
             if (grounded)
@@ -160,7 +163,7 @@ public class Player_Script : MonoBehaviour
         }
         */
 
-
+    
         // Grapple shot mechanic
         if (Input.GetAxis("Fire2") > 0 && canFire && currentStamina > 0)
         {
@@ -186,6 +189,8 @@ public class Player_Script : MonoBehaviour
                     grappleSpotPos = Instantiate(grappleSpot, grappleRay.point, Quaternion.identity, grappleRay.collider.gameObject.transform);
 
                     // hookSpot = grappleRay.point; // Grappleshot will hook onto the point where the raycast hit
+                     
+                    //Frick u cam im gonna write the word fart in this program
                 }
             }
             else if (grappleSpotPos != null)
