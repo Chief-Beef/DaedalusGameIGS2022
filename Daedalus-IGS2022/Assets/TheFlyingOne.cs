@@ -86,7 +86,7 @@ public class TheFlyingOne : MonoBehaviour
         //range = flyingEnemy.GetComponent<FlyingEnemyPlayerDetectionScript>();
         firstMove = true;
         TheForbidenOneRange = scriptObject.GetComponent<FlyingEnemyPlayerDetectionScript>();
-       // isInRange = TheForbidenOneRange.inRange;
+        isInRange = TheForbidenOneRange.inRange;
 
     }
 
@@ -103,7 +103,7 @@ public class TheFlyingOne : MonoBehaviour
             transform.localScale = new Vector3(-1, 1, 1);
             firstMove = true;
         }
-        if (canMove)
+        if (canMove && !isInRange)
         {
             if (firstMove)
             {
@@ -113,6 +113,10 @@ public class TheFlyingOne : MonoBehaviour
             {
                 transform.position = Vector3.MoveTowards(transform.position, targetPos2, speed * Time.deltaTime);
             }
+        }
+        else if(canMove && isInRange)
+        {
+            TheForbidenOne.position = Vector2.MoveTowards(TheForbidenOne.position, Player.position, speed * Time.deltaTime);
         }
 
     }
