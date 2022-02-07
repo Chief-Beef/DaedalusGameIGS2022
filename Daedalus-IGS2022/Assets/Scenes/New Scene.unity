@@ -963,10 +963,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 172482222}
-  - component: {fileID: 172482224}
   - component: {fileID: 172482223}
-  m_Layer: 12
-  m_Name: Weakspot_Of_The_Forbidden_One
+  - component: {fileID: 172482224}
+  m_Layer: 13
+  m_Name: FlyingEnemyPlayerDetection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -980,8 +980,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 172482221}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.45, y: 3.72, z: 0}
-  m_LocalScale: {x: 3.5742, y: 3.5742, z: 3.5742}
+  m_LocalPosition: {x: -0.7, y: -0.8, z: 0}
+  m_LocalScale: {x: 23.429789, y: 23.429789, z: 23.429789}
   m_Children: []
   m_Father: {fileID: 803515955}
   m_RootOrder: 4
@@ -996,7 +996,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -1011,10 +1011,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 172482221}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41dceb3d4b40caa4aa7985d967b05cc3, type: 3}
+  m_Script: {fileID: 11500000, guid: a01aa2f2d63190449b13fe66309bf7ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentObject: {fileID: 803515954}
+  Player: {fileID: 586780688}
+  TheForbidenOne: {fileID: 803515955}
+  inRange: 0
+  TheForbiddenOne: {fileID: 803515954}
+  body: {fileID: 803515957}
+  speed: 10
 --- !u!1 &181802233
 GameObject:
   m_ObjectHideFlags: 0
@@ -1663,6 +1668,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &269557811
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 269557812}
+  m_Layer: 15
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &269557812
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 269557811}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 803515955}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &330898490
 GameObject:
   m_ObjectHideFlags: 0
@@ -3067,6 +3102,12 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!4 &586780688 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3193559472410470513, guid: 6c7e3a22c4a294c42b146152d40c87db,
+    type: 3}
+  m_PrefabInstance: {fileID: 1584863501}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &604483026
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3688,6 +3729,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: The Forbidden One
       objectReference: {fileID: 0}
+    - target: {fileID: 3861804055802241024, guid: 95017032560d33644879abe93b27e9a2,
+        type: 3}
+      propertyPath: m_TagString
+      value: FlyingEnemy1
+      objectReference: {fileID: 0}
     - target: {fileID: 3861804055802241025, guid: 95017032560d33644879abe93b27e9a2,
         type: 3}
       propertyPath: m_RootOrder
@@ -3780,6 +3826,16 @@ MonoBehaviour:
   speed: 50
   canMove: 1
   firstMove: 0
+  TheForbidenOneRange: {fileID: 172482224}
+  range: {fileID: 172482223}
+  Player: {fileID: 586780688}
+  TheForbidenOne: {fileID: 803515955}
+--- !u!50 &803515957 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 3861804055802241026, guid: 95017032560d33644879abe93b27e9a2,
+    type: 3}
+  m_PrefabInstance: {fileID: 803515953}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &810157122
 GameObject:
   m_ObjectHideFlags: 0
@@ -5522,7 +5578,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 20
+  orthographic size: 38.69772
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -7312,6 +7368,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3193559472410470519, guid: 6c7e3a22c4a294c42b146152d40c87db,
+        type: 3}
+      propertyPath: speed
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c7e3a22c4a294c42b146152d40c87db, type: 3}
