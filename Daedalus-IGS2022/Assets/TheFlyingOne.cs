@@ -74,6 +74,7 @@ public class TheFlyingOne : MonoBehaviour
     public bool canMove;
     public bool firstMove;
     public FlyingEnemyPlayerDetectionScript TheForbidenOneRange;
+    public GameObject scriptObject;
     private bool isInRange;
     public CircleCollider2D range;
     public Transform Player;
@@ -84,7 +85,7 @@ public class TheFlyingOne : MonoBehaviour
     {
         //range = flyingEnemy.GetComponent<FlyingEnemyPlayerDetectionScript>();
         firstMove = true;
-        TheForbidenOneRange = GameObject.FindGameObjectWithTag("FlyingEnemy1").GetComponent<FlyingEnemyPlayerDetectionScript>();
+        TheForbidenOneRange = scriptObject.GetComponent<FlyingEnemyPlayerDetectionScript>();
        // isInRange = TheForbidenOneRange.inRange;
 
     }
