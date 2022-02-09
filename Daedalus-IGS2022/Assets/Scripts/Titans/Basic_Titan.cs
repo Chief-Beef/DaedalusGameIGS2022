@@ -138,6 +138,7 @@ public class Basic_Titan : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Fade out when dead
         if (!alive)
         {
             if (opacity > 0)
@@ -157,6 +158,7 @@ public class Basic_Titan : MonoBehaviour
 
     public void InitKill()
     {
+        // Function is called when dead
         alive = false;
         Destroy(this.GetComponent<BoxCollider2D>());
         Destroy(rb);
