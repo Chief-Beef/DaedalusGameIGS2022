@@ -31,6 +31,7 @@ public class Basic_Titan : MonoBehaviour
 
     private bool alive = true;
     public SpriteRenderer[] pieces;
+    public GameObject[] grappleSpots;
     private float opacity = 1.0f;
 
 
@@ -47,7 +48,7 @@ public class Basic_Titan : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (player != null)
+        if (player != null && alive)
         {
             float playerDirection = player.transform.position.x - this.transform.position.x;
             var distanceFromPlayer = Mathf.Abs(playerDirection);
@@ -156,7 +157,17 @@ public class Basic_Titan : MonoBehaviour
 
     public void InitKill()
     {
+        alive = false;
         Destroy(this.GetComponent<BoxCollider2D>());
+        Destroy(rb);
+        for (int i = 0; i < pieces.Length; i++)
+        {
+            pieces[i].GetComponent<BoxCollider2D>().enabled = false;
+        }
+        for (int i = 0; i < grappleSpots.Length; i++)
+        {
+            grappleSpots[i].GetComponent<BoxCollider2D>().enabled = false;
+        }
     }
 
     // Triggered at end of death animation
@@ -170,7 +181,7 @@ public class Basic_Titan : MonoBehaviour
     {
         yield return new WaitForSeconds(turnTime);
 
-        if (!isAttacking)
+        if (!isAttacking && player != null)
         {
             if ((player.transform.position.x > this.transform.position.x && chaseDirection == -1) ||
                 (player.transform.position.x < this.transform.position.x && chaseDirection == 1))

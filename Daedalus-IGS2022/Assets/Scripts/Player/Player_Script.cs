@@ -41,7 +41,10 @@ public class Player_Script : MonoBehaviour
     public GameObject grappleSpot; // The ojbect that gets instantiated when a grappleshot lands
     private GameObject grappleSpotPos; // The variable that keeps track of the grappleSpot to allow grappling to a moving object
 
-
+    //Gunnar Code Attempt 2 :)
+    public ParticleSystem farticleEffect;
+    public Vector3 farticleEffectRotation;
+    public bool activeFart;
 
     public float grappleStamina; // Total stamina
     public float currentStamina; // Current stamina
@@ -53,6 +56,7 @@ public class Player_Script : MonoBehaviour
     private float xMove;
     private float yMove;
     private float jump;
+
     // Stores velocity on the x axis as a float
     private float xVel = 0.0f;
     private float xVelAbs;
@@ -60,10 +64,6 @@ public class Player_Script : MonoBehaviour
     // Transforms used in ground checks
     public Transform boxcastA;
     public Transform boxcastB;
-
-    // private bool canFire = true;
-    public GameObject bullet;
-    public int weaponType;
 
 
     // Called once when a scene is loaded
@@ -127,7 +127,7 @@ public class Player_Script : MonoBehaviour
             rb.AddForce(new Vector2(xMove, yMove) * maneuverSpeed);
         }
 
-        // Jump mechanic
+        // Fart mechanic
         if (jump > 0)
         {
             if (grounded)
@@ -151,7 +151,7 @@ public class Player_Script : MonoBehaviour
         }
 
         /*
-        if (Input.GetAxis("Fire1") > 0 && canFire)
+
         {
             Instantiate(bullet, this.transform.position, Quaternion.Euler(0, 0, (Mathf.Atan2(mousePos.y - this.transform.position.y, mousePos.x - this.transform.position.x))), null);
 
@@ -159,9 +159,7 @@ public class Player_Script : MonoBehaviour
             StartCoroutine(Chamber());
         }
         */
-
-
-        // Grapple shot mechanic
+            // Grapple shot mechanic
         if (Input.GetAxis("Fire2") > 0 && canFire && currentStamina > 0)
         {
             if (canGrapple)
@@ -186,6 +184,8 @@ public class Player_Script : MonoBehaviour
                     grappleSpotPos = Instantiate(grappleSpot, grappleRay.point, Quaternion.identity, grappleRay.collider.gameObject.transform);
 
                     // hookSpot = grappleRay.point; // Grappleshot will hook onto the point where the raycast hit
+                     
+                    //Frick u cam im gonna write the word fart in this program
                 }
             }
             else if (grappleSpotPos != null)
@@ -247,10 +247,9 @@ public class Player_Script : MonoBehaviour
     // Coroutine stops grapple spamming
     IEnumerator CanReloadGrapple()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.15f);
         canReload = true;
     }
-
 
     // Triggered upon colliding with object
     private void OnCollisionEnter2D(Collision2D col)

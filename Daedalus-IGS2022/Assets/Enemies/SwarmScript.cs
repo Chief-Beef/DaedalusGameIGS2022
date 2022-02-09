@@ -59,7 +59,7 @@ public class SwarmScript : MonoBehaviour
             }
         }
 
-        if (Vector2.Distance(player.transform.position, this.transform.position) < attackDistance && lungeTimer <= 0)
+        if (playerDistance < attackDistance && lungeTimer <= 0)
         {
             lungeTimer = 3f;    
             Lunge();
