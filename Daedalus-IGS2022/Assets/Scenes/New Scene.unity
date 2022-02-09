@@ -1014,12 +1014,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a01aa2f2d63190449b13fe66309bf7ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parentObject: {fileID: 3861804055188065841}
   Player: {fileID: 586780688}
   TheForbidenOne: {fileID: 3861804055188065840}
   inRange: 0
   TheForbiddenOne: {fileID: 3861804055188065841}
   body: {fileID: 3861804055188065843}
-  speed: 10
+  speed: 50
 --- !u!1 &181802233
 GameObject:
   m_ObjectHideFlags: 0
@@ -2238,6 +2239,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &424311020 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3193559472410470475, guid: 6c7e3a22c4a294c42b146152d40c87db,
+    type: 3}
+  m_PrefabInstance: {fileID: 1584863501}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &424311027
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424311020}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &437629582
 GameObject:
   m_ObjectHideFlags: 0
@@ -3736,9 +3759,12 @@ MonoBehaviour:
   firstMove: 0
   TheForbidenOneRange: {fileID: 172482224}
   scriptObject: {fileID: 172482221}
+  isInRange: 0
   range: {fileID: 172482223}
   Player: {fileID: 586780688}
   TheForbidenOne: {fileID: 3861804055188065840}
+  TheForbiddenOne: {fileID: 3861804055188065841}
+  body: {fileID: 3861804055188065843}
 --- !u!1 &810157122
 GameObject:
   m_ObjectHideFlags: 0
@@ -7277,6 +7303,16 @@ PrefabInstance:
       propertyPath: speed
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 3193559474233675761, guid: 6c7e3a22c4a294c42b146152d40c87db,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 9211816773329263883, guid: 6c7e3a22c4a294c42b146152d40c87db,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c7e3a22c4a294c42b146152d40c87db, type: 3}
 --- !u!1 &1595172834
@@ -8467,6 +8503,38 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1823376610 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3193559474233675761, guid: 6c7e3a22c4a294c42b146152d40c87db,
+    type: 3}
+  m_PrefabInstance: {fileID: 1584863501}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &1823376613
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823376610}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.010320663, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2, y: 2}
+    newSize: {x: 2, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.3830223, y: 2}
+  m_EdgeRadius: 0
 --- !u!1 &1833224063
 GameObject:
   m_ObjectHideFlags: 0

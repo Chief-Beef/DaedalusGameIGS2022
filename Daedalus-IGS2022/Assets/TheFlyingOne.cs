@@ -75,16 +75,19 @@ public class TheFlyingOne : MonoBehaviour
     public bool firstMove;
     public FlyingEnemyPlayerDetectionScript TheForbidenOneRange;
     public GameObject scriptObject;
-    private bool isInRange;
+    public bool isInRange;
     public CircleCollider2D range;
     public Transform Player;
     public Transform TheForbidenOne;
+    public GameObject TheForbiddenOne;
+    public Rigidbody2D body;
     //public GameObject flyingEnemy;
     //private FlyingEnemyPlayerDetectionScript range;
     void Start()
     {
         //range = flyingEnemy.GetComponent<FlyingEnemyPlayerDetectionScript>();
         firstMove = true;
+        body = TheForbiddenOne.GetComponent<Rigidbody2D>();
         TheForbidenOneRange = scriptObject.GetComponent<FlyingEnemyPlayerDetectionScript>();
         isInRange = TheForbidenOneRange.inRange;
 
@@ -103,8 +106,10 @@ public class TheFlyingOne : MonoBehaviour
             transform.localScale = new Vector3(-1, 1, 1);
             firstMove = true;
         }
-        if (canMove && !isInRange)
+        if (canMove && isInRange)
         {
+            //TheForbidenOne.position = Vector2.MoveTowards(TheForbidenOne.position, Player.position, speed * Time.deltaTime);
+            
             if (firstMove)
             {
                 transform.position = Vector3.MoveTowards(transform.position, targetPos1, speed * Time.deltaTime);
@@ -114,10 +119,14 @@ public class TheFlyingOne : MonoBehaviour
                 transform.position = Vector3.MoveTowards(transform.position, targetPos2, speed * Time.deltaTime);
             }
         }
-        else if(canMove && isInRange)
-        {
-            TheForbidenOne.position = Vector2.MoveTowards(TheForbidenOne.position, Player.position, speed * Time.deltaTime);
-        }
+        //else if(canMove && isInRange)
+        //{
+            //TheForbidenOne.position = Vector2.MoveTowards(TheForbidenOne.position, Player.position, speed * Time.deltaTime);
+            //Vector3 directionOfPlayer = Player.position - TheForbidenOne.position;
+            //Debug.Log(directionOfPlayer);
+            //float angle = Mathf.Atan2(directionOfPlayer.y, directionOfPlayer.x) * Mathf.Rad2Deg;
+            //body.rotation = -angle;
+        //}
 
     }
 }
