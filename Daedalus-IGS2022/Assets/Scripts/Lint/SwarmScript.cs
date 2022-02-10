@@ -93,8 +93,8 @@ public class SwarmScript : MonoBehaviour
         //RayCasts can kick rocks
         //Debug Testing Stuff
 
-        if (wallRay)
-            Debug.Log("I detect: " + playerRay.collider.name + "\t RangeFinder: " + playerRay.distance + "\t Normal Angle: " + playerRay.normal);        
+        //if (wallRay)
+          //  Debug.Log("I detect: " + playerRay.collider.name + "\t RangeFinder: " + playerRay.distance + "\t Normal Angle: " + playerRay.normal);
         
         //END DEBUG TESTING
 
