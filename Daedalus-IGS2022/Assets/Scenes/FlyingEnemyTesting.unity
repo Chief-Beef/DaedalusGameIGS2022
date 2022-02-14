@@ -981,7 +981,7 @@ Transform:
   m_GameObject: {fileID: 172482221}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.7, y: -0.8, z: 0}
-  m_LocalScale: {x: 23.429789, y: 23.429789, z: 23.429789}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3861804055188065840}
   m_RootOrder: 4
@@ -1001,7 +1001,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 50
 --- !u!114 &172482224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1020,7 +1020,7 @@ MonoBehaviour:
   inRange: 0
   TheForbiddenOne: {fileID: 3861804055188065841}
   body: {fileID: 3861804055188065843}
-  speed: 50
+  speed: 15
 --- !u!1 &181802233
 GameObject:
   m_ObjectHideFlags: 0
@@ -3757,7 +3757,7 @@ MonoBehaviour:
   speed: 50
   canMove: 1
   firstMove: 0
-  TheForbidenOneRange: {fileID: 172482224}
+  TheForbidenOneRange: {fileID: 0}
   scriptObject: {fileID: 172482221}
   isInRange: 0
   range: {fileID: 172482223}
@@ -3765,6 +3765,8 @@ MonoBehaviour:
   TheForbidenOne: {fileID: 3861804055188065840}
   TheForbiddenOne: {fileID: 3861804055188065841}
   body: {fileID: 3861804055188065843}
+  rangeRadius: 50
+  distanceFromPlayer: 0
 --- !u!1 &810157122
 GameObject:
   m_ObjectHideFlags: 0

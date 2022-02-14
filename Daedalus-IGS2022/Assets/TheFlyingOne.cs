@@ -81,6 +81,11 @@ public class TheFlyingOne : MonoBehaviour
     public Transform TheForbidenOne;
     public GameObject TheForbiddenOne;
     public Rigidbody2D body;
+    public float rangeRadius = 50;
+    public float distanceFromPlayer;
+    public Transform PlayerFirstContact;
+    public int waitTime = 5;
+
     //public GameObject flyingEnemy;
     //private FlyingEnemyPlayerDetectionScript range;
     void Start()
@@ -89,13 +94,34 @@ public class TheFlyingOne : MonoBehaviour
         firstMove = true;
         body = TheForbiddenOne.GetComponent<Rigidbody2D>();
         TheForbidenOneRange = scriptObject.GetComponent<FlyingEnemyPlayerDetectionScript>();
-        isInRange = TheForbidenOneRange.inRange;
+        
+        //isInRange = false;
 
     }
+    private void OnTriggerEnter2D(Collider2D trigger)
+    {
+        //if the trigger collides with an object with the tag of player
+        //then calculate the direction of the player by subtracting the positon of
+        //the flying enemy from the position of the player
+        if (trigger.gameObject.tag == "Player")
+        {
+            /*
+            Vector3 directionOfPlayer = Player.position - TheForbidenOne.position;
+            Debug.Log(directionOfPlayer);
+            float angle = Mathf.Atan2(directionOfPlayer.y, directionOfPlayer.x) * Mathf.Rad2Deg;
+            body.rotation = -angle;
+            Debug.Log(inRange);
+            */
+            //TheForbidenOne.position = Vector2.MoveTowards(TheForbidenOne.position, Player.position, speed * Time.deltaTime);
+            isInRange = true;
+            Debug.Log(isInRange);
+        }
+    }
 
-    
     void Update()
     {
+        isInRange = TheForbidenOneRange.inRange;
+
         if (transform.position == targetPos1)
         {
             transform.localScale = Vector3.one;
@@ -106,7 +132,8 @@ public class TheFlyingOne : MonoBehaviour
             transform.localScale = new Vector3(-1, 1, 1);
             firstMove = true;
         }
-        if (canMove && isInRange)
+        //isInRange = TheForbidenOneRange.inRange;
+        if (canMove && !isInRange)
         {
             //TheForbidenOne.position = Vector2.MoveTowards(TheForbidenOne.position, Player.position, speed * Time.deltaTime);
             
@@ -118,16 +145,33 @@ public class TheFlyingOne : MonoBehaviour
             {
                 transform.position = Vector3.MoveTowards(transform.position, targetPos2, speed * Time.deltaTime);
             }
+
         }
-        //else if(canMove && isInRange)
-        //{
-            //TheForbidenOne.position = Vector2.MoveTowards(TheForbidenOne.position, Player.position, speed * Time.deltaTime);
+
+        else if (canMove && isInRange)
+        {
+            StartCoroutine(EnemyAttack());
+            TheForbidenOne.position = Vector2.MoveTowards(TheForbidenOne.position, PlayerFirstContact.position, speed * Time.deltaTime);
+
+            distanceFromPlayer = Vector2.Distance(Player.position, transform.position);
+            if (distanceFromPlayer > rangeRadius)
+            {
+                TheForbidenOneRange.inRange = false;
+                isInRange = false;
+                Debug.Log("Goodbye");
+            }
+
             //Vector3 directionOfPlayer = Player.position - TheForbidenOne.position;
             //Debug.Log(directionOfPlayer);
             //float angle = Mathf.Atan2(directionOfPlayer.y, directionOfPlayer.x) * Mathf.Rad2Deg;
             //body.rotation = -angle;
-        //}
+        }
+    }
 
+    IEnumerator EnemyAttack()
+    {
+        yield return new WaitForSeconds(waitTime);
+        PlayerFirstContact = Player.transform;
     }
 }
 
