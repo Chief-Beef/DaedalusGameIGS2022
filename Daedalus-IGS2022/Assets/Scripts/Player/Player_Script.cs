@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Player_Script : MonoBehaviour
 {
-    /********************************
-     *         Player script        *
-     ********************************/
+    /********************************/
+    /*         Player script        */
+    /********************************/
 
     // The rigidbody for handling player movement
     public Rigidbody2D rb;
@@ -108,9 +108,9 @@ public class Player_Script : MonoBehaviour
             anm.Play("Falling");
 
         // Flips the player if they move in a direction
-        if (xVel > 0.1f)
+        if (mousePos.x > this.transform.position.x)
             transform.eulerAngles = Vector3.zero;
-        else if (xVel < -0.1f)
+        else if (mousePos.x < this.transform.position.x)
             transform.eulerAngles = Vector3.up * 180;
 
         // Player's horizontal movement when grounded & ungrounded

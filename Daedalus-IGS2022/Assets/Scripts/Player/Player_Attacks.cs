@@ -16,8 +16,8 @@ public class Player_Attacks : MonoBehaviour
     public float lungeForce;
 
     public GameObject cooldownBar;
-    private float cooldownTime = 2.5f;
-    private float currentTime = 2.5f;
+    private float cooldownTime = 5f;
+    private float dashRechargeTime = 5f;
 
 
     void Update()
@@ -37,10 +37,12 @@ public class Player_Attacks : MonoBehaviour
 
                 playerScript.rb.velocity = Vector2.zero;
                 canDash = false;
-                currentTime = 0f;
+                canAttack = false;
+                dashRechargeTime = 0f;
 
                 rb.AddForce(Vector3.Normalize(playerScript.mousePos - this.transform.position) * lungeForce, ForceMode2D.Impulse);
-                anm.Play("QuickSwing");
+                anm.StopPlayback();
+                anm.Play("DashAttack");
             }
         }
         else if (canAttack)
@@ -51,17 +53,17 @@ public class Player_Attacks : MonoBehaviour
                 isHolding = false;
         }
 
-        if (currentTime < cooldownTime)
+        if (dashRechargeTime < cooldownTime)
         {
             // Make cooldown bar appear
             cooldownBar.SetActive(true);
             // Recharge bar
-            Mathf.Clamp(currentTime += Time.deltaTime, 0, cooldownTime);
+            Mathf.Clamp(dashRechargeTime += Time.deltaTime, 0, cooldownTime);
             // Set bar scale
-            cooldownBar.transform.localScale = new Vector2(currentTime / cooldownTime, 1);
+            cooldownBar.transform.localScale = new Vector2(dashRechargeTime / cooldownTime, 1);
 
             // Cooldown period has ended
-            if (currentTime >= cooldownTime)
+            if (dashRechargeTime >= cooldownTime)
             {
                 cooldownBar.SetActive(false);
                 canDash = true;

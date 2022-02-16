@@ -28,11 +28,20 @@ public class Basic_Titan : MonoBehaviour
     public float turnTime;
     // Attacking
     private bool isAttacking = false;
-
+    // Bool prevents titan from doing anything after death
     private bool alive = true;
+    // Sprite renderers of pieces to fade out
     public SpriteRenderer[] pieces;
+    // Gets rid of grapple spots when enemy dies
     public GameObject[] grappleSpots;
+    // Destroys enemy attacks when they dies
+    public BoxCollider2D[] attackHitBoxes;
+    // Float to make enemy fade out (opacity of sprite renderers of pieces)
     private float opacity = 1.0f;
+
+    // Blood effects
+    public GameObject bloodSpurt;
+    public Transform bloodSpot;
 
 
     // Start is called before the first frame update
@@ -48,6 +57,7 @@ public class Basic_Titan : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // If the player is alive and titan is alive
         if (player != null && alive)
         {
             float playerDirection = player.transform.position.x - this.transform.position.x;
@@ -162,6 +172,10 @@ public class Basic_Titan : MonoBehaviour
         alive = false;
         Destroy(this.GetComponent<BoxCollider2D>());
         Destroy(rb);
+        // Instantiates blood when dead
+        Instantiate(bloodSpurt, bloodSpot.transform.position, bloodSpot.transform.rotation, bloodSpot);
+
+        // Disables titan's hitboxes
         for (int i = 0; i < pieces.Length; i++)
         {
             pieces[i].GetComponent<BoxCollider2D>().enabled = false;
@@ -169,6 +183,11 @@ public class Basic_Titan : MonoBehaviour
         for (int i = 0; i < grappleSpots.Length; i++)
         {
             grappleSpots[i].GetComponent<BoxCollider2D>().enabled = false;
+        }
+        // Destroys attack hitboxes
+        for (int i = 0; i < attackHitBoxes.Length; i++)
+        {
+            Destroy(attackHitBoxes[i]);
         }
     }
 
