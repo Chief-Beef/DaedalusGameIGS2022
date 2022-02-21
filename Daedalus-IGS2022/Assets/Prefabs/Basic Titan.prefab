@@ -60,7 +60,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 2.5
 --- !u!1 &3120149882145965937
 GameObject:
   m_ObjectHideFlags: 0
@@ -1149,7 +1149,7 @@ MonoBehaviour:
   rb: {fileID: 7860391418139569037}
   speed: 10
   health: 20
-  engageDistance: 50
+  engageDistance: 250
   turnTime: 0.5
   pieces:
   - {fileID: 7860391417541734191}

@@ -387,6 +387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 3193559472410470518}
   cam: {fileID: 0}
+  camDefaultSize: 25
   anm: {fileID: 3193559472410470517}
   speed: 25
   airSpeed: 5

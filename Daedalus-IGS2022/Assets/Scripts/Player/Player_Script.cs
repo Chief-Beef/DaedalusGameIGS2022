@@ -13,7 +13,7 @@ public class Player_Script : MonoBehaviour
     // The camera in the scene
     public Camera cam;
     private float lastVelocity;
-    private Vector3 lastCameraPos;
+    public float camDefaultSize;
 
     // The animator component on the player
     public Animator anm;
@@ -79,7 +79,7 @@ public class Player_Script : MonoBehaviour
     {
         // Camera controls
         var vel = rb.velocity.magnitude;
-            cam.orthographicSize = 20 + (Mathf.Lerp(vel, lastVelocity, 0.05f) / 7.5f);
+            cam.orthographicSize = camDefaultSize + (Mathf.Lerp(vel, lastVelocity, 0.05f) / 7.5f);
 
         // Sets camera position relative to player
         cam.transform.position = Vector3.Lerp(cam.transform.position + Vector3.back, new Vector3(this.transform.position.x + rb.velocity.x / 3.5f, this.transform.position.y + rb.velocity.y / 3.5f, -1), 0.15f);
