@@ -3,74 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-/*public class Boundary
-{
-    public float xMin, xMax;
-}
-
 public class TheFlyingOne : MonoBehaviour
 {
-    public Transform transformx;
-    private Vector3 xAxis;
-    private float secondsForOneLength = 1f;
-    public Boundary boundary;  
-
-    void Start()
-    {
-        body = GetComponent<Rigidbody2D>();
-
-    }
-
-    void Update()
-    {
-        //Let's ping pong the guy along the X-axis, i.e. change the value of X, and keep the values of Y & Z constant.            
-       transformx.position = new Vector3(Mathf.PingPong(boundary.xMin, boundary.xMax), transform.position.y, transform.position.z);
-    }
-}
-*/
-/*public class TheFlyingOne : MonoBehaviour
-{
-    public Rigidbody2d body;
-    public Animator anim;
-
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        body = GetComponent<Rigidbody2d>();
-        anim = GetComponent<Animator>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        body.addForce(new Vector2(10,0));
-
-    }
-}*/
-/*public class TheFlyingOne : MonoBehaviour
-{
-    public Rigidbody2D body;
-
-    void start()
-    {
-       body = GetComponent<Rigidbody2D>();
-    }
-
-    void update()
-    {
-        body.transform.Translate(100, 0, Time.deltaTime);
-    }
-}*/
-
-public class TheFlyingOne : MonoBehaviour
-{
-    [SerializeField]
-    public Vector3 targetPos1;
-    [SerializeField]
-    public Vector3 targetPos2;
-    [SerializeField]
-    public float speed = 1f;
+    [SerializeField] public Vector3 targetPos1;
+    [SerializeField] public Vector3 targetPos2;
+    [SerializeField] public float speed = 1f;
+    [SerializeField] public float attackSpeed = 1f;
     public bool canMove;
     public bool firstMove;
     public FlyingEnemyPlayerDetectionScript TheForbidenOneRange;
@@ -84,74 +22,82 @@ public class TheFlyingOne : MonoBehaviour
     public float rangeRadius = 50;
     public float distanceFromPlayer;
     public Transform PlayerFirstContact;
-    public int waitTime = 5;
+    [SerializeField] public float waitTime = 5;
+    public bool moveRight;
+    public bool coroutineReset;
+    private Vector2 diff;
+    private Vector2 diffNorm;
 
-    //public GameObject flyingEnemy;
-    //private FlyingEnemyPlayerDetectionScript range;
+
     void Start()
     {
-        //range = flyingEnemy.GetComponent<FlyingEnemyPlayerDetectionScript>();
         firstMove = true;
+        moveRight = false;
+        coroutineReset = false;
         body = TheForbiddenOne.GetComponent<Rigidbody2D>();
         TheForbidenOneRange = scriptObject.GetComponent<FlyingEnemyPlayerDetectionScript>();
-        
-        //isInRange = false;
-
-    }
-    private void OnTriggerEnter2D(Collider2D trigger)
-    {
-        //if the trigger collides with an object with the tag of player
-        //then calculate the direction of the player by subtracting the positon of
-        //the flying enemy from the position of the player
-        if (trigger.gameObject.tag == "Player")
-        {
-            /*
-            Vector3 directionOfPlayer = Player.position - TheForbidenOne.position;
-            Debug.Log(directionOfPlayer);
-            float angle = Mathf.Atan2(directionOfPlayer.y, directionOfPlayer.x) * Mathf.Rad2Deg;
-            body.rotation = -angle;
-            Debug.Log(inRange);
-            */
-            //TheForbidenOne.position = Vector2.MoveTowards(TheForbidenOne.position, Player.position, speed * Time.deltaTime);
-            isInRange = true;
-            Debug.Log(isInRange);
-        }
     }
 
-    void Update()
+
+    void FixedUpdate()
     {
         isInRange = TheForbidenOneRange.inRange;
+        diff = Player.position - TheForbidenOne.position;
+        diff = (diff.normalized) * 2;
 
-        if (transform.position == targetPos1)
+        //if x position of enemy is larger than the x position of the target position
+        if (transform.position.x > targetPos1.x)
         {
-            transform.localScale = Vector3.one;
+            transform.localScale = Vector3.one; //face enemy right 
             firstMove = false;
+            moveRight = false;
         }
-        if (transform.position == targetPos2)
+        else if (transform.position.x < targetPos2.x)
         {
-            transform.localScale = new Vector3(-1, 1, 1);
+            transform.localScale = new Vector3(-1, 1, 1); //face enemy left
             firstMove = true;
+            moveRight = true;
         }
-        //isInRange = TheForbidenOneRange.inRange;
+
         if (canMove && !isInRange)
         {
-            //TheForbidenOne.position = Vector2.MoveTowards(TheForbidenOne.position, Player.position, speed * Time.deltaTime);
-            
-            if (firstMove)
+
+            if (firstMove && moveRight)
             {
-                transform.position = Vector3.MoveTowards(transform.position, targetPos1, speed * Time.deltaTime);
+                //transform.position = Vector3.MoveTowards(transform.position, targetPos1, speed * Time.deltaTime);
+                body.AddForce(Vector2.right * speed);
             }
-            else
+            else if (!moveRight)
             {
-                transform.position = Vector3.MoveTowards(transform.position, targetPos2, speed * Time.deltaTime);
+                //transform.position = Vector3.MoveTowards(transform.position, targetPos2, speed * Time.deltaTime);
+                body.AddForce(Vector2.left * speed);
             }
 
+            if (transform.position.y > targetPos1.y)
+            {
+                body.AddForce(Vector2.down * speed);
+            }
+            else if (transform.position.y < targetPos2.y)
+            {
+                body.AddForce(Vector2.up * speed);
+            }
         }
 
         else if (canMove && isInRange)
         {
-            StartCoroutine(EnemyAttack());
-            TheForbidenOne.position = Vector2.MoveTowards(TheForbidenOne.position, PlayerFirstContact.position, speed * Time.deltaTime);
+            if (coroutineReset)
+            {
+                StartCoroutine(EnemyAttack());
+                //body.velocity = Vector2.zero;
+                coroutineReset = false;
+            }
+            //diff = Player.position - TheForbidenOne.position;
+            //diff = (diff.normalized) * 2;
+            //body.AddForce((diff) * attackSpeed);
+            Debug.Log("I am in range so I should attack");
+            //body.AddForce(Vector2.zero);
+            //StartCoroutine(EnemyAttack());
+            //TheForbidenOne.position = Vector2.MoveTowards(TheForbidenOne.position, Player.position, speed * Time.deltaTime);
 
             distanceFromPlayer = Vector2.Distance(Player.position, transform.position);
             if (distanceFromPlayer > rangeRadius)
@@ -167,11 +113,27 @@ public class TheFlyingOne : MonoBehaviour
             //body.rotation = -angle;
         }
     }
-
     IEnumerator EnemyAttack()
     {
         yield return new WaitForSeconds(waitTime);
-        PlayerFirstContact = Player.transform;
+        
+        diff = Player.position - TheForbidenOne.position;
+        diff = (diff.normalized);
+        body.AddForce((diff) * attackSpeed, ForceMode2D.Impulse);
+        Debug.Log("Coroutine Called");
+        coroutineReset = true;
     }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //if(collison.gameObject )
+    //}
+    //IEnumerator EnemyAttack()
+    //{
+    //yield return new WaitForSeconds(waitTime);
+    //body.AddForce((transform.position - Player.position) * speed);
+    //coroutineReset = true;
+    //}
+
 }
+
 

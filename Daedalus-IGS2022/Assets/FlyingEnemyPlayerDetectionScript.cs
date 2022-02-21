@@ -18,26 +18,26 @@ public class FlyingEnemyPlayerDetectionScript : MonoBehaviour
         TheForbidenOne.position = Vector2.MoveTowards(TheForbidenOne.position, Player.position, speed * Time.deltaTime);
     }
 
-    private void OnTriggerEnter2D(Collider2D trigger)
-    {
-        //if the trigger collides with an object with the tag of player
-        //then calculate the direction of the player by subtracting the positon of
-        //the flying enemy from the position of the player
-        if (trigger.gameObject.tag == "Player")
-        {
-            /*
-            Vector3 directionOfPlayer = Player.position - TheForbidenOne.position;
-            Debug.Log(directionOfPlayer);
-            float angle = Mathf.Atan2(directionOfPlayer.y, directionOfPlayer.x) * Mathf.Rad2Deg;
-            body.rotation = -angle;
-            Debug.Log(inRange);
-            */
-            //TheForbidenOne.position = Vector2.MoveTowards(TheForbidenOne.position, Player.position, speed * Time.deltaTime);
-            inRange = true;
-            Debug.Log(inRange);
-        }
-    }
-        
+     private void OnTriggerEnter2D(Collider2D trigger)
+     {
+         //if the trigger collides with an object with the tag of player
+         //then calculate the direction of the player by subtracting the positon of
+         //the flying enemy from the position of the player
+         if (trigger.gameObject.tag == "Player")
+         {
+             
+             //Vector3 directionOfPlayer = Player.position - TheForbidenOne.position;
+             //Debug.Log(directionOfPlayer);
+             //float angle = Mathf.Atan2(directionOfPlayer.y, directionOfPlayer.x) * Mathf.Rad2Deg;
+             //body.rotation = -angle;
+             //Debug.Log(inRange);
+
+             //TheForbidenOne.position = Vector2.MoveTowards(TheForbidenOne.position, Player.position, speed * Time.deltaTime);
+             inRange = true;
+             Debug.Log(inRange);
+         }
+     }
+
     private void OnTriggerExit(Collider trigger)
     {
         if (trigger.gameObject.tag == "Player")

@@ -252,9 +252,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -28, y: 7}
+  m_Offset: {x: -25.5, y: 7}
   serializedVersion: 2
-  m_Radius: 12
+  m_Radius: 11
 --- !u!61 &9028346620511973218
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -268,7 +268,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -23, y: -10}
+  m_Offset: {x: -22, y: -10}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1170,6 +1170,18 @@ MonoBehaviour:
   grappleSpots:
   - {fileID: 3120149882145965937}
   - {fileID: 4853718694327036980}
+  attackHitBoxes:
+  - {fileID: 7860391417652216715}
+  - {fileID: 7860391417395655285}
+  - {fileID: 7860391418999779849}
+  - {fileID: 7860391417350271665}
+  - {fileID: 7860391417493331511}
+  - {fileID: 7860391418657536429}
+  - {fileID: 7860391418665933155}
+  - {fileID: 7860391419002559285}
+  bloodSpurt: {fileID: 4970017042367310563, guid: 7a7a40ec33dde5c47b242cbf5de1fe66,
+    type: 3}
+  bloodSpot: {fileID: 5097298216676385155}
 --- !u!95 &7860391418139569026
 Animator:
   serializedVersion: 3
@@ -1766,7 +1778,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1.3600001, y: 6.5799994, z: 0}
   m_LocalScale: {x: 1.25, y: 1.25, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 5097298216676385155}
   m_Father: {fileID: 7860391417541734184}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2067,3 +2080,33 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.4582462, y: 4.419819}
   m_EdgeRadius: 0
+--- !u!1 &8198335594461581879
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5097298216676385155}
+  m_Layer: 11
+  m_Name: Blood Spot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5097298216676385155
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8198335594461581879}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.75, y: 0.75, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7860391418884130906}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
