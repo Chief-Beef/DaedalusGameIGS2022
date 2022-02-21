@@ -158,6 +158,7 @@ public class Player_Script : MonoBehaviour
             canFire = false;
             StartCoroutine(Chamber());
         }
+
         */
             // Grapple shot mechanic
         if (Input.GetAxis("Fire2") > 0 && canFire && currentStamina > 0)
