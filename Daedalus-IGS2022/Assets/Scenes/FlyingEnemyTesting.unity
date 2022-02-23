@@ -3755,7 +3755,7 @@ MonoBehaviour:
   targetPos1: {x: 400, y: 53.6, z: 0}
   targetPos2: {x: 100, y: 53.6, z: 0}
   speed: 25
-  attackSpeed: 50
+  attackSpeed: 40
   canMove: 1
   firstMove: 0
   TheForbidenOneRange: {fileID: 0}
@@ -3769,7 +3769,7 @@ MonoBehaviour:
   rangeRadius: 52
   distanceFromPlayer: 0
   PlayerFirstContact: {fileID: 0}
-  waitTime: 0
+  waitTime: 3
   moveRight: 0
   coroutineReset: 1
 --- !u!1 &810157122
