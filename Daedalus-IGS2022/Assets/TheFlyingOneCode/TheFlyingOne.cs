@@ -33,7 +33,7 @@ public class TheFlyingOne : MonoBehaviour
     {
         firstMove = true;
         moveRight = false;
-        coroutineReset = false;
+        coroutineReset = true;
         body = TheForbiddenOne.GetComponent<Rigidbody2D>();
         TheForbidenOneRange = scriptObject.GetComponent<FlyingEnemyPlayerDetectionScript>();
     }
@@ -87,9 +87,10 @@ public class TheFlyingOne : MonoBehaviour
         {
             if (coroutineReset)
             {
+                coroutineReset = false;
                 StartCoroutine(EnemyAttack());
                 //body.velocity = Vector2.zero;
-                coroutineReset = false;
+                
             }
             //diff = Player.position - TheForbidenOne.position;
             //diff = (diff.normalized) * 2;
