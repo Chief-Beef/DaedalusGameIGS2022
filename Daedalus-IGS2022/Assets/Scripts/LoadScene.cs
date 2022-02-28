@@ -14,7 +14,11 @@ public class LoadScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.I))
             SceneManager.LoadScene(0);
+        if (Input.GetKeyDown(KeyCode.O))
+            SceneManager.LoadScene(1);
+        if (Input.GetKeyDown(KeyCode.P))
+            SceneManager.LoadScene(2);
     }
 }

@@ -60,4 +60,12 @@ public class Target_Counter : MonoBehaviour
             targetCounter.text = "";
         }
     }
+
+    // Create new set of targets
+    public void AddNewTargets(int newAmount)
+    {
+        currentCount = 0;
+        targetCount = newAmount;
+        targetCounter.text = currentCount.ToString() + "/" + targetCount.ToString() + " targets destroyed";
+    }
 }
