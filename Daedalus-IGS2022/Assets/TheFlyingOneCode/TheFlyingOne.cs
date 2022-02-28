@@ -41,9 +41,13 @@ public class TheFlyingOne : MonoBehaviour
 
     void FixedUpdate()
     {
-        isInRange = TheForbidenOneRange.inRange;
-        diff = Player.position - TheForbidenOne.position;
-        diff = (diff.normalized) * 2;
+        if (Player != null)
+        {
+            isInRange = TheForbidenOneRange.inRange;
+            diff = Player.position - TheForbidenOne.position;
+            diff = (diff.normalized) * 2;
+        }
+        
 
         //if x position of enemy is larger than the x position of the target position
         if (transform.position.x > targetPos1.x)
