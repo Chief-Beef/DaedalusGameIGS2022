@@ -48,6 +48,9 @@ public class DeathScript : MonoBehaviour
 
             deathBounces++;
 
+            float randRotate = Random.Range(-180f, 180f);
+            transform.Rotate(0, 0, randRotate);
+
             //impact is your angle of impact, normal is the walls normal angle
             //launch is the reflected angle for the bounce
             Vector2 impactAngle, normalAngle, launchAngle;
@@ -55,21 +58,21 @@ public class DeathScript : MonoBehaviour
             impactAngle = previousVelocity;
             Debug.Log("previousVelocity:\t" + previousVelocity);
 
-            Debug.DrawRay(this.transform.position, impactAngle.normalized*5, Color.cyan, 10f);
+            Debug.DrawRay(this.transform.position, impactAngle.normalized*10, Color.cyan, 10f);
 
             normalAngle = col.contacts[0].normal;
 
-            Debug.DrawRay(this.transform.position, normalAngle*30, Color.red, 10f);
+            Debug.DrawRay(this.transform.position, normalAngle*20, Color.red, 10f);
             Debug.Log("col.contacts[0].normal:\t" + col.contacts[0].normal);
 
 
             launchAngle = Vector2.Reflect(impactAngle, normalAngle);
-            Debug.DrawRay(this.transform.position, launchAngle * 3, Color.green, 10f);
+            Debug.DrawRay(this.transform.position, launchAngle, Color.green, 10f);
 
             //launchForce *= .8f;
             //rb.AddForce(launchAngle * launchForce);
 
-            rb.velocity = launchAngle;
+            rb.velocity = launchAngle * .8f;
 
         }
     }
