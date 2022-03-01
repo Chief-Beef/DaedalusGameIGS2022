@@ -41,10 +41,6 @@ public class Player_Script : MonoBehaviour
     public GameObject grappleSpot; // The ojbect that gets instantiated when a grappleshot lands
     private GameObject grappleSpotPos; // The variable that keeps track of the grappleSpot to allow grappling to a moving object
 
-    //Gunnar Code Attempt 2 :)
-    public ParticleSystem farticleEffect;
-    public Vector3 farticleEffectRotation;
-    public bool activeFart;
 
     public float grappleStamina; // Total stamina
     public float currentStamina; // Current stamina
@@ -69,6 +65,8 @@ public class Player_Script : MonoBehaviour
     private Vector2 launchPoint;
     private Vector2 launchAngle;
     private Transform parentTitan;
+    private Vector2 previousVelocity;
+    public float bounciness;
 
     // Called once when a scene is loaded
     void Start()
@@ -210,6 +208,10 @@ public class Player_Script : MonoBehaviour
         }
         else if (Input.GetAxis("Fire2") == 0 && canReload)
             canFire = true;
+
+        //for collision physics in OnCollisionEnter2D
+        previousVelocity = rb.velocity;
+        
     }
 
     private void Update()
@@ -259,7 +261,26 @@ public class Player_Script : MonoBehaviour
         if (GroundCheck() && canGrapple)
             Ground();
 
-        
+        // if not grounded bounce off walls/platforms
+        if(!GroundCheck())
+        {
+            Vector2 impactAngle, normalAngle, launchAngle;
+
+            impactAngle = previousVelocity;
+            
+            normalAngle = col.contacts[0].normal;
+            launchAngle = Vector2.Reflect(impactAngle, normalAngle);
+
+            rb.velocity = launchAngle * bounciness;
+
+            //Debug.Log("previousVelocity:\t" + previousVelocity);
+            //Debug.DrawRay(this.transform.position, impactAngle.normalized * 10, Color.cyan, 10f);
+            //Debug.DrawRay(this.transform.position, normalAngle * 20, Color.red, 10f);
+            //Debug.Log("col.contacts[0].normal:\t" + col.contacts[0].normal);
+            //Debug.DrawRay(this.transform.position, launchAngle, Color.green, 10f);
+        }
+
+
     }
 
     private void OnTriggerEnter2D(Collider2D trigger)

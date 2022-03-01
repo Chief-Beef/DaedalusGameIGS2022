@@ -75,6 +75,13 @@ public class DeathScript : MonoBehaviour
             rb.velocity = launchAngle * .8f;
 
         }
+
+        /* Destroy Player after 20 bounces
+        if(deathBounces > 20)
+        {
+            Destroy(this.gameObject);
+        }
+        */
     }
 
 
