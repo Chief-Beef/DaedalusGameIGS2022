@@ -25,11 +25,14 @@ public class DeathScript : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         Instance = this;
         playerPos = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         player = GameObject.FindGameObjectWithTag("Player");
+        // Add a camera if there is not already one attached
+        if (cam == null)
+            cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
     }
 
     private void FixedUpdate()
