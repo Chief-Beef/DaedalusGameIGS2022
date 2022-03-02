@@ -17,6 +17,11 @@ public class DeathScript : MonoBehaviour
     public Rigidbody2D rb;
     public float launchForce;
     public LayerMask enemy;
+    public Vector2 previousVelocity;
+
+    //bool
+    private bool firstDeath = false;
+    public int deathBounces;
 
 
     // Start is called before the first frame update
@@ -31,6 +36,52 @@ public class DeathScript : MonoBehaviour
     {
         if(player == null)
             cam.transform.position = Vector3.Lerp(cam.transform.position + Vector3.back, new Vector3(this.transform.position.x + rb.velocity.x / 3.5f, this.transform.position.y + rb.velocity.y / 3.5f, -1), 0.15f);
+
+        previousVelocity = rb.velocity;
+    }
+
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if(firstDeath)
+        {
+
+            deathBounces++;
+
+            float randRotate = Random.Range(-180f, 180f);
+            transform.Rotate(0, 0, randRotate);
+
+            //impact is your angle of impact, normal is the walls normal angle
+            //launch is the reflected angle for the bounce
+            Vector2 impactAngle, normalAngle, launchAngle;
+            
+            impactAngle = previousVelocity;
+            Debug.Log("previousVelocity:\t" + previousVelocity);
+
+            Debug.DrawRay(this.transform.position, impactAngle.normalized*10, Color.cyan, 10f);
+
+            normalAngle = col.contacts[0].normal;
+
+            Debug.DrawRay(this.transform.position, normalAngle*20, Color.red, 10f);
+            Debug.Log("col.contacts[0].normal:\t" + col.contacts[0].normal);
+
+
+            launchAngle = Vector2.Reflect(impactAngle, normalAngle);
+            Debug.DrawRay(this.transform.position, launchAngle, Color.green, 10f);
+
+            //launchForce *= .8f;
+            //rb.AddForce(launchAngle * launchForce);
+
+            rb.velocity = launchAngle * .8f;
+
+        }
+
+        /* Destroy Player after 20 bounces
+        if(deathBounces > 20)
+        {
+            Destroy(this.gameObject);
+        }
+        */
     }
 
 
@@ -50,10 +101,10 @@ public class DeathScript : MonoBehaviour
         else
             ray = Physics2D.Raycast(this.transform.position, Vector2.up, 20f, enemy);
 
-        Debug.DrawRay(this.transform.position, rayAngle, Color.red, 10f);
+        Debug.DrawRay(this.transform.position, rayAngle*5, Color.red, 10f);
 
 
-        launchAngle = ray.normal;
+        launchAngle = ray.normal*10;
         Debug.DrawRay(this.transform.position, launchAngle, Color.blue, 10f);
 
 
@@ -67,6 +118,8 @@ public class DeathScript : MonoBehaviour
 
         //launch the ragdoll
         rb.AddForce(launchAngle * launchForce);
+
+        firstDeath = true;
 
         Debug.Log("RayAngle:\t" + rayAngle + "\tLaunchAngle:\t" + launchAngle + "\tLaunchPoint:\t" + launchPoint + "\tthis.position:\t" + this.transform.position);
 
