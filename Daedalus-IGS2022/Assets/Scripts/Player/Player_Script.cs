@@ -65,6 +65,10 @@ public class Player_Script : MonoBehaviour
     public Transform boxcastA;
     public Transform boxcastB;
 
+    //Death Stuff
+    private Vector2 launchPoint;
+    private Vector2 launchAngle;
+    private Transform parentTitan;
 
     // Called once when a scene is loaded
     void Start()
@@ -249,17 +253,28 @@ public class Player_Script : MonoBehaviour
     }
 
     // Triggered upon colliding with object
-    private void OnCollisionEnter2D(Collision2D col)
+    public void OnCollisionEnter2D(Collision2D col)
     {
         // This statement checks whether or not there is ground underneath the player whenever they hit an object
         if (GroundCheck() && canGrapple)
             Ground();
+
+        
     }
 
     private void OnTriggerEnter2D(Collider2D trigger)
     {
         if (trigger.gameObject.tag == "TitanAttack")
+        {
+
+            launchPoint = trigger.ClosestPoint(this.transform.position);
+            
+            Debug.Log("LaunchPoint:\t" + launchPoint);
+
+            //RagDoll Death Script Function Call then destroy the player bc they are dead
+            DeathScript.Instance.DeathLaunch(launchPoint, trigger.gameObject.transform.position.x);
             Destroy(this.gameObject);
+        }
     }
 
     // Triggered whenever ending collision with object
