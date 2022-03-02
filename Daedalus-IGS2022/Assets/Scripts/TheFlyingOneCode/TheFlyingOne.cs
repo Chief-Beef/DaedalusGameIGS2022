@@ -41,9 +41,13 @@ public class TheFlyingOne : MonoBehaviour
 
     void FixedUpdate()
     {
-        isInRange = TheForbidenOneRange.inRange;
-        diff = Player.position - TheForbidenOne.position;
-        diff = (diff.normalized) * 2;
+        if (Player != null)
+        {
+            isInRange = TheForbidenOneRange.inRange;
+            diff = Player.position - TheForbidenOne.position;
+            diff = (diff.normalized) * 2;
+        }
+        
 
         //if x position of enemy is larger than the x position of the target position
         if (transform.position.x > targetPos1.x)
@@ -88,6 +92,7 @@ public class TheFlyingOne : MonoBehaviour
             if (coroutineReset)
             {
                 coroutineReset = false;
+                gameObject.tag = "Untagged";
                 StartCoroutine(EnemyAttack());
                 //body.velocity = Vector2.zero;
             }
@@ -98,14 +103,17 @@ public class TheFlyingOne : MonoBehaviour
             //body.AddForce(Vector2.zero);
             //StartCoroutine(EnemyAttack());
             //TheForbidenOne.position = Vector2.MoveTowards(TheForbidenOne.position, Player.position, speed * Time.deltaTime);
-
-            distanceFromPlayer = Vector2.Distance(Player.position, transform.position);
-            if (distanceFromPlayer > rangeRadius)
+            if (Player != null)
             {
-                TheForbidenOneRange.inRange = false;
-                isInRange = false;
-                Debug.Log("Goodbye");
+                distanceFromPlayer = Vector2.Distance(Player.position, transform.position);
+                if (distanceFromPlayer > rangeRadius)
+                {
+                    TheForbidenOneRange.inRange = false;
+                    isInRange = false;
+                    Debug.Log("Goodbye");
+                }
             }
+            
 
             //Vector3 directionOfPlayer = Player.position - TheForbidenOne.position;
             //Debug.Log(directionOfPlayer);
@@ -116,12 +124,16 @@ public class TheFlyingOne : MonoBehaviour
     IEnumerator EnemyAttack()
     {
         yield return new WaitForSeconds(waitTime);
+        if (Player != null)
+        {
+            diff = Player.position - TheForbidenOne.position;
+            diff = (diff.normalized);
+            gameObject.tag = "TitanAttack";
+            body.AddForce((diff) * attackSpeed, ForceMode2D.Impulse);
+            Debug.Log("Coroutine Called");
+            coroutineReset = true;
+        }
         
-        diff = Player.position - TheForbidenOne.position;
-        diff = (diff.normalized);
-        body.AddForce((diff) * attackSpeed, ForceMode2D.Impulse);
-        Debug.Log("Coroutine Called");
-        coroutineReset = true;
     }
     //private void OnCollisionEnter(Collision collision)
     //{
