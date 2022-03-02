@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: daca4392bdb85f8409b22168b6ddc2a4
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - shootyNoise: {fileID: 5749088526649960207, guid: 34bb272f496636c4e912db8dce471c8b,
+      type: 3}
+  - vineBoom: {fileID: 2806609413619837245, guid: a54adc03784a26247992c194d42378c1,
+      type: 3}
+  - windowsError: {fileID: 7489309415491272827, guid: 034300b414da2a84bb414516dd5524a9,
+      type: 3}
+  - tacoBell: {fileID: 3741456852533308636, guid: d313941b4af7e7c47b09d00ae303915d,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

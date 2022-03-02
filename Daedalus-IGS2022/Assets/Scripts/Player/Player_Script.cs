@@ -273,6 +273,9 @@ public class Player_Script : MonoBehaviour
 
             rb.velocity = launchAngle * bounciness;
 
+            //play hitmarker sound effect
+            NoisyBoi.Instance.MakeNoise();
+
             //Debug.Log("previousVelocity:\t" + previousVelocity);
             //Debug.DrawRay(this.transform.position, impactAngle.normalized * 10, Color.cyan, 10f);
             //Debug.DrawRay(this.transform.position, normalAngle * 20, Color.red, 10f);

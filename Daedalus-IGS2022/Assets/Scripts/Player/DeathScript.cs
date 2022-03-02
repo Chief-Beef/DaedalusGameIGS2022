@@ -54,26 +54,31 @@ public class DeathScript : MonoBehaviour
             //impact is your angle of impact, normal is the walls normal angle
             //launch is the reflected angle for the bounce
             Vector2 impactAngle, normalAngle, launchAngle;
-            
+            //angle of ragdoll impact
             impactAngle = previousVelocity;
             Debug.Log("previousVelocity:\t" + previousVelocity);
 
             Debug.DrawRay(this.transform.position, impactAngle.normalized*10, Color.cyan, 10f);
 
+            //normal angle of wall needed for vector calcs
             normalAngle = col.contacts[0].normal;
 
+            //Debugging
             Debug.DrawRay(this.transform.position, normalAngle*20, Color.red, 10f);
             Debug.Log("col.contacts[0].normal:\t" + col.contacts[0].normal);
 
-
+            //create launch angle
             launchAngle = Vector2.Reflect(impactAngle, normalAngle);
             Debug.DrawRay(this.transform.position, launchAngle, Color.green, 10f);
 
             //launchForce *= .8f;
             //rb.AddForce(launchAngle * launchForce);
 
+            //launch character
             rb.velocity = launchAngle * .8f;
-
+          
+            //play hitmarker sound effect
+            NoisyBoi.Instance.MakeNoise();
         }
 
         /* Destroy Player after 20 bounces
@@ -122,6 +127,9 @@ public class DeathScript : MonoBehaviour
         firstDeath = true;
 
         Debug.Log("RayAngle:\t" + rayAngle + "\tLaunchAngle:\t" + launchAngle + "\tLaunchPoint:\t" + launchPoint + "\tthis.position:\t" + this.transform.position);
+
+        //play hitmarker sound effect
+        NoisyBoi.Instance.MakeNoise();
 
     }
 }
