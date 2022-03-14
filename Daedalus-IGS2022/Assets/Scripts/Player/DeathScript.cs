@@ -23,10 +23,25 @@ public class DeathScript : MonoBehaviour
     private bool firstDeath = false;
     public int deathBounces;
 
+    // The spot the ragdoll waits to be summoned from
+    private Vector3 waitingSpot;
+    private bool reset = true;
+
+    // Respawn point + bool to check if player is alive
+    public Transform[] respawnPoints;
+    private Transform closestPoint;
+    private Transform lastPos;
+    private bool alive = true;
+
+    // Player's total lives
+    private int lives;
+
 
     // Start is called before the first frame update
     void Awake()
     {
+        waitingSpot = this.transform.position;
+
         Instance = this;
         playerPos = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         player = GameObject.FindGameObjectWithTag("Player");
@@ -37,18 +52,63 @@ public class DeathScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(player == null)
-            cam.transform.position = Vector3.Lerp(cam.transform.position + Vector3.back, new Vector3(this.transform.position.x + rb.velocity.x / 3.5f, this.transform.position.y + rb.velocity.y / 3.5f, -1), 0.15f);
-
         previousVelocity = rb.velocity;
+
+        if (!alive)
+            cam.transform.position = Vector3.Lerp(cam.transform.position + Vector3.back, new Vector3(this.transform.position.x + rb.velocity.x / 3.5f, this.transform.position.y + rb.velocity.y / 3.5f, -1), 0.15f);
+    }
+
+    private void Update()
+    {
+        if (!player.activeInHierarchy && alive)
+        {
+            lives = player.GetComponent<Player_Script>().lives;
+            alive = false;
+            lastPos = player.transform;
+        }
+        else if (!alive)
+        {
+            if (lives > 0)
+            {
+                if (Input.GetKeyDown(KeyCode.R))
+                {
+                    Debug.Log("respawned");
+                    player.gameObject.SetActive(true);
+                    closestPoint = respawnPoints[0];
+                    for (int i = 0; i < respawnPoints.Length; i++)
+                    {
+                        var shortestDistance = Vector2.Distance(lastPos.position, closestPoint.position);
+                        var checkDistance = Vector2.Distance(lastPos.position, respawnPoints[i].position);
+
+                        if (checkDistance < shortestDistance)
+                            closestPoint = respawnPoints[i];
+                        else
+                            continue;
+                    }
+                    player.transform.position = closestPoint.position;
+                    rb.velocity = Vector2.zero;
+                    rb.angularVelocity = 0;
+                    this.transform.position = waitingSpot;
+                    reset = true;
+                    firstDeath = false;
+                    alive = true;
+                }
+            }
+            else if (lives == 0)
+            {
+                if (Input.GetKeyDown(KeyCode.R))
+                {
+                    Debug.Log("dead, no more lives!");
+                }
+            }
+        }
     }
 
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if(firstDeath)
+        if (firstDeath)
         {
-
             deathBounces++;
 
             float randRotate = Random.Range(-180f, 180f);
@@ -59,7 +119,7 @@ public class DeathScript : MonoBehaviour
             Vector2 impactAngle, normalAngle, launchAngle;
             //angle of ragdoll impact
             impactAngle = previousVelocity;
-            Debug.Log("previousVelocity:\t" + previousVelocity);
+            //Debug.Log("previousVelocity:\t" + previousVelocity);
 
             Debug.DrawRay(this.transform.position, impactAngle.normalized*10, Color.cyan, 10f);
 
@@ -67,8 +127,8 @@ public class DeathScript : MonoBehaviour
             normalAngle = col.contacts[0].normal;
 
             //Debugging
-            Debug.DrawRay(this.transform.position, normalAngle*20, Color.red, 10f);
-            Debug.Log("col.contacts[0].normal:\t" + col.contacts[0].normal);
+            //Debug.DrawRay(this.transform.position, normalAngle*20, Color.red, 10f);
+            //Debug.Log("col.contacts[0].normal:\t" + col.contacts[0].normal);
 
             //create launch angle
             launchAngle = Vector2.Reflect(impactAngle, normalAngle);
@@ -128,8 +188,9 @@ public class DeathScript : MonoBehaviour
         rb.AddForce(launchAngle * launchForce);
 
         firstDeath = true;
+        reset = false;
 
-        Debug.Log("RayAngle:\t" + rayAngle + "\tLaunchAngle:\t" + launchAngle + "\tLaunchPoint:\t" + launchPoint + "\tthis.position:\t" + this.transform.position);
+        //Debug.Log("RayAngle:\t" + rayAngle + "\tLaunchAngle:\t" + launchAngle + "\tLaunchPoint:\t" + launchPoint + "\tthis.position:\t" + this.transform.position);
 
         //play hitmarker sound effect
         NoisyBoi.Instance.MakeNoise();

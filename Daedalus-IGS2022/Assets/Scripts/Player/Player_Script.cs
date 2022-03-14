@@ -67,9 +67,19 @@ public class Player_Script : MonoBehaviour
     private Transform parentTitan;
     private Vector2 previousVelocity;
     public float bounciness;
+    private bool alive = true;
+    public int lives;
+    // Resets player's alive status
+    private void SetAlive()
+    {alive = true;}
+
+
+    // Places player can respawn at
+    public Transform[] respawnPoints;
+    private Transform closestPoint;
 
     // Called once when a scene is loaded
-    void Start()
+    void Awake()
     {
         if (cam == null)
             cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
@@ -293,11 +303,12 @@ public class Player_Script : MonoBehaviour
 
             launchPoint = trigger.ClosestPoint(this.transform.position);
             
-            Debug.Log("LaunchPoint:\t" + launchPoint);
+            //Debug.Log("LaunchPoint:\t" + launchPoint);
 
             //RagDoll Death Script Function Call then destroy the player bc they are dead
             DeathScript.Instance.DeathLaunch(launchPoint, trigger.gameObject.transform.position.x);
-            Destroy(this.gameObject);
+            this.gameObject.SetActive(false);
+            alive = false;
         }
     }
 

@@ -52,7 +52,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   active: 0
-  switchWeapon: 114
-  grappleButton: 113
+  switchWeapon: 43
+  grappleButton: 45
   mouseOffset: {x: 12.5, y: 12.5}
   grappleActive: 0
