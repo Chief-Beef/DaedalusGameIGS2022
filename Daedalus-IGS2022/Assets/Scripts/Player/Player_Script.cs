@@ -221,7 +221,6 @@ public class Player_Script : MonoBehaviour
 
         //for collision physics in OnCollisionEnter2D
         previousVelocity = rb.velocity;
-        
     }
 
     private void Update()
@@ -307,8 +306,8 @@ public class Player_Script : MonoBehaviour
 
             //RagDoll Death Script Function Call then destroy the player bc they are dead
             DeathScript.Instance.DeathLaunch(launchPoint, trigger.gameObject.transform.position.x);
-            this.gameObject.SetActive(false);
             alive = false;
+            this.gameObject.SetActive(false);
         }
     }
 
@@ -348,7 +347,8 @@ public class Player_Script : MonoBehaviour
 
     public void ResetGrapple()
     {
-        Destroy(grappleSpotPos.gameObject); // Destroys instantiated grappleSpot
+        if (grappleSpotPos != null)
+            Destroy(grappleSpotPos.gameObject); // Destroys instantiated grappleSpot
         canGrapple = true; // Resets grappleshot
         isGrappling = false; // Allows game to grapple again
         canFire = false; // Prevents player from firing another grapple shot until they release the keybind

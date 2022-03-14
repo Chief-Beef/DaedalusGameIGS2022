@@ -43,6 +43,9 @@ public class Basic_Titan : MonoBehaviour
     public GameObject bloodSpurt;
     public Transform bloodSpot;
 
+    // Set true if there is a tital kill counter
+    public bool killCount;
+
 
     // Start is called before the first frame update
     void Start()
@@ -199,6 +202,7 @@ public class Basic_Titan : MonoBehaviour
     public void Kill()
     {
         alive = false;
+        GameObject.FindGameObjectWithTag("KillCounter").GetComponent<Kill_The_Titans>().KillTitan();
     }
 
     // A coroutine for flipping the titan around to prevent them from instantly turning around

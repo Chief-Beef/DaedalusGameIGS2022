@@ -72,8 +72,6 @@ public class DeathScript : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.R))
                 {
-                    Debug.Log("respawned");
-                    player.gameObject.SetActive(true);
                     closestPoint = respawnPoints[0];
                     for (int i = 0; i < respawnPoints.Length; i++)
                     {
@@ -85,13 +83,7 @@ public class DeathScript : MonoBehaviour
                         else
                             continue;
                     }
-                    player.transform.position = closestPoint.position;
-                    rb.velocity = Vector2.zero;
-                    rb.angularVelocity = 0;
-                    this.transform.position = waitingSpot;
-                    reset = true;
-                    firstDeath = false;
-                    alive = true;
+                    ResetPlayerState();
                 }
             }
             else if (lives == 0)
@@ -104,6 +96,33 @@ public class DeathScript : MonoBehaviour
         }
     }
 
+    // This respawns the player at a nearby checkpoint
+    private void ResetPlayerState()
+    {
+        // Sets player to active
+        player.gameObject.SetActive(true);
+
+        // Sets player script + attack script to accessible variables
+        var script = player.GetComponent<Player_Script>();
+        var attackScript = player.GetComponentInChildren<Player_Attacks>();
+
+        // Sets player's position to closest checkpoint
+        player.transform.position = closestPoint.position;
+
+        // Resets ragdoll velocity and places it back into waiting spot
+        rb.velocity = Vector2.zero;
+        rb.angularVelocity = 0;
+        this.transform.position = waitingSpot;
+        // Resetting variables in ragdoll
+        reset = true;
+        firstDeath = false;
+        alive = true;
+        // Resetting variables in player script and attack script + fixing animator
+        script.ResetGrapple();
+        attackScript.anm.Play("Idle");
+        attackScript.CanAttack();
+        attackScript.ResetCooldown();
+    }
 
     private void OnCollisionEnter2D(Collision2D col)
     {

@@ -19,7 +19,6 @@ public class Player_Attacks : MonoBehaviour
     private float cooldownTime = 5f;
     private float dashRechargeTime = 5f;
 
-
     void Update()
     {
         if (Input.GetAxis("Fire1") == 1 && canAttack && !isHolding)
@@ -71,8 +70,6 @@ public class Player_Attacks : MonoBehaviour
         }
     }
 
-
-
     public void CheckAttack()
     {
         if (Input.GetAxis("Fire1") == 1 && isHolding)
@@ -84,5 +81,14 @@ public class Player_Attacks : MonoBehaviour
     public void CanAttack()
     {
         canAttack = true;
+    }
+
+    // Used by death script to reset dash cooldown
+    public void ResetCooldown()
+    {
+        dashRechargeTime = cooldownTime;
+        cooldownBar.transform.localScale = new Vector2(dashRechargeTime / cooldownTime, 1);
+        cooldownBar.SetActive(false);
+        canDash = true;
     }
 }
