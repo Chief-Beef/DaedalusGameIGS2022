@@ -53,6 +53,10 @@ public class Basic_Titan : MonoBehaviour
             chaseDirection = -1;
         else
             chaseDirection = 1;
+
+        float scale = Random.Range(0.8f, 1.1f);
+
+        transform.localScale = new Vector3(scale, scale, 1);
     }
 
     private void FixedUpdate()
