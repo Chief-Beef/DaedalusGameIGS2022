@@ -73,6 +73,14 @@ public class Player_Script : MonoBehaviour
     private void SetAlive()
     {alive = true;}
 
+    // Crosshair stuff
+    public GameObject crosshair;
+    private SpriteRenderer crosshairSpr;
+    public GameObject targetMarker;
+    // Grapple is in range color
+    public Color activeColor;
+    // Grapple is out of range color
+    public Color inactiveColor;
 
     // Places player can respawn at
     public Transform[] respawnPoints;
@@ -83,7 +91,16 @@ public class Player_Script : MonoBehaviour
     {
         if (cam == null)
             cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+
+
         currentStamina = grappleStamina;
+
+        // Initializes crosshair
+        crosshairSpr = crosshair.GetComponent<SpriteRenderer>();
+        crosshairSpr.color = inactiveColor;
+
+        // Disables cursor so it doesn't get in the way of crosshair (will probably need to be reworked into other crosshair script)
+        Cursor.visible = false;
     }
 
     // Update called once per physics update
@@ -177,9 +194,6 @@ public class Player_Script : MonoBehaviour
         {
             if (canGrapple)
             {
-                // Grapple ray is the RaycastHit2D that tells the grappleshot where to go
-                grappleRay = Physics2D.Raycast(this.transform.position, mousePos - this.transform.position, grappleRange, grapple);
-
                 // Triggered when grappleRay has hit an object
                 if (grappleRay.collider != null)
                 {
@@ -228,6 +242,30 @@ public class Player_Script : MonoBehaviour
         // Mouse position
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
 
+        // Sets crosshair position
+        crosshair.transform.position = new Vector2(mousePos.x, mousePos.y);
+
+        // Grapple ray is the RaycastHit2D that tells the grappleshot where to go
+        grappleRay = Physics2D.Raycast(this.transform.position, mousePos - this.transform.position, grappleRange, grapple);
+
+        // If object is in range of crosshair:
+        if (grappleRay.collider != null)
+        {
+            targetMarker.SetActive(true);
+            targetMarker.transform.position = grappleRay.point;
+            crosshair.transform.localScale = Vector2.one * 0.75f;
+            crosshairSpr.color = activeColor;
+            
+        }
+        // If object is not in range of crosshair:
+        else
+        {
+            targetMarker.SetActive(false);
+            crosshair.transform.localScale = Vector2.one;
+            crosshairSpr.color = inactiveColor;
+        }
+
+
         if (isGrappling && grappleSpotPos != null)
         {
             // Rope visuals
@@ -259,7 +297,7 @@ public class Player_Script : MonoBehaviour
     // Coroutine stops grapple spamming
     IEnumerator CanReloadGrapple()
     {
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.075f);
         canReload = true;
     }
 
@@ -280,7 +318,7 @@ public class Player_Script : MonoBehaviour
             normalAngle = col.contacts[0].normal;
             launchAngle = Vector2.Reflect(impactAngle, normalAngle);
 
-            rb.velocity = launchAngle * bounciness;
+            rb.AddForce(launchAngle * bounciness, ForceMode2D.Impulse);
 
             //play hitmarker sound effect
             NoisyBoi.Instance.MakeNoise();
