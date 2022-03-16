@@ -253,16 +253,23 @@ public class Player_Script : MonoBehaviour
         {
             targetMarker.SetActive(true);
             targetMarker.transform.position = grappleRay.point;
-            crosshair.transform.localScale = Vector2.one * 0.75f;
-            crosshairSpr.color = activeColor;
+
+            if (!isGrappling)
+            {
+                crosshairSpr.color = activeColor;
+                crosshair.transform.localScale = Vector2.one * 0.75f;
+            }
             
         }
         // If object is not in range of crosshair:
         else
         {
             targetMarker.SetActive(false);
-            crosshair.transform.localScale = Vector2.one;
-            crosshairSpr.color = inactiveColor;
+            if (!isGrappling)
+            {
+                crosshairSpr.color = inactiveColor;
+                crosshair.transform.localScale = Vector2.one;
+            }
         }
 
 
@@ -275,6 +282,10 @@ public class Player_Script : MonoBehaviour
 
             Mathf.Clamp(currentStamina -= Time.deltaTime, 0, grappleStamina); // Deplete stamina at 1 unit / second
             staminaBar.transform.localScale = new Vector3(currentStamina / grappleStamina, 1, 1); // Update scale of stamina bar
+
+            // Sets crosshair color and scale while locked on
+            crosshair.transform.localScale = Vector2.one * 0.5f;
+            crosshairSpr.color = activeColor;
         }
         else if (currentStamina < grappleStamina)
         {

@@ -421,6 +421,7 @@ MonoBehaviour:
   targetMarker: {fileID: 8161388986667661638}
   activeColor: {r: 0, g: 1, b: 0.11449838, a: 0.78431374}
   inactiveColor: {r: 0.8460461, g: 1, b: 0, a: 0.78431374}
+  usingColor: {r: 0, g: 0.8798566, b: 1, a: 0.78431374}
   respawnPoints: []
 --- !u!50 &3193559472410470518
 Rigidbody2D:
