@@ -86,6 +86,9 @@ public class Player_Script : MonoBehaviour
     public Transform[] respawnPoints;
     private Transform closestPoint;
 
+    // Collectables stuff
+    public List<string> items;
+
     // Called once when a scene is loaded
     void Awake()
     {
@@ -101,6 +104,9 @@ public class Player_Script : MonoBehaviour
 
         // Disables cursor so it doesn't get in the way of crosshair (will probably need to be reworked into other crosshair script)
         Cursor.visible = false;
+
+        //Collectables list
+        items = new List<string>();
     }
 
     // Update called once per physics update
@@ -358,6 +364,18 @@ public class Player_Script : MonoBehaviour
             alive = false;
             this.gameObject.SetActive(false);
         }
+
+        if (trigger.gameObject.tag == "Collectable")
+        {
+            string itemType = trigger.gameObject.GetComponent<CollectableScript>().itemType;
+            print("You have collected a: "+ itemType);
+
+            items.Add(itemType);
+            print("Inventory length:" + items.Count);
+
+            Destroy(trigger.gameObject);
+        }
+
     }
 
     // Triggered whenever ending collision with object
