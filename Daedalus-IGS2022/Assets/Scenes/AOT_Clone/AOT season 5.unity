@@ -3074,9 +3074,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3193559472410470519, guid: 6c7e3a22c4a294c42b146152d40c87db,
         type: 3}
+      propertyPath: lives
+      value: 999
+      objectReference: {fileID: 0}
+    - target: {fileID: 3193559472410470519, guid: 6c7e3a22c4a294c42b146152d40c87db,
+        type: 3}
       propertyPath: bounciness
       value: 0.25
       objectReference: {fileID: 0}
+    - target: {fileID: 3193559472410470519, guid: 6c7e3a22c4a294c42b146152d40c87db,
+        type: 3}
+      propertyPath: respawnPoints.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3193559472410470519, guid: 6c7e3a22c4a294c42b146152d40c87db,
+        type: 3}
+      propertyPath: respawnPoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 1972260580}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c7e3a22c4a294c42b146152d40c87db, type: 3}
 --- !u!4 &1098398193 stripped
