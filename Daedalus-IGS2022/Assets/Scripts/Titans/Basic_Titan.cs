@@ -176,8 +176,7 @@ public class Basic_Titan : MonoBehaviour
     public void InitKill()
     {
         //Scoreboard
-        if (killCount)
-            ScoreBoard.Instance.TitanKill();
+        ScoreBoard.Instance.TitanKill();
 
         // Function is called when dead
         alive = false;
@@ -206,7 +205,8 @@ public class Basic_Titan : MonoBehaviour
     public void Kill()
     {
         alive = false;
-        GameObject.FindGameObjectWithTag("KillCounter").GetComponent<Kill_The_Titans>().KillTitan();
+        if (killCount)
+            GameObject.FindGameObjectWithTag("KillCounter").GetComponent<Kill_The_Titans>().KillTitan();
     }
 
     // A coroutine for flipping the titan around to prevent them from instantly turning around

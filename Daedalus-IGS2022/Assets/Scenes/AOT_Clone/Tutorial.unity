@@ -1306,6 +1306,8 @@ MonoBehaviour:
   - Hello and welcome!
   - To begin, you can move right and left with 'A' & 'D'
   - To grapple, simply hold 'RMB'
+  - You can hold the grapple button and it will latch onto the first thing it can
+    reach
   - While grappling, you can hold 'W' 'A' 'S' or 'D' to change your momentum
   - Use your sword by clicking or holding 'LMB'
   - Hitting 'Shift' while in the air will initiate a dash attack
