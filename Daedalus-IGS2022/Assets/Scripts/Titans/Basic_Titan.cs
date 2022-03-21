@@ -205,7 +205,7 @@ public class Basic_Titan : MonoBehaviour
     public void Kill()
     {
         alive = false;
-        //GameObject.FindGameObjectWithTag("KillCounter").GetComponent<Kill_The_Titans>().KillTitan();
+        GameObject.FindGameObjectWithTag("KillCounter").GetComponent<Kill_The_Titans>().KillTitan();
     }
 
     // A coroutine for flipping the titan around to prevent them from instantly turning around
