@@ -67,13 +67,40 @@ public class Player_Script : MonoBehaviour
     private Transform parentTitan;
     private Vector2 previousVelocity;
     public float bounciness;
+    private bool alive = true;
+    public int lives;
+    // Resets player's alive status
+    private void SetAlive()
+    {alive = true;}
+
+    // Crosshair stuff
+    public GameObject crosshair;
+    private SpriteRenderer crosshairSpr;
+    public GameObject targetMarker;
+    // Grapple is in range color
+    public Color activeColor;
+    // Grapple is out of range color
+    public Color inactiveColor;
+
+    // Places player can respawn at
+    public Transform[] respawnPoints;
+    private Transform closestPoint;
 
     // Called once when a scene is loaded
-    void Start()
+    void Awake()
     {
         if (cam == null)
             cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+
+
         currentStamina = grappleStamina;
+
+        // Initializes crosshair
+        crosshairSpr = crosshair.GetComponent<SpriteRenderer>();
+        crosshairSpr.color = inactiveColor;
+
+        // Disables cursor so it doesn't get in the way of crosshair (will probably need to be reworked into other crosshair script)
+        Cursor.visible = false;
     }
 
     // Update called once per physics update
@@ -167,9 +194,6 @@ public class Player_Script : MonoBehaviour
         {
             if (canGrapple)
             {
-                // Grapple ray is the RaycastHit2D that tells the grappleshot where to go
-                grappleRay = Physics2D.Raycast(this.transform.position, mousePos - this.transform.position, grappleRange, grapple);
-
                 // Triggered when grappleRay has hit an object
                 if (grappleRay.collider != null)
                 {
@@ -211,13 +235,43 @@ public class Player_Script : MonoBehaviour
 
         //for collision physics in OnCollisionEnter2D
         previousVelocity = rb.velocity;
-        
     }
 
     private void Update()
     {
         // Mouse position
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+
+        // Sets crosshair position
+        crosshair.transform.position = new Vector2(mousePos.x, mousePos.y);
+
+        // Grapple ray is the RaycastHit2D that tells the grappleshot where to go
+        grappleRay = Physics2D.Raycast(this.transform.position, mousePos - this.transform.position, grappleRange, grapple);
+
+        // If object is in range of crosshair:
+        if (grappleRay.collider != null)
+        {
+            targetMarker.SetActive(true);
+            targetMarker.transform.position = grappleRay.point;
+
+            if (!isGrappling)
+            {
+                crosshairSpr.color = activeColor;
+                crosshair.transform.localScale = Vector2.one * 0.75f;
+            }
+            
+        }
+        // If object is not in range of crosshair:
+        else
+        {
+            targetMarker.SetActive(false);
+            if (!isGrappling)
+            {
+                crosshairSpr.color = inactiveColor;
+                crosshair.transform.localScale = Vector2.one;
+            }
+        }
+
 
         if (isGrappling && grappleSpotPos != null)
         {
@@ -228,6 +282,10 @@ public class Player_Script : MonoBehaviour
 
             Mathf.Clamp(currentStamina -= Time.deltaTime, 0, grappleStamina); // Deplete stamina at 1 unit / second
             staminaBar.transform.localScale = new Vector3(currentStamina / grappleStamina, 1, 1); // Update scale of stamina bar
+
+            // Sets crosshair color and scale while locked on
+            crosshair.transform.localScale = Vector2.one * 0.5f;
+            crosshairSpr.color = activeColor;
         }
         else if (currentStamina < grappleStamina)
         {
@@ -250,7 +308,7 @@ public class Player_Script : MonoBehaviour
     // Coroutine stops grapple spamming
     IEnumerator CanReloadGrapple()
     {
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.075f);
         canReload = true;
     }
 
@@ -271,7 +329,7 @@ public class Player_Script : MonoBehaviour
             normalAngle = col.contacts[0].normal;
             launchAngle = Vector2.Reflect(impactAngle, normalAngle);
 
-            rb.velocity = launchAngle * bounciness;
+            rb.AddForce(launchAngle * bounciness, ForceMode2D.Impulse);
 
             //play hitmarker sound effect
             NoisyBoi.Instance.MakeNoise();
@@ -293,11 +351,12 @@ public class Player_Script : MonoBehaviour
 
             launchPoint = trigger.ClosestPoint(this.transform.position);
             
-            Debug.Log("LaunchPoint:\t" + launchPoint);
+            //Debug.Log("LaunchPoint:\t" + launchPoint);
 
             //RagDoll Death Script Function Call then destroy the player bc they are dead
             DeathScript.Instance.DeathLaunch(launchPoint, trigger.gameObject.transform.position.x);
-            Destroy(this.gameObject);
+            alive = false;
+            this.gameObject.SetActive(false);
         }
     }
 
@@ -337,7 +396,8 @@ public class Player_Script : MonoBehaviour
 
     public void ResetGrapple()
     {
-        Destroy(grappleSpotPos.gameObject); // Destroys instantiated grappleSpot
+        if (grappleSpotPos != null)
+            Destroy(grappleSpotPos.gameObject); // Destroys instantiated grappleSpot
         canGrapple = true; // Resets grappleshot
         isGrappling = false; // Allows game to grapple again
         canFire = false; // Prevents player from firing another grapple shot until they release the keybind

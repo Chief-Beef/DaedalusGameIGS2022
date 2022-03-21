@@ -67,7 +67,7 @@ public class Text_Sequencer : MonoBehaviour
             else
                 continueBox.color = new Color(continueBox.color.r, continueBox.color.g, continueBox.color.b, 0);
 
-            if (messageCompleted && Input.GetKeyDown(KeyCode.Return))
+            if (messageCompleted && Input.GetKeyDown(KeyCode.R))
             {
                 messageCompleted = false;
                 StartCoroutine(ClearText());

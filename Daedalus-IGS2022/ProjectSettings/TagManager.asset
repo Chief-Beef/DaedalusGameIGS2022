@@ -7,6 +7,7 @@ TagManager:
   - Bullet
   - PlayerAttack
   - TitanAttack
+  - KillCounter
   layers:
   - Default
   - TransparentFX
@@ -26,7 +27,7 @@ TagManager:
   - Enemy (No Grapple)
   - Player (Triggers)
   - Minimap
-  - 
+  - Grapple Platforns (No Col.)
   - 
   - 
   - 
