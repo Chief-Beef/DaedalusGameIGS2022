@@ -76,7 +76,6 @@ public class Player_Script : MonoBehaviour
     // Crosshair stuff
     public GameObject crosshair;
     private SpriteRenderer crosshairSpr;
-    public GameObject targetMarker;
     // Grapple is in range color
     public Color activeColor;
     // Grapple is out of range color
@@ -259,11 +258,12 @@ public class Player_Script : MonoBehaviour
         // If object is in range of crosshair:
         if (grappleRay.collider != null)
         {
-            targetMarker.SetActive(true);
-            targetMarker.transform.position = grappleRay.point;
-
             if (!isGrappling)
             {
+                // Ensures cursor is not visible
+                if (Cursor.visible)
+                    Cursor.visible = false;
+
                 crosshairSpr.color = activeColor;
                 crosshair.transform.localScale = Vector2.one * 0.75f;
             }
@@ -272,7 +272,6 @@ public class Player_Script : MonoBehaviour
         // If object is not in range of crosshair:
         else
         {
-            targetMarker.SetActive(false);
             if (!isGrappling)
             {
                 crosshairSpr.color = inactiveColor;
