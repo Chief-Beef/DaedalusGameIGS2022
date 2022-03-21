@@ -258,6 +258,10 @@ public class Player_Script : MonoBehaviour
         {
             if (!isGrappling)
             {
+                // Ensures cursor is not visible
+                if (Cursor.visible)
+                    Cursor.visible = false;
+
                 crosshairSpr.color = activeColor;
                 crosshair.transform.localScale = Vector2.one * 0.75f;
             }
