@@ -176,7 +176,8 @@ public class Basic_Titan : MonoBehaviour
     public void InitKill()
     {
         //Scoreboard
-        ScoreBoard.Instance.TitanKill();
+        if (killCount)
+            ScoreBoard.Instance.TitanKill();
 
         // Function is called when dead
         alive = false;
