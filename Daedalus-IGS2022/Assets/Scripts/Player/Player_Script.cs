@@ -88,6 +88,8 @@ public class Player_Script : MonoBehaviour
     // Collectables stuff
     public List<string> items;
 
+    public int frames;
+
     // Called once when a scene is loaded
     void Awake()
     {
@@ -366,6 +368,8 @@ public class Player_Script : MonoBehaviour
 
         if (trigger.gameObject.tag == "Collectable")
         {
+            frames++;
+
             string itemType = trigger.gameObject.GetComponent<CollectableScript>().itemType;
             print("You have collected a: "+ itemType);
 
