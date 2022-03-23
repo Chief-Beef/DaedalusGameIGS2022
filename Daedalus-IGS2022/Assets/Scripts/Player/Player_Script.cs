@@ -76,7 +76,6 @@ public class Player_Script : MonoBehaviour
     // Crosshair stuff
     public GameObject crosshair;
     private SpriteRenderer crosshairSpr;
-    public GameObject targetMarker;
     // Grapple is in range color
     public Color activeColor;
     // Grapple is out of range color
@@ -88,6 +87,8 @@ public class Player_Script : MonoBehaviour
 
     // Collectables stuff
     public List<string> items;
+
+    public int frames;
 
     // Called once when a scene is loaded
     void Awake()
@@ -257,11 +258,12 @@ public class Player_Script : MonoBehaviour
         // If object is in range of crosshair:
         if (grappleRay.collider != null)
         {
-            targetMarker.SetActive(true);
-            targetMarker.transform.position = grappleRay.point;
-
             if (!isGrappling)
             {
+                // Ensures cursor is not visible
+                if (Cursor.visible)
+                    Cursor.visible = false;
+
                 crosshairSpr.color = activeColor;
                 crosshair.transform.localScale = Vector2.one * 0.75f;
             }
@@ -270,7 +272,6 @@ public class Player_Script : MonoBehaviour
         // If object is not in range of crosshair:
         else
         {
-            targetMarker.SetActive(false);
             if (!isGrappling)
             {
                 crosshairSpr.color = inactiveColor;
@@ -372,7 +373,7 @@ public class Player_Script : MonoBehaviour
             {
                 string itemType = trigger.gameObject.GetComponent<CollectableScript>().itemType;
                 print("You have collected a: " + itemType);
-
+ 
                 items.Add(itemType);
                 print("Inventory length:" + items.Count);
 
