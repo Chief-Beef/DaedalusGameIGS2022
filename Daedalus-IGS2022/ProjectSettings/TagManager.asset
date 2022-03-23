@@ -9,6 +9,7 @@ TagManager:
   - TitanAttack
   - KillCounter
   - Collectable
+  - Minimap
   layers:
   - Default
   - TransparentFX
