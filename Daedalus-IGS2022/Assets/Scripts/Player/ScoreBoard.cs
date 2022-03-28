@@ -45,14 +45,26 @@ public class ScoreBoard : MonoBehaviour
     public Sprite tenKill;
 
     public float moveSpeed;
-    public float xPos;
+    public float xPosMax, xPosMin;
 
-    int medalCounter;
+    private Vector3 midPoint, leftPoint, rightPoint;
+
+    public int medalCounter;
+
 
     // Start is called before the first frame update
     void Start()
     {
         Instance = this;
+
+        midPoint = image1.transform.position;
+        leftPoint = new Vector3(midPoint.x - 140, midPoint.y, midPoint.z);
+        rightPoint = new Vector3(midPoint.x + 140, midPoint.y, midPoint.z);
+
+        medalWheel[0].enabled = false;
+        medalWheel[1].enabled = false;
+        medalWheel[2].enabled = false;
+
 
         score = 0;
         totalTitans = 0;
@@ -67,7 +79,7 @@ public class ScoreBoard : MonoBehaviour
     //timers and kill count
     void FixedUpdate()
     {
-        if (multiKillTimer >= multiKillReset)   
+        if (multiKillTimer >= multiKillReset)
             multiKillEnd();                     //if mk reaches time limit end it
         else
             multiKillTimer += Time.deltaTime;   //else add time
@@ -124,6 +136,11 @@ public class ScoreBoard : MonoBehaviour
     {
         multiKillTotal = 0;
         active = false;
+
+        medalCounter = 0;
+        medalWheel[0].enabled = false;
+        medalWheel[1].enabled = false;
+        medalWheel[2].enabled = false;
     }
 
     //check for multikill, if yes determine which multikill
@@ -162,7 +179,7 @@ public class ScoreBoard : MonoBehaviour
                     medalDisplay(eightKill);
                     break;
                 case 9:
-                    Debug.Log("ANOTHER ONE BITES THE DUST\n");
+                    Debug.Log("CIVIL WAR DOCTOR\n");
                     medalDisplay(nineKill);
                     break;
                 case 10:
@@ -178,9 +195,9 @@ public class ScoreBoard : MonoBehaviour
             multiKillEnd();
     }
 
-   
+
     //Displays the medals at the top middle part of the screen
-     void medalDisplay(Sprite medal)
+    void medalDisplay(Sprite medal)
     {
         /*
         have the medals scroll across the top of the screen from right to left
@@ -193,12 +210,30 @@ public class ScoreBoard : MonoBehaviour
         change opacity or disable when they go offscreen to appear as if they are gone
          */
 
+        //new medal enters at image 1
+        medalWheel[medalCounter % 3].enabled = true;
         medalWheel[medalCounter % 3].sprite = medal;
 
-
+        moveMedals(medalCounter);
 
         medalCounter++; //next medal will be on the next image
     }
 
+    void moveMedals(int count)
+    {
+
+        if (count == 0)
+            medalWheel[0].transform.position = midPoint;
+        else if (count == 1)
+            medalWheel[1].transform.position = rightPoint;
+        else
+        {
+            //rotates medals
+            medalWheel[(count-2)%3].transform.position = leftPoint;
+            medalWheel[(count-1)%3].transform.position = midPoint;
+            medalWheel[(count)%3].transform.position = rightPoint;
+        }
+        
+    }
 
 }
