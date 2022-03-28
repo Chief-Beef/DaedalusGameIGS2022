@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class ScoreBoard : MonoBehaviour
 {
@@ -13,7 +15,7 @@ public class ScoreBoard : MonoBehaviour
     public float multiKillTimer;    //how much time has passed since last kill
     public float multiKillReset;    //how fast you must get the next kill
     public int multiKillTotal;      //number of kills in the multikill
-    public bool active;    //is the multikill actively happening
+    public bool active;             //is the multikill actively happening
 
     //How many points for each enemy
     public int titanPoints;         //
@@ -25,6 +27,19 @@ public class ScoreBoard : MonoBehaviour
     public int totalLints;          //
     public int totalAngels;         // Total Kills
     public int totalKills;          //
+
+    //Sprites + Images
+    public Image doubleKill;
+    public Image tripleKill;
+    public Image quadKill;
+    public Image fiveKill;
+    public Image sixKill;
+    public Image sevenKill;
+    public Image eightKill;
+    public Image nineKill;
+    public Image tenKill;
+    public float moveSpeed;
+    public float xPos;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +56,7 @@ public class ScoreBoard : MonoBehaviour
         multiKillTotal = 0;
     }
 
+    //timers and kill count
     void FixedUpdate()
     {
         if (multiKillTimer >= multiKillReset)   
@@ -51,6 +67,7 @@ public class ScoreBoard : MonoBehaviour
         totalKills = totalTitans + totalLints + totalAngels;
     }
 
+    //add kill and check if multikill
     public void addKill()
     {
         if (multiKillTotal >= 10)   //reset mk to 0 if it hits 10
@@ -62,6 +79,7 @@ public class ScoreBoard : MonoBehaviour
         CheckMultiKill();
     }
 
+    //reference from titan script
     public void TitanKill()
     {
         score += titanPoints;
@@ -69,6 +87,7 @@ public class ScoreBoard : MonoBehaviour
         addKill();
     }
 
+    //reference from lint script
     public void LintKill()
     {
         score += lintPoints;
@@ -76,6 +95,8 @@ public class ScoreBoard : MonoBehaviour
         addKill();
 
     }
+
+    //reference from angel script
     public void AngelKill()
     {
         score += angelPoints;
@@ -84,17 +105,20 @@ public class ScoreBoard : MonoBehaviour
 
     }
 
+    //activate multikill
     public void multiKillActive()
     {
         active = true;
     }
 
+    //end multikill
     public void multiKillEnd()
     {
         multiKillTotal = 0;
         active = false;
     }
 
+    //check for multikill, if yes determine which multikill
     public void CheckMultiKill()
     {
         if (active && multiKillTimer <= multiKillReset)
@@ -103,40 +127,67 @@ public class ScoreBoard : MonoBehaviour
             {
                 case 2:
                     Debug.Log("DOUBLE KILL\n");
+                    doubleKill.enabled = true;
                     break;
                 case 3:
                     Debug.Log("TRIPLE KILL\n");
-                    Debug.Log(multiKillTotal);
+                    tripleKill.enabled = true;
                     break;
                 case 4:
-                    Debug.Log("OVERKILL\n");
+                    Debug.Log("SQUAD WIPE\n");
+                    quadKill.enabled = true;
                     break;
                 case 5:
-                    Debug.Log("KILLTACULAR\n");
+                    Debug.Log("DEMON TIME\n");
+                    fiveKill.enabled = true;
                     break;
                 case 6:
-                    Debug.Log("KILLTROCITY\n");
+                    Debug.Log("6 PIECE\n");
+                    sixKill.enabled = true;
                     break;
                 case 7:
-                    Debug.Log("KILLIMANJARO\n");
+                    Debug.Log("CHAT CLIP THAT\n");
+                    sevenKill.enabled = true;
                     break;
                 case 8:
-                    Debug.Log("KILLTASTROPHE\n");
+                    Debug.Log("MOM GET THE CAMERA\n");
+                    eightKill.enabled = true;
                     break;
                 case 9:
-                    Debug.Log("KILLPOCALYPSE\n");
+                    Debug.Log("ANOTHER ONE BITES THE DUST\n");
+                    nineKill.enabled = true;
                     break;
                 case 10:
-                    Debug.Log("KILLIONAIRE -- MOM GET THE CAMERA\n");
+                    Debug.Log("OUT OF MEDALS\n");
+                    tenKill.enabled = true;
                     break;
                 default:
                     Debug.Log("either 1 kill or more than 10 kills or error");
+                    doubleKill.enabled = false;
+                    tenKill.enabled = false;
                     break;
-
             }
         }
         else
             multiKillEnd();
     }
 
+   
+    //Displays the medals at the top middle part of the screen
+     void medalDisplay()
+    {
+        /*
+        have the medals scroll across the top of the screen from right to left
+        maximum three medals on screen at a time
+        medals wait a few seconds before sliding off naturally
+        medals will be pushed off if the player gets a new medal  
+       
+         * 
+         
+         
+         */
+
+    }
+      
+    
 }
