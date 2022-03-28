@@ -3183,7 +3183,7 @@ MonoBehaviour:
   spawnObject: {fileID: 0}
   spawnPos: {x: 0, y: 0, z: 0}
   objectToEnable:
-  - {fileID: 0}
+  - {fileID: 940059340}
   - {fileID: 107874025}
   - {fileID: 1337087652}
   - {fileID: 540372767}
@@ -8565,7 +8565,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &940059341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12591,11 +12591,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   messageText: {fileID: 1905100171}
   messages:
-  - There's some titans up ahead there. They're pretty stupid but be careful (I haven't
-    coded in a checkpoint yet lol)
+  - There's some titans up ahead there. They're pretty stupid but be careful
   - Cut their necks to kill them, but be careful.
   appearTime: 0.01
-  clearTime: 4
+  clearTime: 2
   continueTime: 0.75
   tutorialMessage: 0
   continueBox: {fileID: 1127111112}
@@ -18872,6 +18871,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1473616561577902479, guid: 8bf70f3806c41704d9ec3c5ec5346afe,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1473616563509628453, guid: 8bf70f3806c41704d9ec3c5ec5346afe,
         type: 3}
       propertyPath: m_Name
@@ -18931,6 +18935,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4845492386633563016, guid: 8bf70f3806c41704d9ec3c5ec5346afe,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7674311105966346298, guid: 8bf70f3806c41704d9ec3c5ec5346afe,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8bf70f3806c41704d9ec3c5ec5346afe, type: 3}
