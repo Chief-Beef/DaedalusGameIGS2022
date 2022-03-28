@@ -29,17 +29,25 @@ public class ScoreBoard : MonoBehaviour
     public int totalKills;          //
 
     //Sprites + Images
-    public Image doubleKill;
-    public Image tripleKill;
-    public Image quadKill;
-    public Image fiveKill;
-    public Image sixKill;
-    public Image sevenKill;
-    public Image eightKill;
-    public Image nineKill;
-    public Image tenKill;
+    public Image[] medalWheel = new Image[3];
+    public Image image1;
+    public Image image2;
+    public Image image3;
+
+    public Sprite doubleKill;
+    public Sprite tripleKill;
+    public Sprite quadKill;
+    public Sprite fiveKill;
+    public Sprite sixKill;
+    public Sprite sevenKill;
+    public Sprite eightKill;
+    public Sprite nineKill;
+    public Sprite tenKill;
+
     public float moveSpeed;
     public float xPos;
+
+    int medalCounter;
 
     // Start is called before the first frame update
     void Start()
@@ -127,44 +135,42 @@ public class ScoreBoard : MonoBehaviour
             {
                 case 2:
                     Debug.Log("DOUBLE KILL\n");
-                    doubleKill.enabled = true;
+                    medalDisplay(doubleKill);
                     break;
                 case 3:
                     Debug.Log("TRIPLE KILL\n");
-                    tripleKill.enabled = true;
+                    medalDisplay(tripleKill);
                     break;
                 case 4:
                     Debug.Log("SQUAD WIPE\n");
-                    quadKill.enabled = true;
+                    medalDisplay(quadKill);
                     break;
                 case 5:
                     Debug.Log("DEMON TIME\n");
-                    fiveKill.enabled = true;
+                    medalDisplay(fiveKill);
                     break;
                 case 6:
                     Debug.Log("6 PIECE\n");
-                    sixKill.enabled = true;
+                    medalDisplay(sixKill);
                     break;
                 case 7:
                     Debug.Log("CHAT CLIP THAT\n");
-                    sevenKill.enabled = true;
+                    medalDisplay(sevenKill);
                     break;
                 case 8:
                     Debug.Log("MOM GET THE CAMERA\n");
-                    eightKill.enabled = true;
+                    medalDisplay(eightKill);
                     break;
                 case 9:
                     Debug.Log("ANOTHER ONE BITES THE DUST\n");
-                    nineKill.enabled = true;
+                    medalDisplay(nineKill);
                     break;
                 case 10:
                     Debug.Log("OUT OF MEDALS\n");
-                    tenKill.enabled = true;
+                    medalDisplay(tenKill);
                     break;
                 default:
                     Debug.Log("either 1 kill or more than 10 kills or error");
-                    doubleKill.enabled = false;
-                    tenKill.enabled = false;
                     break;
             }
         }
@@ -174,7 +180,7 @@ public class ScoreBoard : MonoBehaviour
 
    
     //Displays the medals at the top middle part of the screen
-     void medalDisplay()
+     void medalDisplay(Sprite medal)
     {
         /*
         have the medals scroll across the top of the screen from right to left
@@ -182,12 +188,17 @@ public class ScoreBoard : MonoBehaviour
         medals wait a few seconds before sliding off naturally
         medals will be pushed off if the player gets a new medal  
        
-         * 
-         
-         
+        three images in an array
+        move images, when they get to x2 they are reset to x1
+        change opacity or disable when they go offscreen to appear as if they are gone
          */
 
+        medalWheel[medalCounter % 3].sprite = medal;
+
+
+
+        medalCounter++; //next medal will be on the next image
     }
-      
-    
+
+
 }
