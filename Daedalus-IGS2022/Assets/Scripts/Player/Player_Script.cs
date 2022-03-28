@@ -135,6 +135,7 @@ public class Player_Script : MonoBehaviour
             if (xVelAbs > 0.1f) // Walking animation plays when moving and grounded
             {
                 anm.Play("Run");
+
                 anm.speed = xVelAbs / 7.5f;
             }
             else // They will stand still if not moving
