@@ -55,3 +55,21 @@ MonoBehaviour:
   totalLints: 0
   totalAngels: 0
   totalKills: 0
+  medalWheel:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  image1: {fileID: 0}
+  image2: {fileID: 0}
+  image3: {fileID: 0}
+  doubleKill: {fileID: 21300000, guid: f1e6cb6753a91ca46bb565ae7ac5531f, type: 3}
+  tripleKill: {fileID: 21300000, guid: a54e212d9eff079469fb85dc7e479622, type: 3}
+  quadKill: {fileID: 21300000, guid: f084559ee1f271845b2ce59d6e04bca4, type: 3}
+  fiveKill: {fileID: 21300000, guid: 6aae241e622d9c5409d3d608a02829ec, type: 3}
+  sixKill: {fileID: 21300000, guid: b5946ddeb5287fb4e97819f490c4ff49, type: 3}
+  sevenKill: {fileID: 21300000, guid: 52d31c55a1b3e1746ba35b95fcc7fa61, type: 3}
+  eightKill: {fileID: 21300000, guid: f4b60f5af45cee040b5ae8fce7cdc714, type: 3}
+  nineKill: {fileID: 21300000, guid: 2c700de44c6e201429d72cfc7373bd7b, type: 3}
+  tenKill: {fileID: 21300000, guid: e820e90d4f716494ea492e16352a5266, type: 3}
+  moveSpeed: 0
+  xPos: 0
