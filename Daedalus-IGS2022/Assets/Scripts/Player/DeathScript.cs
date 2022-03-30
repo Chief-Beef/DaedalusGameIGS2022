@@ -130,8 +130,8 @@ public class DeathScript : MonoBehaviour
         {
             deathBounces++;
 
-            float randRotate = Random.Range(-180f, 180f);
-            transform.Rotate(0, 0, randRotate);
+            //float randRotate = Random.Range(-180f, 180f);
+            //transform.Rotate(0, 0, randRotate);
 
             //impact is your angle of impact, normal is the walls normal angle
             //launch is the reflected angle for the bounce
