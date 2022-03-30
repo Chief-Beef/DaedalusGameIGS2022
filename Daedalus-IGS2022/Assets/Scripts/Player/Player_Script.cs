@@ -81,10 +81,6 @@ public class Player_Script : MonoBehaviour
     // Grapple is out of range color
     public Color inactiveColor;
 
-    // Places player can respawn at
-    public Transform[] respawnPoints;
-    private Transform closestPoint;
-
     // Collectables stuff
     public List<string> items;
 
