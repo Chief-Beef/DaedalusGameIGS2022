@@ -11,6 +11,7 @@ TagManager:
   - Collectable
   - Minimap
   - DeathMessage
+  - Ragdoll
   layers:
   - Default
   - TransparentFX
