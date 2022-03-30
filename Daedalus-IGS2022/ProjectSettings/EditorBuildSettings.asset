@@ -6,12 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/AOT_Clone/Tutorial.unity
+    path: Assets/Scenes/Menu/MainMenu.unity
+    guid: df406018c0158244782429a5512caec2
+  - enabled: 1
+    path: Assets/Scenes/Menu/LevelSelect.unity
+    guid: 65260fd6f89224c4e9dd44bbc6b49fee
+  - enabled: 1
+    path: Assets/Scenes/Stages/Tutorial.unity
     guid: 98b9f50e79c56444895c4544b3f0f4ba
   - enabled: 1
     path: Assets/Scenes/AOT_Clone/AOT season 5.unity
     guid: 1129a476f399ae840bd9d83056e3c8bf
   - enabled: 1
-    path: Assets/Scenes/FlyingEnemyTesting.unity
+    path: Assets/Scenes/Testing/FlyingEnemyTesting.unity
     guid: a0435ea0570c49548a15bef8bb74fb13
   m_configObjects: {}
