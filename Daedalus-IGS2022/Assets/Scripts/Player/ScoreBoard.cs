@@ -30,9 +30,9 @@ public class ScoreBoard : MonoBehaviour
 
     //Sprites + Images
     public Image[] medalWheel = new Image[3];
-    public Image image1;
-    public Image image2;
-    public Image image3;
+    public Image image1, image2, image3;
+    public Text[] txtWheel = new Text[3];
+    public Text txt1, txt2, txt3;
 
     public Sprite doubleKill;
     public Sprite tripleKill;
@@ -44,13 +44,11 @@ public class ScoreBoard : MonoBehaviour
     public Sprite nineKill;
     public Sprite tenKill;
 
-    public float moveSpeed;
-    public float xPosMax, xPosMin;
-
     private Vector3 midPoint, leftPoint, rightPoint;
+    private string mkText;
 
     public int medalCounter;
-
+    
 
     // Start is called before the first frame update
     void Start()
@@ -64,6 +62,11 @@ public class ScoreBoard : MonoBehaviour
         medalWheel[0].enabled = false;
         medalWheel[1].enabled = false;
         medalWheel[2].enabled = false;
+
+        txtWheel[0].enabled = false;
+        txtWheel[1].enabled = false;
+        txtWheel[2].enabled = false;
+
 
 
         score = 0;
@@ -141,6 +144,10 @@ public class ScoreBoard : MonoBehaviour
         medalWheel[0].enabled = false;
         medalWheel[1].enabled = false;
         medalWheel[2].enabled = false;
+
+        txtWheel[0].enabled = false;
+        txtWheel[1].enabled = false;
+        txtWheel[2].enabled = false;
     }
 
     //check for multikill, if yes determine which multikill
@@ -151,45 +158,46 @@ public class ScoreBoard : MonoBehaviour
             switch (multiKillTotal)
             {
                 case 2:
-                    Debug.Log("DOUBLE KILL\n");
+                    mkText = "DOUBLE KILL\n";
                     medalDisplay(doubleKill);
                     break;
                 case 3:
-                    Debug.Log("TRIPLE KILL\n");
+                    mkText = "TRIPLE KILL\n";
                     medalDisplay(tripleKill);
                     break;
                 case 4:
-                    Debug.Log("SQUAD WIPE\n");
+                    mkText = "SQUAD WIPE\n";
                     medalDisplay(quadKill);
                     break;
                 case 5:
-                    Debug.Log("DEMON TIME\n");
+                    mkText = "DEMON TIME\n";
                     medalDisplay(fiveKill);
                     break;
                 case 6:
-                    Debug.Log("6 PIECE\n");
+                    mkText = "6 PIECE\n";
                     medalDisplay(sixKill);
                     break;
                 case 7:
-                    Debug.Log("CHAT CLIP THAT\n");
+                    mkText = "CHAT CLIP THAT\n";
                     medalDisplay(sevenKill);
                     break;
                 case 8:
-                    Debug.Log("MOM GET THE CAMERA\n");
+                    mkText = "MOM GET THE CAMERA\n";
                     medalDisplay(eightKill);
                     break;
                 case 9:
-                    Debug.Log("CIVIL WAR DOCTOR\n");
+                    mkText = "CIVIL WAR DOCTOR\n";
                     medalDisplay(nineKill);
                     break;
                 case 10:
-                    Debug.Log("OUT OF MEDALS\n");
+                    mkText = "OUT OF MEDALS\n";
                     medalDisplay(tenKill);
                     break;
                 default:
-                    Debug.Log("either 1 kill or more than 10 kills or error");
+                    mkText = "either 1 kill or more than 10 kills or error";
                     break;
             }
+            Debug.Log(mkText);
         }
         else
             multiKillEnd();
@@ -213,6 +221,10 @@ public class ScoreBoard : MonoBehaviour
         //new medal enters at image 1
         medalWheel[medalCounter % 3].enabled = true;
         medalWheel[medalCounter % 3].sprite = medal;
+
+        //new medal has text underneath
+        txtWheel[medalCounter % 3].enabled = true;
+        txtWheel[medalCounter % 3].text = mkText;
 
         moveMedals(medalCounter);
 
