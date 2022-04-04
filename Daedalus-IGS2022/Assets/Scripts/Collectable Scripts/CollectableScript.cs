@@ -8,6 +8,9 @@ public class CollectableScript : MonoBehaviour
     public string itemType;
     public UICol UICollect;
     public Player_Script player;
+    public AudioSource FnafYay;
+    public AudioClip clip;
+    public float volume = 1f;
     //public CollectableSounds allCollected;
     //public bool collected = false;
 
@@ -15,8 +18,11 @@ public class CollectableScript : MonoBehaviour
     {
         UICollect = UICollect.GetComponent<UICol>();
         player = player.GetComponent<Player_Script>();
+
+
+        FnafYay.PlayOneShot(clip, volume);
         //allCollected = allCollected.GetComponent<CollectableSounds>();
-        
+
     }
 
     private void Update()
@@ -62,7 +68,7 @@ public class CollectableScript : MonoBehaviour
 
             if (player.items.Count == 7) 
             {
-                //CollectableSounds.colInstance.playFnaf();
+                //FnafYay.PlayOneShot(clip, volume);
             }
 
             

@@ -20,6 +20,6 @@ public class CollectableSounds : MonoBehaviour
     // Update is called once per frame
     public void playFnaf()
     {
-        sound[0].Play();
+        //sound[0].Play();
     }
 }
