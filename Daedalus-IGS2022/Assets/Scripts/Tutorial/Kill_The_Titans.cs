@@ -35,7 +35,7 @@ public class Kill_The_Titans : MonoBehaviour
 
             if (fade >= 1.0f)
             {
-
+                SceneManager.LoadScene(0);
             }
         }
     }

@@ -160,7 +160,7 @@ public class DeathScript : MonoBehaviour
             rb.velocity = launchAngle * .8f;
           
             //play hitmarker sound effect
-            NoisyBoi.Instance.MakeNoise();
+            //NoisyBoi.Instance.MakeNoise();
         }
 
         /* Destroy Player after 20 bounces
