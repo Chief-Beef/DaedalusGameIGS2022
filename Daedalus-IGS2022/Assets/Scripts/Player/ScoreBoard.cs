@@ -44,11 +44,18 @@ public class ScoreBoard : MonoBehaviour
     public Sprite nineKill;
     public Sprite tenKill;
 
+    public Sprite fiveSpree;
+    public Sprite tenSpree;
+    public Sprite fifteenSpree;
+    public Sprite twentySpree;
+    public Sprite thirtySpree;
+
     private Vector3 midPoint, leftPoint, rightPoint;
     private string mkText;
 
     public int medalCounter;
-    
+    public int killStreak;
+
 
     // Start is called before the first frame update
     void Start()
@@ -98,8 +105,10 @@ public class ScoreBoard : MonoBehaviour
 
         multiKillTimer = 0;         //reset timer on kill
         multiKillTotal++;           //add kill
+        killStreak++;
         multiKillActive();          //set mk to active
         CheckMultiKill();
+        CheckStreak();
     }
 
     //reference from titan script
@@ -248,4 +257,40 @@ public class ScoreBoard : MonoBehaviour
         
     }
 
+    public void CheckStreak()
+    {
+        switch (killStreak)
+        {
+            case 5:
+                mkText = "KILLING SPREE\n";
+                medalDisplay(fiveSpree);
+                break;
+            case 10:
+                mkText = "RAMPAGE\n";
+                medalDisplay(tenSpree);
+                break;
+            case 15:
+                mkText = "TERMINATOR\n";
+                medalDisplay(fifteenSpree);
+                break;
+            case 20:
+                mkText = "JOHN WICK\n";
+                medalDisplay(twentySpree);
+                break;
+            case 30:
+                mkText = "GET IN THE FRIDGE\n";
+                medalDisplay(thirtySpree);
+                break;
+            default:
+                Debug.Log("Get More Kills");
+                break;
+        }
+    }
+    public void kill(string name)
+    {
+        if (name == "Lint")
+            LintKill();
+        else if (name == "Flying One")
+            AngelKill();
+    }
 }
