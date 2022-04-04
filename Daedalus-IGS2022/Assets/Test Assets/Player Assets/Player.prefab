@@ -718,7 +718,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 3193559472410470518}
   cam: {fileID: 0}
-  camDefaultSize: 25
+  camDefaultSize: 27.5
   anm: {fileID: 3193559472410470517}
   speed: 25
   airSpeed: 5
@@ -748,7 +748,6 @@ MonoBehaviour:
   crosshair: {fileID: 5428042358575965871}
   activeColor: {r: 0, g: 1, b: 0.11449838, a: 0.78431374}
   inactiveColor: {r: 0.8460461, g: 1, b: 0, a: 0.78431374}
-  respawnPoints: []
   items: []
   frames: 0
 --- !u!50 &3193559472410470518

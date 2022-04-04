@@ -175,6 +175,66 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.421669, y: 7.6983876}
   m_EdgeRadius: 0
+--- !u!1 &5960775750269376376
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8356090368010521688}
+  m_Layer: 15
+  m_Name: WallCheckB
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8356090368010521688
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5960775750269376376}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8.5, y: -19, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6377759024173198008}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6010319021657729230
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3287043840182591318}
+  m_Layer: 15
+  m_Name: WallCheckA
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3287043840182591318
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6010319021657729230}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8.75, y: 14.575, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6377759024173198008}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6377759024173198009
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,6 +264,8 @@ Transform:
   m_Children:
   - {fileID: 7860391417541734184}
   - {fileID: 6377759024317957804}
+  - {fileID: 3287043840182591318}
+  - {fileID: 8356090368010521688}
   m_Father: {fileID: 7860391418139569038}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1179,9 +1241,15 @@ MonoBehaviour:
   - {fileID: 7860391418657536429}
   - {fileID: 7860391418665933155}
   - {fileID: 7860391419002559285}
+  areaCheckA: {fileID: 3287043840182591318}
+  areaCheckB: {fileID: 8356090368010521688}
+  groundCheck:
+    serializedVersion: 2
+    m_Bits: 67894
   bloodSpurt: {fileID: 4970017042367310563, guid: 7a7a40ec33dde5c47b242cbf5de1fe66,
     type: 3}
   bloodSpot: {fileID: 5097298216676385155}
+  killCount: 0
 --- !u!95 &7860391418139569026
 Animator:
   serializedVersion: 3

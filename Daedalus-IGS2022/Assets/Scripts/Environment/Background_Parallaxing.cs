@@ -47,7 +47,7 @@ public class Background_Parallaxing : MonoBehaviour
         for (int i = 0; i < backgrounds.Length; i++)
         {
             backgrounds[i].transform.position = new Vector2(startPositions[i].x + diff.x * movementMultpliersX[i],
-                                                            startPositions[i].x + diff.y * movementMultipliersY[i]);
+                                                            startPositions[i].y + diff.y * movementMultipliersY[i]);
         }
     }
 }
