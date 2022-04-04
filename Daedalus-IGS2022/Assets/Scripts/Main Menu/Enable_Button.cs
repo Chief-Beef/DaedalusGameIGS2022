@@ -23,5 +23,8 @@ public class Enable_Button : MonoBehaviour
         }
         else
             this.gameObject.SetActive(true);
+
+        if (Cursor.visible == false)
+            Cursor.visible = true;
     }
 }
