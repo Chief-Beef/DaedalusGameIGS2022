@@ -7,11 +7,16 @@ public class CollectableScript : MonoBehaviour
     public bool isPickedUp = false;
     public string itemType;
     public UICol UICollect;
+    public Player_Script player;
+    //public CollectableSounds allCollected;
     //public bool collected = false;
 
     private void Start()
     {
         UICollect = UICollect.GetComponent<UICol>();
+        player = player.GetComponent<Player_Script>();
+        //allCollected = allCollected.GetComponent<CollectableSounds>();
+        
     }
 
     private void Update()
@@ -54,7 +59,11 @@ public class CollectableScript : MonoBehaviour
                     break;
 
             }
-            
+
+            if (player.items.Count == 7) 
+            {
+                //CollectableSounds.colInstance.playFnaf();
+            }
 
             
         }

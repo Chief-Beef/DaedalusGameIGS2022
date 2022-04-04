@@ -81,7 +81,7 @@ public class Player_Script : MonoBehaviour
     // Grapple is out of range color
     public Color inactiveColor;
 
-    // Collectables stuff
+    // Collectables string names array
     public List<string> items;
 
     public int frames;
