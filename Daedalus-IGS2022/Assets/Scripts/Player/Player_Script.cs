@@ -369,13 +369,13 @@ public class Player_Script : MonoBehaviour
             if (itemScript.isPickedUp == false)
             {
                 string itemType = trigger.gameObject.GetComponent<CollectableScript>().itemType;
-                print("You have collected a: " + itemType);
+                //print("You have collected a: " + itemType);
  
                 items.Add(itemType);
                 print("Inventory length:" + items.Count);
 
                 itemScript.isPickedUp = true;
-                Destroy(trigger.gameObject);
+                
             }
             
         }
