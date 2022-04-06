@@ -32,6 +32,8 @@ public class Basic_Titan : MonoBehaviour
     private bool alive = true;
     // Sprite renderers of pieces to fade out
     public SpriteRenderer[] pieces;
+    // The eye
+    public GameObject eye;
     // Gets rid of grapple spots when enemy dies
     public GameObject[] grappleSpots;
     // Destroys enemy attacks when they dies
@@ -202,6 +204,13 @@ public class Basic_Titan : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
+        else
+        {
+            if (transform.eulerAngles == Vector3.up * 180)
+                eye.transform.localPosition = (player.transform.position - eye.transform.position).normalized * new Vector2(-1, 1);
+            else
+                eye.transform.localPosition = (player.transform.position - eye.transform.position).normalized;
+        }
     }
 
     public void InitKill()
@@ -219,7 +228,8 @@ public class Basic_Titan : MonoBehaviour
         // Disables titan's hitboxes
         for (int i = 0; i < pieces.Length; i++)
         {
-            pieces[i].GetComponent<BoxCollider2D>().enabled = false;
+            if (pieces[i].GetComponent<BoxCollider2D>() != null)
+                pieces[i].GetComponent<BoxCollider2D>().enabled = false;
         }
         for (int i = 0; i < grappleSpots.Length; i++)
         {
