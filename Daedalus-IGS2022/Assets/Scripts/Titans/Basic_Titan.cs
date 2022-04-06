@@ -196,7 +196,7 @@ public class Basic_Titan : MonoBehaviour
                 opacity -= Time.deltaTime * 0.15f;
                 for (int i = 0; i < pieces.Length; i++)
                 {
-                    pieces[i].color = new Color(255, 255, 255, opacity);
+                    pieces[i].color = new Color(pieces[i].color.r, pieces[i].color.g, pieces[i].color.b, opacity);
                 }
             }
             else
