@@ -1065,6 +1065,24 @@ PrefabInstance:
       objectReference: {fileID: 4026483603705382901}
     - target: {fileID: 8400665099745245761, guid: 5720646f6725fc148bbb46bfe33f37cc,
         type: 3}
+      propertyPath: fireball
+      value: 
+      objectReference: {fileID: 21300000, guid: 47bc3e36c8b5d9441b95bfe4106d4af4,
+        type: 3}
+    - target: {fileID: 8400665099745245761, guid: 5720646f6725fc148bbb46bfe33f37cc,
+        type: 3}
+      propertyPath: rocketMan
+      value: 
+      objectReference: {fileID: 21300000, guid: 5e0ea872d8f035445a36b8fc0c77e4b6,
+        type: 3}
+    - target: {fileID: 8400665099745245761, guid: 5720646f6725fc148bbb46bfe33f37cc,
+        type: 3}
+      propertyPath: lightningBolt
+      value: 
+      objectReference: {fileID: 21300000, guid: d1ef88dee8ae7a341a5b4c5827804a31,
+        type: 3}
+    - target: {fileID: 8400665099745245761, guid: 5720646f6725fc148bbb46bfe33f37cc,
+        type: 3}
       propertyPath: txtWheel.Array.data[0]
       value: 
       objectReference: {fileID: 2687656297112962490}
