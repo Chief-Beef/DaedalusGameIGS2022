@@ -3,7 +3,11 @@ guid: c3b0c660c1571b444b51066fb179b441
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - UICollect: {instanceID: 0}
+  - player: {instanceID: 0}
+  - FnafYay: {instanceID: 0}
+  - clip: {fileID: 8300000, guid: 03993e00314376b44940aa320abe7da3, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

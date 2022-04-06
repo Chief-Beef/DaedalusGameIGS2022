@@ -11,6 +11,7 @@ public class CollectableScript : MonoBehaviour
     public AudioSource FnafYay;
     public AudioClip clip;
     public float volume = 1f;
+    public bool ready2PlayFnaf = true;
     //public CollectableSounds allCollected;
     //public bool collected = false;
 
@@ -18,9 +19,10 @@ public class CollectableScript : MonoBehaviour
     {
         UICollect = UICollect.GetComponent<UICol>();
         player = player.GetComponent<Player_Script>();
+        FnafYay = FnafYay.GetComponent<AudioSource>();
+        FnafYay.clip = clip;
 
-
-        FnafYay.PlayOneShot(clip, volume);
+        //FnafYay.PlayOneShot(clip, volume);
         //allCollected = allCollected.GetComponent<CollectableSounds>();
 
     }
@@ -68,7 +70,17 @@ public class CollectableScript : MonoBehaviour
 
             if (player.items.Count == 7) 
             {
-                //FnafYay.PlayOneShot(clip, volume);
+                //ready2PlayFnaf = true;
+                if (ready2PlayFnaf)
+                {
+                    Debug.Log("Play Fnaf Sound");
+                    FnafYay.PlayOneShot(clip, volume);
+                    ready2PlayFnaf = false;
+                    if (ready2PlayFnaf == false)
+                    {
+                        Debug.Log("ready2PlayFnaf is false");
+                    }
+                }
             }
 
             
