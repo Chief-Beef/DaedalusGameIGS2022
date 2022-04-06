@@ -10,6 +10,7 @@ public class ScoreBoard : MonoBehaviour
     public static ScoreBoard Instance;
 
     public int score;
+    public Rigidbody2D rb;
 
     //You need a kill every 4 seconds to get a multikill
     public float multiKillTimer;    //how much time has passed since last kill
@@ -44,11 +45,26 @@ public class ScoreBoard : MonoBehaviour
     public Sprite nineKill;
     public Sprite tenKill;
 
+    public Sprite fiveSpree;
+    public Sprite tenSpree;
+    public Sprite fifteenSpree;
+    public Sprite twentySpree;
+    public Sprite thirtySpree;
+
+    public Sprite rocketMan;
+    public Sprite fireball;
+    public Sprite lightningBolt;
+
     private Vector3 midPoint, leftPoint, rightPoint;
     private string mkText;
 
     public int medalCounter;
-    
+    public int killStreak;
+
+
+    //Speed Checks
+    public float xSpeed, ySpeed, linearSpeed;
+
 
     // Start is called before the first frame update
     void Start()
@@ -98,8 +114,11 @@ public class ScoreBoard : MonoBehaviour
 
         multiKillTimer = 0;         //reset timer on kill
         multiKillTotal++;           //add kill
+        killStreak++;
         multiKillActive();          //set mk to active
-        CheckMultiKill();
+        CheckMultiKill();           //check mks
+        CheckStreak();              //check killstreak
+        playerSpeed();              //check player speed
     }
 
     //reference from titan script
@@ -231,6 +250,7 @@ public class ScoreBoard : MonoBehaviour
         medalCounter++; //next medal will be on the next image
     }
 
+    //Moves the medals to show new medals on screen
     void moveMedals(int count)
     {
 
@@ -248,4 +268,72 @@ public class ScoreBoard : MonoBehaviour
         
     }
 
+    //Kill Streak function
+    //Awards a medal for a 5, 10 ,15, 20 and 30 spree
+    public void CheckStreak()
+    {
+        switch (killStreak)
+        {
+            case 5:
+                mkText = "KILLING SPREE\n";
+                medalDisplay(fiveSpree);
+                break;
+            case 10:
+                mkText = "RAMPAGE\n";
+                medalDisplay(tenSpree);
+                break;
+            case 15:
+                mkText = "TERMINATOR\n";
+                medalDisplay(fifteenSpree);
+                break;
+            case 20:
+                mkText = "JOHN WICK\n";
+                medalDisplay(twentySpree);
+                break;
+            case 30:
+                mkText = "GET IN THE FRIDGE\n";
+                medalDisplay(thirtySpree);
+                break;
+            default:
+                Debug.Log("Get More Kills");
+                break;
+        }
+    }
+
+    //detecting kills on either Lint or the Flying/Forbidden One
+    public void kill(string name)
+    {
+        if (name == "Lint")
+            LintKill();
+        else if (name == "Flying One")
+            AngelKill();
+    }
+
+    //Awards medals for getting a kill at a high speed
+    //the higher the speed the better the medal
+    public void playerSpeed()
+    {
+        xSpeed = rb.velocity.x;
+        ySpeed = rb.velocity.y;
+
+        linearSpeed = Mathf.Sqrt(xSpeed*xSpeed + ySpeed*ySpeed);
+
+        if(linearSpeed >= 80.0f)
+        {
+            mkText = "IT WAS ME BARRY\n";
+            medalDisplay(lightningBolt);
+        }
+        else if (linearSpeed >= 70.0f)
+        {
+            mkText = "SPEED KILLS\n";
+            medalDisplay(fireball);
+        }
+        else if (linearSpeed >= 60.0f)
+        {
+            mkText = "ROCKET MAN\n";
+            medalDisplay(rocketMan);
+        }
+
+        //Debug.Log("Linear Speed: " + linearSpeed);
+    }
 }
