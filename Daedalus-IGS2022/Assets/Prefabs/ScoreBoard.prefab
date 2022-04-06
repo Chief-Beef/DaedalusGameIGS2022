@@ -62,6 +62,13 @@ MonoBehaviour:
   image1: {fileID: 0}
   image2: {fileID: 0}
   image3: {fileID: 0}
+  txtWheel:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  txt1: {fileID: 0}
+  txt2: {fileID: 0}
+  txt3: {fileID: 0}
   doubleKill: {fileID: 21300000, guid: f1e6cb6753a91ca46bb565ae7ac5531f, type: 3}
   tripleKill: {fileID: 21300000, guid: a54e212d9eff079469fb85dc7e479622, type: 3}
   quadKill: {fileID: 21300000, guid: f084559ee1f271845b2ce59d6e04bca4, type: 3}
@@ -71,5 +78,10 @@ MonoBehaviour:
   eightKill: {fileID: 21300000, guid: f4b60f5af45cee040b5ae8fce7cdc714, type: 3}
   nineKill: {fileID: 21300000, guid: 2c700de44c6e201429d72cfc7373bd7b, type: 3}
   tenKill: {fileID: 21300000, guid: e820e90d4f716494ea492e16352a5266, type: 3}
-  moveSpeed: 0
-  xPos: 0
+  fiveSpree: {fileID: 21300000, guid: 2199601a1f5872443a3bfb7ee6b89252, type: 3}
+  tenSpree: {fileID: 21300000, guid: 5c7ce575c1b137145b25b83766f3319c, type: 3}
+  fifteenSpree: {fileID: 21300000, guid: 2f2e2810495f22c48b6bb22c8d9dc156, type: 3}
+  twentySpree: {fileID: 21300000, guid: cefde23f59306eb40ab95576a8f872e5, type: 3}
+  thirtySpree: {fileID: 21300000, guid: 8066b42e6aeb24844956836e9a52f227, type: 3}
+  medalCounter: 0
+  killStreak: 0

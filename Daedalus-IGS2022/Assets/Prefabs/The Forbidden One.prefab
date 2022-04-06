@@ -386,6 +386,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentObject: {fileID: 1198419327819356685}
+  species: Flying One
 --- !u!58 &9220953294650386729
 CircleCollider2D:
   m_ObjectHideFlags: 0
