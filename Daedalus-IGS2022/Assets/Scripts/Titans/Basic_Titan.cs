@@ -39,12 +39,21 @@ public class Basic_Titan : MonoBehaviour
     // Float to make enemy fade out (opacity of sprite renderers of pieces)
     private float opacity = 1.0f;
 
+    // Area checks for walls and such
+    public Transform areaCheckA;
+    public Transform areaCheckB;
+    public LayerMask groundCheck;
+
     // Blood effects
     public GameObject bloodSpurt;
     public Transform bloodSpot;
 
     // Set true if there is a tital kill counter
     public bool killCount;
+
+    // Determines whether or not scale of a titan is manually set
+    public bool scalable;
+    public float scalePreset;
 
 
     // Start is called before the first frame update
@@ -57,9 +66,15 @@ public class Basic_Titan : MonoBehaviour
         else
             chaseDirection = 1;
 
-        float scale = Random.Range(0.9f, 1.1f);
+        float scale = Random.Range(0.925f, 1.25f);
 
-        transform.localScale = new Vector3(scale, scale, 1);
+        if (!scalable)
+            transform.localScale = new Vector3(scale, scale, 1);
+        else
+        {
+            transform.localScale = new Vector3(scalePreset, scalePreset, 1);
+            anm.speed = 1 / (scalePreset / 2);
+        }
     }
 
     private void FixedUpdate()
@@ -79,14 +94,24 @@ public class Basic_Titan : MonoBehaviour
                     // Player is in front of titan (left-facing)
                     if (player.transform.position.x < this.transform.position.x && chaseDirection == -1)
                     {
-                        rb.velocity = new Vector2(-speed, rb.velocity.y);
-                        anm.SetBool("isWalking", true);
+                        if (!WallCheck())
+                        {
+                            rb.velocity = new Vector2(-speed, rb.velocity.y);
+                            anm.SetBool("isWalking", true);
+                        }
+                        else
+                            anm.SetBool("isWalking", false);
                     }
                     // Player is in front of titan (right-facing)
                     else if (player.transform.position.x > this.transform.position.x && chaseDirection == 1)
                     {
-                        rb.velocity = new Vector2(speed, rb.velocity.y);
-                        anm.SetBool("isWalking", true);
+                        if (!WallCheck())
+                        {
+                            rb.velocity = new Vector2(speed, rb.velocity.y);
+                            anm.SetBool("isWalking", true);
+                        }
+                        else
+                            anm.SetBool("isWalking", false);
                     }
                 }
                 else
@@ -112,10 +137,16 @@ public class Basic_Titan : MonoBehaviour
             anm.SetBool("isWalking", false); // Will stop animator if player is dead
     }
 
+    // Checks for walls
+    private bool WallCheck()
+    {
+        return Physics2D.OverlapArea(areaCheckA.position, areaCheckB.position, groundCheck);
+    }
+
     private void OnTriggerStay2D(Collider2D trigger)
     {
         // Will attack player if attack is not already occurring
-        if (!isAttacking)
+        if (trigger.gameObject.tag == "Player" && !isAttacking)
         {
             Attack();
         }
