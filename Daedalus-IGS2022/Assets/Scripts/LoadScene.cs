@@ -15,10 +15,10 @@ public class LoadScene : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.I))
-            SceneManager.LoadScene(0);
-        if (Input.GetKeyDown(KeyCode.O))
-            SceneManager.LoadScene(1);
-        if (Input.GetKeyDown(KeyCode.P))
             SceneManager.LoadScene(2);
+        if (Input.GetKeyDown(KeyCode.O))
+            SceneManager.LoadScene(3);
+        if (Input.GetKeyDown(KeyCode.P))
+            SceneManager.LoadScene(4);
     }
 }
