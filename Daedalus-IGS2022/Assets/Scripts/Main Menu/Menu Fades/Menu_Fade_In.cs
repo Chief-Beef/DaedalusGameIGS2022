@@ -21,6 +21,11 @@ public class Menu_Fade_In : MonoBehaviour
     private int levelIndex = 0;
     private string levelName = " ";
 
+    private void Start()
+    {
+        Cursor.visible = true;
+    }
+
     private void Update()
     {
         // Begin fading in

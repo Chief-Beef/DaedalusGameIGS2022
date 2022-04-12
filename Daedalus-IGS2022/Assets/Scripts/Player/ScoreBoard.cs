@@ -93,6 +93,9 @@ public class ScoreBoard : MonoBehaviour
 
         active = false;
         multiKillTotal = 0;
+
+        if (rb == null)
+            rb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
     }
 
     //timers and kill count
