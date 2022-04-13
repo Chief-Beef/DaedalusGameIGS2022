@@ -12,6 +12,8 @@ TagManager:
   - Minimap
   - DeathMessage
   - Ragdoll
+  - Fade
+  - RespawnText
   layers:
   - Default
   - TransparentFX

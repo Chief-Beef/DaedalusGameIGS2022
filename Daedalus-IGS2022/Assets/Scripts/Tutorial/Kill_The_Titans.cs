@@ -8,11 +8,6 @@ public class Kill_The_Titans : MonoBehaviour
     public GameObject[] titans;
     public int remainingTitans;
 
-    public GameObject fadeOut;
-    private SpriteRenderer fadeOutSpr;
-    private float fade = -0.5f;
-    private bool fading = false;
-
     public LevelProgression prog;
 
     public void KillTitan()
@@ -24,25 +19,10 @@ public class Kill_The_Titans : MonoBehaviour
         if (remainingTitans <= 0)
         {
             // Updates current level
-            prog.UpdateLevel(1);
-            // Begins fading
-            fading = true;
-            fadeOutSpr = fadeOut.GetComponent<SpriteRenderer>();
-        }
-    }
 
-    private void Update()
-    {
-        if (fading)
-        {
-            // Fade out
-            fade += Time.deltaTime;
-            fadeOutSpr.color = new Color(0, 0, 0, fade);
-            // Load scene when done fading
-            if (fade >= 1.0f)
-            {
-                SceneManager.LoadScene(0);
-            }
+            // Begins fading out to black
+            var fade = GameObject.FindGameObjectWithTag("Fade").GetComponent<FadeIn>();
+            fade.FadeOut(1);
         }
     }
 }
