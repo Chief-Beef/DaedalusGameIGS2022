@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5422782384191861107}
   - component: {fileID: 1415822231088303642}
   - component: {fileID: 1920272005127884024}
-  m_Layer: 13
+  m_Layer: 15
   m_Name: attackHitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 8222413330014051425}
   - component: {fileID: 8222413330014051429}
   - component: {fileID: 8222413330014051428}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: Lint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -211,7 +211,7 @@ MonoBehaviour:
   lungeForce: 50
   speed: 8
   engageDistance: 50
-  attackDistance: 15
+  attackDistance: 5
   ground:
     serializedVersion: 2
     m_Bits: 768
@@ -219,6 +219,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   playerAngle: {x: 0, y: 0}
+  missile: {fileID: 5246891456498848551, guid: 825db59489f43ea4abfe29519e08da61, type: 3}
 --- !u!1 &8222413331725770643
 GameObject:
   m_ObjectHideFlags: 0
