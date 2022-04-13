@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DeathScript : MonoBehaviour
 {
@@ -33,6 +34,9 @@ public class DeathScript : MonoBehaviour
     private Transform lastPos;
     private bool alive = true;
 
+    // Tells player how to respawn
+    private Text respawnText;
+
     // Player's total lives
     private int lives;
 
@@ -40,6 +44,9 @@ public class DeathScript : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        if (respawnText == null)
+            respawnText = GameObject.FindGameObjectWithTag("RespawnText").GetComponent<Text>();
+
         waitingSpot = this.transform.position;
 
         Instance = this;
@@ -68,10 +75,13 @@ public class DeathScript : MonoBehaviour
         }
         else if (!alive)
         {
-            if (lives > 0)
+            respawnText.enabled = true;
+
+            if (lives != -999999)
             {
                 if (Input.GetKeyDown(KeyCode.R))
                 {
+                    respawnText.enabled = false;
                     closestPoint = respawnPoints[0];
                     for (int i = 0; i < respawnPoints.Length; i++)
                     {
