@@ -15,14 +15,14 @@ public class Enable_Button : MonoBehaviour
     private void Start()
     {
         // Progression int is used to keep track of how far player has progressed
-        int progression = PlayerPrefs.GetInt("Progression", 0);
+        int progression = PlayerPrefs.GetInt("Level", 0);
 
-        if (requiredLevel >= progression)
+        if (requiredLevel <= progression)
         {
-            this.gameObject.SetActive(false);
+            this.gameObject.SetActive(true);
         }
         else
-            this.gameObject.SetActive(true);
+            this.gameObject.SetActive(false);
 
         if (Cursor.visible == false)
             Cursor.visible = true;

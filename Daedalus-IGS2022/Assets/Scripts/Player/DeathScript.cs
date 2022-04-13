@@ -212,7 +212,6 @@ public class DeathScript : MonoBehaviour
         //Debug.Log("RayAngle:\t" + rayAngle + "\tLaunchAngle:\t" + launchAngle + "\tLaunchPoint:\t" + launchPoint + "\tthis.position:\t" + this.transform.position);
 
         //play hitmarker sound effect
-        NoisyBoi.Instance.MakeNoise();
-
+        //NoisyBoi.Instance.MakeNoise();
     }
 }
