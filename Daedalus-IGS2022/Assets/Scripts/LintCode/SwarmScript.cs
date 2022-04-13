@@ -12,11 +12,8 @@ public class SwarmScript : MonoBehaviour
     public float speed;
 
     private float lungeTimer; //prevent lunge spam
-
-    //health is current health while max health is what it starts with
-    private float health;
-    private float maxHealth;
-
+    private float missileTimer;//prevent missile spam
+    
     //distance and direction floats
     public float engageDistance;    //when you see the player and chase them
     public float attackDistance;    //when you attack the player
@@ -39,10 +36,11 @@ public class SwarmScript : MonoBehaviour
 
     public Vector2 playerAngle;
 
+    public GameObject missile;
+
     // Start is called before the first frame update
     void Start()
     {
-        health = maxHealth;
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -50,11 +48,11 @@ public class SwarmScript : MonoBehaviour
     {
         //Reset Lunge Timer
         lungeTimer -= Time.deltaTime;
+        missileTimer -= Time.deltaTime;
 
         //Find Player
         playerDirection = player.transform.position.x - this.transform.position.x;
         playerDistance = Vector2.Distance(player.transform.position, this.transform.position);
-
 
         // if the player is close enought to be chased but not yet in attack distance
         if (playerDistance < attackDistance && lungeTimer < 0f)
@@ -64,6 +62,11 @@ public class SwarmScript : MonoBehaviour
         }
         else if (playerDistance < engageDistance)
         {
+            //Missile launch stuff
+            //instantiate missile and do the rest of the work in the missile code
+            if (missileTimer < 0f)
+                fireMissile();
+
             // Player is to the left
             if (playerDirection < 0)
             {
@@ -91,22 +94,8 @@ public class SwarmScript : MonoBehaviour
         }
 
 
-        //RayCasts can kick rocks
-        //Debug Testing Stuff
-
-        //if (wallRay)
-          //  Debug.Log("I detect: " + playerRay.collider.name + "\t RangeFinder: " + playerRay.distance + "\t Normal Angle: " + playerRay.normal);
-        
-        //END DEBUG TESTING
-
-
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     
     //Lunge Attack
     public void Lunge()
@@ -126,6 +115,14 @@ public class SwarmScript : MonoBehaviour
     {
         //
         rb.AddForce(new Vector2(0, speed*2));
+    }
+
+    public void fireMissile()
+    {
+        
+        Instantiate(missile, this.transform.position, Quaternion.identity, null);
+        Debug.Log("Missile Launch");
+        missileTimer = 3.5f;
     }
 
 }

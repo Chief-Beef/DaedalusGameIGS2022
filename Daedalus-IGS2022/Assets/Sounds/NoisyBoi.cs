@@ -11,7 +11,7 @@ public class NoisyBoi : MonoBehaviour
     public AudioSource windowsError;
     public AudioSource tacoBell;
 
-    public AudioSource[] soundCollection = new AudioSource[4];
+    //public AudioSource[] soundCollection = new AudioSource[4];
 
     private int soundRand;
 
@@ -20,18 +20,15 @@ public class NoisyBoi : MonoBehaviour
     {
         Instance = this;
 
-        soundCollection[0] = shootyNoise;
-        soundCollection[1] = vineBoom;
-        soundCollection[2] = windowsError;
-        soundCollection[3] = tacoBell;
+        //soundCollection[0] = shootyNoise;
+        //soundCollection[1] = vineBoom;
+        //soundCollection[2] = windowsError;
+        //soundCollection[3] = tacoBell;
 
-
-        soundRand = Random.Range(0, soundCollection.Length);
-        Debug.Log("soundRand:\t" + soundRand);
     }
 
     public void MakeNoise()
     {
-        soundCollection[soundRand].Play();
+        shootyNoise.Play();
     }
 }
