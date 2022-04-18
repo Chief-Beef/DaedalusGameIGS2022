@@ -389,7 +389,8 @@ public class Player_Script : MonoBehaviour
         if (trigger.gameObject.tag == "ColRange")
         {
             
-            miniMap.GetComponent<Image>().color = new Color32(166, 0, 5, 100);
+            //miniMap.GetComponent<Image>().color = new Color32(166, 0, 5, 100);
+
         }
     }
 

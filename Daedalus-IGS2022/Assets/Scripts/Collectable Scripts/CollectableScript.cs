@@ -14,6 +14,7 @@ public class CollectableScript : MonoBehaviour
     public bool ready2PlayFnaf = true;
     public GameObject BurgerFormation;
     public Animator anim;
+    private bool colorRange = false;
     //public CollectableSounds allCollected;
     //public bool collected = false;
 
@@ -32,13 +33,14 @@ public class CollectableScript : MonoBehaviour
 
     private void Update()
     {
-        
-        if (isPickedUp == true) 
+
+
+        if (isPickedUp == true)
         {
             //figure out what type of item has been picked up and set it to collected
-            switch (itemType) 
+            switch (itemType)
             {
-                case "1/7": 
+                case "1/7":
                     UICollect.collected = true;
                     break;
 
@@ -71,7 +73,7 @@ public class CollectableScript : MonoBehaviour
 
             }
 
-            if (player.items.Count == 7) 
+            if (player.items.Count == 7)
             {
                 anim.Play("BurgerAssemble");
                 //ready2PlayFnaf = true;
@@ -87,7 +89,9 @@ public class CollectableScript : MonoBehaviour
                 }
             }
 
-            
+
         }
+
     }
+   
 }
