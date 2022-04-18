@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player_Script : MonoBehaviour
 {
@@ -81,8 +82,11 @@ public class Player_Script : MonoBehaviour
     // Grapple is out of range color
     public Color inactiveColor;
 
-    // Collectables string names array
+    // Collectables stuff
     public List<string> items;
+    public Image miniMap;
+    //public SpriteRenderer mmBorder; //minimap border
+
 
     public int frames;
 
@@ -104,6 +108,8 @@ public class Player_Script : MonoBehaviour
 
         //Collectables list
         items = new List<string>();
+        //miniMap = GameObject.Find("MiniMapBorder").GetComponent<SpriteRenderer>();
+        //mmBorder = mmBorder.GetComponent<SpriteRenderer>();
     }
 
     // Update called once per physics update
@@ -380,6 +386,11 @@ public class Player_Script : MonoBehaviour
             
         }
 
+        if (trigger.gameObject.tag == "ColRange")
+        {
+            
+            miniMap.GetComponent<Image>().color = new Color32(166, 0, 5, 100);
+        }
     }
 
     // Triggered whenever ending collision with object
