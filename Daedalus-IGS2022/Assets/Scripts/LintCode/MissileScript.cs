@@ -57,18 +57,17 @@ public class MissileScript : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-        else if (timer > attackTime)    //fly at guy
+        else if (timer > attackTime)    //fly at guy at max speed
         {
-            rb.velocity = Vector2.zero;
+
+            //rayDirection = new Vector2(player.transform.position.x - this.transform.position.x, player.transform.position.y - this.transform.position.y);
+            //Debug.DrawRay(this.transform.position, rayDirection* 20, Color.cyan, 10.0f);
+
             speed = maxSpeed;
-
-            rayDirection = new Vector2(player.transform.position.x - this.transform.position.x, player.transform.position.y - this.transform.position.y);
-            Debug.DrawRay(this.transform.position, rayDirection* 20, Color.cyan, 10.0f);
-
             transform.position = Vector2.MoveTowards(this.transform.position, target.position, speed * Time.deltaTime);
 
         }
-        else
+        else    //start flying
         {
             //start missile pointing at player
             transform.position = Vector2.MoveTowards(this.transform.position, target.position, speed * Time.deltaTime);
