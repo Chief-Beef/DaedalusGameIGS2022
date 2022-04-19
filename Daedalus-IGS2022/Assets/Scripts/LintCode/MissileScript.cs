@@ -7,9 +7,10 @@ public class MissileScript : MonoBehaviour
 
 
     //Player Detection
-    private RaycastHit2D playerRay;
     private Transform target;
-    private GameObject player;
+    public Vector2 lastLoc;
+
+    private RaycastHit2D playerRay;
     private Vector2 rayDirection;
     public LayerMask ground;
 
@@ -25,8 +26,9 @@ public class MissileScript : MonoBehaviour
     //rotation shit
     float angle;
     Vector2 targetPos;
-    
 
+    //Farticle Effect
+    public GameObject farticleEffect;
 
     // Start is called before the first frame update
     void Start()
@@ -37,8 +39,7 @@ public class MissileScript : MonoBehaviour
  
         // find player location
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        player = GameObject.FindGameObjectWithTag("Player");
-
+        
         maxSpeed = speed * 5;
 
     }
@@ -47,31 +48,42 @@ public class MissileScript : MonoBehaviour
     void FixedUpdate()
     {
         //rotate the missile to go to look at the player
-        targetPos = new Vector2(target.position.x - this.transform.position.x, target.position.y - this.transform.position.y);
-        angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg;
-        this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
+        if (timer < attackTime)
+        {
+            lastLoc = target.position;   //last known location before attackTime is met
+            targetPos = new Vector2(target.position.x - this.transform.position.x, target.position.y - this.transform.position.y);
+            angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg;
+            this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
+        }
+
 
         timer += Time.deltaTime;
 
-        if (timer >= deathTime)//destroy missile if still alive
+        if (timer >= deathTime)//destroy missile if still alive after time x2
         {
             Destroy(this.gameObject);
         }
-        else if (timer > attackTime)    //fly at guy at max speed
+        else if (timer >= attackTime)    //after time x fly at guy at max speed
         {
-
-            //rayDirection = new Vector2(player.transform.position.x - this.transform.position.x, player.transform.position.y - this.transform.position.y);
-            //Debug.DrawRay(this.transform.position, rayDirection* 20, Color.cyan, 10.0f);
+            
+            targetPos = new Vector2(lastLoc.x - this.transform.position.x, lastLoc.y - this.transform.position.y);
+            angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg;
+            this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
 
             speed = maxSpeed;
-            transform.position = Vector2.MoveTowards(this.transform.position, target.position, speed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(this.transform.position,lastLoc, speed * Time.deltaTime);
+
+            if (Vector2.Distance(this.transform.position, lastLoc) <= 1.0f)
+                Destroy(this.gameObject);
 
         }
-        else    //start flying
+        else    //start flying and slowly track player
         {
             //start missile pointing at player
             transform.position = Vector2.MoveTowards(this.transform.position, target.position, speed * Time.deltaTime);
         }
+
+        
     }
 
     public void OnCollisionEnter2D(Collision2D col)
@@ -80,6 +92,12 @@ public class MissileScript : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+    }
+
+    private void OnDestroy()
+    {
+        Instantiate(farticleEffect, this.transform.position, Quaternion.identity, null);
+        //when the missile is destroyed create the explosion prefab
     }
 
 }

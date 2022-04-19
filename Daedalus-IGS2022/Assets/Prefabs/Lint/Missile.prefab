@@ -113,6 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15ec5bdd4fcc53e4c86eab396631ccb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastLoc: {x: 0, y: 0}
   ground:
     serializedVersion: 2
     m_Bits: 768
@@ -121,7 +122,9 @@ MonoBehaviour:
   maxSpeed: 500
   rb: {fileID: -5003289977232833149}
   attackTime: 3
-  deathTime: 10
+  deathTime: 8
+  farticleEffect: {fileID: 861854431766076844, guid: 301495b49c1b4284890b7c3904a12fb9,
+    type: 3}
 --- !u!50 &-5003289977232833149
 Rigidbody2D:
   serializedVersion: 4
