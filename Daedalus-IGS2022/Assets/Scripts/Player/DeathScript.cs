@@ -69,6 +69,7 @@ public class DeathScript : MonoBehaviour
     {
         if (!player.activeInHierarchy && alive)
         {
+            player.GetComponent<Player_Script>().lives -= 1;
             lives = player.GetComponent<Player_Script>().lives;
             alive = false;
             lastPos = player.transform;
@@ -76,8 +77,10 @@ public class DeathScript : MonoBehaviour
         else if (!alive)
         {
             respawnText.enabled = true;
+            if (lives < 100)
+                respawnText.text = "Press 'R' to respawn. Lives remaining: " + lives.ToString();
 
-            if (lives != -999999)
+            if (lives >= 1)
             {
                 if (Input.GetKeyDown(KeyCode.R))
                 {
@@ -96,11 +99,14 @@ public class DeathScript : MonoBehaviour
                     ResetPlayerState();
                 }
             }
-            else if (lives == 0)
+            else if (lives <= 0)
             {
+                respawnText.text = "Press 'R' to return to menu";
+
                 if (Input.GetKeyDown(KeyCode.R))
                 {
-                    Debug.Log("dead, no more lives!");
+                    var fade = GameObject.FindGameObjectWithTag("Fade").GetComponent<FadeIn>();
+                    fade.FadeOut(0);
                 }
             }
         }
