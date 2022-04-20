@@ -70,6 +70,10 @@ public class Player_Script : MonoBehaviour
     public float bounciness;
     private bool alive = true;
     public int lives;
+
+    public float explosionForce;
+
+
     // Resets player's alive status
     private void SetAlive()
     {alive = true;}
@@ -343,12 +347,15 @@ public class Player_Script : MonoBehaviour
 
             //play hitmarker sound effect
             NoisyBoi.Instance.MakeNoise();
+            
+        }
 
-            //Debug.Log("previousVelocity:\t" + previousVelocity);
-            //Debug.DrawRay(this.transform.position, impactAngle.normalized * 10, Color.cyan, 10f);
-            //Debug.DrawRay(this.transform.position, normalAngle * 20, Color.red, 10f);
-            //Debug.Log("col.contacts[0].normal:\t" + col.contacts[0].normal);
-            //Debug.DrawRay(this.transform.position, launchAngle, Color.green, 10f);
+        if(col.gameObject.tag == "missile")
+        {
+            DeathScript.Instance.DeathLaunch(launchPoint, col.gameObject.transform.position.x, explosionForce);
+            alive = false;
+            this.gameObject.SetActive(false);
+
         }
 
 

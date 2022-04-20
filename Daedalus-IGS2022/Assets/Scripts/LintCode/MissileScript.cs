@@ -7,20 +7,23 @@ public class MissileScript : MonoBehaviour
 
 
     //Player Detection
-    private Transform target;
-    public Vector2 lastLoc;
+    public Transform target;        //player location
+    public Rigidbody2D player;      //player rigidbody
+    public Vector2 lastLoc;         //last location of the player
+    public float explosionForce;    //Force of the explosion
 
-    private RaycastHit2D playerRay;
-    private Vector2 rayDirection;
-    public LayerMask ground;
+    private RaycastHit2D playerRay; //ray that aims at player
+    private Vector2 playerAngle;    //angle of player relative to missile
+    private Vector2 rayDirection;   //direction of the ray
+    public LayerMask ground;        //ground layer
 
     //Movement
-    public float speed, startSpeed, maxSpeed;
-    public Rigidbody2D rb;
+    public float speed, maxSpeed;   //start and max speed of missile
+    public Rigidbody2D rb;          //missile RB
 
     //timers and shit
-    private float timer;
-    public float attackTime;
+    private float timer;    
+    public float attackTime;        //timers
     public float deathTime;
 
     //rotation shit
@@ -36,12 +39,11 @@ public class MissileScript : MonoBehaviour
        
         Debug.Log("Missile Fired");
         timer = 0.0f;
- 
+
         // find player location
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         
-        maxSpeed = speed * 5;
-
+        
     }
 
     // Update is called once per frame
@@ -63,18 +65,20 @@ public class MissileScript : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-        else if (timer >= attackTime)    //after time x fly at guy at max speed
+        else if (timer >= attackTime)    //after time x1 fly at guy at max speed
         {
             
             targetPos = new Vector2(lastLoc.x - this.transform.position.x, lastLoc.y - this.transform.position.y);
             angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg;
             this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
 
-            speed = maxSpeed;
+            speed = maxSpeed;   //inc speed to max speed
             transform.position = Vector2.MoveTowards(this.transform.position,lastLoc, speed * Time.deltaTime);
 
-            if (Vector2.Distance(this.transform.position, lastLoc) <= 1.0f)
+            //Missile Hit Player
+            if (Vector2.Distance(this.transform.position, lastLoc) <= .05f)
                 Destroy(this.gameObject);
+       
 
         }
         else    //start flying and slowly track player
@@ -88,10 +92,7 @@ public class MissileScript : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "Player")
-        {
-            Destroy(this.gameObject);
-        }
+        Destroy(this.gameObject);
     }
 
     private void OnDestroy()

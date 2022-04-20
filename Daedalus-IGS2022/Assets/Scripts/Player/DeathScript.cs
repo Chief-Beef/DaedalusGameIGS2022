@@ -69,7 +69,6 @@ public class DeathScript : MonoBehaviour
     {
         if (!player.activeInHierarchy && alive)
         {
-            player.GetComponent<Player_Script>().lives -= 1;
             lives = player.GetComponent<Player_Script>().lives;
             alive = false;
             lastPos = player.transform;
@@ -77,10 +76,8 @@ public class DeathScript : MonoBehaviour
         else if (!alive)
         {
             respawnText.enabled = true;
-            if (lives < 100)
-                respawnText.text = "Press 'R' to respawn. Lives remaining: " + lives.ToString();
 
-            if (lives >= 1)
+            if (lives != -999999)
             {
                 if (Input.GetKeyDown(KeyCode.R))
                 {
@@ -99,14 +96,11 @@ public class DeathScript : MonoBehaviour
                     ResetPlayerState();
                 }
             }
-            else if (lives <= 0)
+            else if (lives == 0)
             {
-                respawnText.text = "Press 'R' to return to menu";
-
                 if (Input.GetKeyDown(KeyCode.R))
                 {
-                    var fade = GameObject.FindGameObjectWithTag("Fade").GetComponent<FadeIn>();
-                    fade.FadeOut(0);
+                    Debug.Log("dead, no more lives!");
                 }
             }
         }
@@ -188,7 +182,7 @@ public class DeathScript : MonoBehaviour
     }
 
 
-    public void DeathLaunch(Vector2 launchPoint, float parentTitan)
+    public void DeathLaunch(Vector2 launchPoint, float parentPos)
     {
 
         Vector2 launchAngle, rayAngle;
@@ -212,11 +206,11 @@ public class DeathScript : MonoBehaviour
 
 
         //if titan to the right and launch to the right, flip x to launch left
-        if (parentTitan > this.transform.position.x && launchAngle.x > 0)
+        if (parentPos > this.transform.position.x && launchAngle.x > 0)
             launchAngle.x *= -1;
 
         //if titan to the left and launch to the left, flip x to right
-        if (parentTitan < this.transform.position.x && launchAngle.x < 0)
+        if (parentPos < this.transform.position.x && launchAngle.x < 0)
             launchAngle.x *= -1;
 
         //launch the ragdoll
@@ -230,4 +224,40 @@ public class DeathScript : MonoBehaviour
         //play hitmarker sound effect
         //NoisyBoi.Instance.MakeNoise();
     }
+
+    public void DeathLaunch(Vector2 launchPoint, float parentPos, float explosionForce)
+    {
+
+        Vector2 launchAngle;
+
+        //tp ragdoll to player
+        this.transform.position = playerPos.position;
+
+        launchAngle = new Vector2(this.transform.position.x - launchPoint.x, this.transform.position.y - launchPoint.y);
+
+        //Debug.DrawRay(this.transform.position, rayAngle * 5, Color.red, 10f);
+
+        Debug.DrawRay(this.transform.position, launchAngle, Color.blue, 10f);
+
+
+        //if titan to the right and launch to the right, flip x to launch left
+        if (parentPos > this.transform.position.x && launchAngle.x > 0)
+            launchAngle.x *= -1;
+
+        //if titan to the left and launch to the left, flip x to right
+        if (parentPos < this.transform.position.x && launchAngle.x < 0)
+            launchAngle.x *= -1;
+
+        //launch the ragdoll
+        rb.AddForce(launchAngle * explosionForce);
+
+        firstDeath = true;
+        reset = false;
+
+        //Debug.Log("RayAngle:\t" + rayAngle + "\tLaunchAngle:\t" + launchAngle + "\tLaunchPoint:\t" + launchPoint + "\tthis.position:\t" + this.transform.position);
+
+        //play hitmarker sound effect
+        //NoisyBoi.Instance.MakeNoise();
+    }
+
 }
