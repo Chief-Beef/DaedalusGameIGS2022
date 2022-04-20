@@ -24,8 +24,6 @@ public class Background_Parallaxing : MonoBehaviour
 
         if (player == null)
             player = GameObject.FindGameObjectWithTag("Player").transform;
-        if (ragdoll == null)
-            ragdoll = GameObject.FindGameObjectWithTag("Ragdoll").transform;
 
         playerStartPos = player.position;
     }
