@@ -728,7 +728,7 @@ MonoBehaviour:
   mousePos: {x: 0, y: 0, z: 0}
   grappleForce: 3
   rope: {fileID: 3193559472410470514}
-  grappleRange: 37.5
+  grappleRange: 50
   isGrappling: 0
   staminaBar: {fileID: 6358945192514104127}
   grappleSpot: {fileID: 6905994385759541779, guid: bde1091b1539e3041b4a5fd7b78ddd94,
