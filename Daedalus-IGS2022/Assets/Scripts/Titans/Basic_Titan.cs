@@ -53,6 +53,9 @@ public class Basic_Titan : MonoBehaviour
     // Set true if there is a tital kill counter
     public bool killCount;
 
+    // Set true if survival
+    public bool survival;
+
     // Determines whether or not scale of a titan is manually set
     public bool scalable;
     public float scalePreset;
@@ -76,6 +79,20 @@ public class Basic_Titan : MonoBehaviour
         {
             transform.localScale = new Vector3(scalePreset, scalePreset, 1);
             anm.speed = 1 / (scalePreset / 2);
+        }
+
+        // Fixes titan moonwalking glitch
+        // Reverses direction if player is behind titan
+        if (player.transform.position.x > this.transform.position.x && chaseDirection == -1)
+        {
+            StopCoroutine(ReverseDirection());
+            StartCoroutine(ReverseDirection());
+        }
+        // Reverses direction if player is behind titan
+        else if (player.transform.position.x < this.transform.position.x && chaseDirection == 1)
+        {
+            StopCoroutine(ReverseDirection());
+            StartCoroutine(ReverseDirection());
         }
     }
 
@@ -174,12 +191,12 @@ public class Basic_Titan : MonoBehaviour
             anm.SetBool("attackingHigh", true);
         }
         // Attacks low when player is lower down
-        else if (player.transform.position.y <= this.transform.position.y && player.transform.position.y > this.transform.position.y - 12f)
+        else if (player.transform.position.y <= this.transform.position.y && player.transform.position.y > this.transform.position.y - 12f * scalePreset)
         {
             anm.SetBool("attackingLow", true);
         }
         // Kicks at player if they're really low
-        else if (player.transform.position.y <= this.transform.position.y - 12f)
+        else if (player.transform.position.y <= this.transform.position.y - 12f * scalePreset)
         {
             anm.SetBool("attackingFeet", true);
         }
@@ -248,6 +265,8 @@ public class Basic_Titan : MonoBehaviour
         alive = false;
         if (killCount)
             GameObject.FindGameObjectWithTag("KillCounter").GetComponent<Kill_The_Titans>().KillTitan();
+        if (survival)
+            GameObject.FindGameObjectWithTag("KillCounter").GetComponent<Titan_Spawner>().SpawnTitan();
     }
 
     // A coroutine for flipping the titan around to prevent them from instantly turning around

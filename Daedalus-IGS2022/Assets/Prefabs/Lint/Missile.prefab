@@ -98,8 +98,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.01871872, y: 0.89731026}
-  m_Size: {x: 3.6223984, y: 8.445379}
+  m_Offset: {x: 0, y: 0.6561823}
+  m_Size: {x: 4, y: 9.312365}
   m_Direction: 0
 --- !u!114 &-478403246290392093
 MonoBehaviour:
@@ -113,16 +113,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15ec5bdd4fcc53e4c86eab396631ccb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  player: {fileID: 0}
   lastLoc: {x: 0, y: 0}
+  explosionForce: 1000000
   ground:
     serializedVersion: 2
     m_Bits: 768
-  speed: 5
-  startSpeed: 5
-  maxSpeed: 500
+  speed: 6
+  maxSpeed: 45
   rb: {fileID: -5003289977232833149}
-  attackTime: 3
-  deathTime: 8
+  attackTime: 1.5
+  deathTime: 5
   farticleEffect: {fileID: 861854431766076844, guid: 301495b49c1b4284890b7c3904a12fb9,
     type: 3}
 --- !u!50 &-5003289977232833149
