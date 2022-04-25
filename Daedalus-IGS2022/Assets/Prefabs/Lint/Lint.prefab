@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 8222413330014051425}
   - component: {fileID: 8222413330014051429}
   - component: {fileID: 8222413330014051428}
-  m_Layer: 15
+  m_Layer: 21
   m_Name: Lint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
