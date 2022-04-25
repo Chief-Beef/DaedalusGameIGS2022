@@ -346,7 +346,7 @@ public class Player_Script : MonoBehaviour
             rb.AddForce(launchAngle * bounciness, ForceMode2D.Impulse);
 
             //play hitmarker sound effect
-            NoisyBoi.Instance.shootyNoise.Play();
+            //NoisyBoi.Instance.shootyNoise.Play();
 
         }
 
@@ -354,6 +354,7 @@ public class Player_Script : MonoBehaviour
         {
             DeathScript.Instance.DeathLaunch(launchPoint, col.gameObject.transform.position.x, explosionForce);
             alive = false;
+            lives -= 1;
             this.gameObject.SetActive(false);
 
         }
@@ -373,6 +374,7 @@ public class Player_Script : MonoBehaviour
             //RagDoll Death Script Function Call then destroy the player bc they are dead
             DeathScript.Instance.DeathLaunch(launchPoint, trigger.gameObject.transform.position.x);
             alive = false;
+            lives -= 1;
             this.gameObject.SetActive(false);
         }
 
