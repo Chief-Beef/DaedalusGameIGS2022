@@ -346,7 +346,7 @@ public class Player_Script : MonoBehaviour
             rb.AddForce(launchAngle * bounciness, ForceMode2D.Impulse);
 
             //play hitmarker sound effect
-            //NoisyBoi.Instance.shootyNoise.Play();
+            NoisyBoi.Instance.MakeNoise(4);
 
         }
 

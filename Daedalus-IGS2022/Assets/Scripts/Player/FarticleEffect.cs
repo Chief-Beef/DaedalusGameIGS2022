@@ -16,6 +16,8 @@ public class FarticleEffect : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        NoisyBoi.Instance.MakeNoise(0);
+
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
 
