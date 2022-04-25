@@ -77,11 +77,12 @@ public class DeathScript : MonoBehaviour
         {
             respawnText.enabled = true;
 
-            if (lives != -999999)
+            if (lives > 0)
             {
+                respawnText.text = "Press 'R' to respawn. Lives remaining: " + lives.ToString();
+
                 if (Input.GetKeyDown(KeyCode.R))
                 {
-                    respawnText.enabled = false;
                     closestPoint = respawnPoints[0];
                     for (int i = 0; i < respawnPoints.Length; i++)
                     {
@@ -94,13 +95,16 @@ public class DeathScript : MonoBehaviour
                             continue;
                     }
                     ResetPlayerState();
+                    respawnText.enabled = false;
                 }
             }
             else if (lives == 0)
             {
+                respawnText.text = "You died! Press 'R' to return to menu";
+
                 if (Input.GetKeyDown(KeyCode.R))
                 {
-                    Debug.Log("dead, no more lives!");
+                    GameObject.FindGameObjectWithTag("Fade").GetComponent<FadeIn>().FadeOut(0);
                 }
             }
         }

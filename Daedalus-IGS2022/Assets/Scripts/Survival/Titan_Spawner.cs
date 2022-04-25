@@ -55,6 +55,7 @@ public class Titan_Spawner : MonoBehaviour
         if (choice == 0)
         {
             tit.transform.position = spawnPointA.position + (Vector3.up * 20);
+            tit.transform.eulerAngles = new Vector3(0, 180, 0);
         }
         else
         {

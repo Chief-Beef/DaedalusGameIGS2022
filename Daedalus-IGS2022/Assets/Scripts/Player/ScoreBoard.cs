@@ -130,7 +130,7 @@ public class ScoreBoard : MonoBehaviour
         score += titanPoints;
         totalTitans++;
         addKill();
-        NoisyBoi.Instance.MakeNoise(2);
+        NoisyBoi.Instance.shootyNoise.Play();
     }
 
     //reference from lint script
@@ -139,6 +139,7 @@ public class ScoreBoard : MonoBehaviour
         score += lintPoints;
         totalLints++;
         addKill();
+        NoisyBoi.Instance.shootyNoise.Play();
 
     }
 
@@ -148,7 +149,7 @@ public class ScoreBoard : MonoBehaviour
         score += angelPoints;
         totalLints++;
         addKill();
-
+        NoisyBoi.Instance.shootyNoise.Play();
     }
 
     //activate multikill

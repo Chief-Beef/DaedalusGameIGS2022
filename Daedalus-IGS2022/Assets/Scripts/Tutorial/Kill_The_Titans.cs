@@ -21,8 +21,7 @@ public class Kill_The_Titans : MonoBehaviour
             // Updates current level
 
             // Begins fading out to black
-            var fade = GameObject.FindGameObjectWithTag("Fade").GetComponent<FadeIn>();
-            fade.FadeOut(1);
+            GameObject.FindGameObjectWithTag("Fade").GetComponent<FadeIn>().FadeOut(1);
         }
     }
 }
