@@ -40,31 +40,31 @@ public class CollectableScript : MonoBehaviour
             //figure out what type of item has been picked up and set it to collected
             switch (itemType)
             {
-                case "1/7":
+                case "TopBun":
                     UICollect.collected = true;
                     break;
 
-                case "2/7":
+                case "Bacon":
                     UICollect.collected = true;
                     break;
 
-                case "3/7":
+                case "Cheese":
                     UICollect.collected = true;
                     break;
 
-                case "4/7":
+                case "Lettuce":
                     UICollect.collected = true;
                     break;
 
-                case "5/7":
+                case "Tomato":
                     UICollect.collected = true;
                     break;
 
-                case "6/7":
+                case "Patty":
                     UICollect.collected = true;
                     break;
 
-                case "7/7":
+                case "BottomBun":
                     UICollect.collected = true;
                     break;
 

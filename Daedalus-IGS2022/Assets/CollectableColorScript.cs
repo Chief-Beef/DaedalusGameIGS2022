@@ -15,6 +15,7 @@ public class CollectableColorScript : MonoBehaviour
         player = player.GetComponent<Player_Script>();
         UICollect = UICollect.GetComponent<UICol>();
         CollectableScript = CollectableScript.GetComponent<CollectableScript>();
+        UICollect.image.color = Color.black;
 
     }
 
@@ -23,8 +24,8 @@ public class CollectableColorScript : MonoBehaviour
     {
         if (colorRange == true && CollectableScript.isPickedUp == false)
         {
-            float distance = Vector2.Distance(this.gameObject.transform.position, player.gameObject.transform.position)/5f;
-            float color = ((30f - distance) / 30f);
+            float distance = Vector2.Distance(this.gameObject.transform.position, player.gameObject.transform.position);
+            float color = ((150f - distance) / 150f);
             Debug.Log("Distance: " + distance.ToString() + "  Color: " + color.ToString());
             UICollect.image.color = new Color(color, color, color);
         }
