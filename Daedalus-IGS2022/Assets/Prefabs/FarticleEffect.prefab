@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5546258192215379582}
   - component: {fileID: 4659571682078806035}
   - component: {fileID: -8529489699635057917}
+  - component: {fileID: 4012044844591206690}
   m_Layer: 0
   m_Name: FarticleEffect
   m_TagString: Untagged
@@ -4767,3 +4768,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   killTimer: 1
+--- !u!114 &4012044844591206690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861854431766076844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90b41601372f1de4ba92da03936a9ad2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  player: {fileID: 0}
+  explosionForce: 3
+  explosionRange: 10

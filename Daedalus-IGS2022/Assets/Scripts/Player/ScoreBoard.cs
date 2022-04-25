@@ -130,6 +130,7 @@ public class ScoreBoard : MonoBehaviour
         score += titanPoints;
         totalTitans++;
         addKill();
+        NoisyBoi.Instance.MakeNoise(2);
     }
 
     //reference from lint script

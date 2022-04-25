@@ -228,28 +228,22 @@ public class DeathScript : MonoBehaviour
     public void DeathLaunch(Vector2 launchPoint, float parentPos, float explosionForce)
     {
 
-        Vector2 launchAngle;
 
         //tp ragdoll to player
         this.transform.position = playerPos.position;
 
-        launchAngle = new Vector2(this.transform.position.x - launchPoint.x, this.transform.position.y - launchPoint.y);
+        Vector2 launchAngle = new Vector2(this.transform.position.x - launchPoint.x, this.transform.position.y - launchPoint.y);
+        Debug.DrawRay(this.transform.position, launchAngle, Color.blue, 10f);   // draw launch angle for testing
 
-        //Debug.DrawRay(this.transform.position, rayAngle * 5, Color.red, 10f);
-
-        Debug.DrawRay(this.transform.position, launchAngle, Color.blue, 10f);
-
-
-        //if titan to the right and launch to the right, flip x to launch left
+        //if missile to the right and launch to the right, flip x to launch left
         if (parentPos > this.transform.position.x && launchAngle.x > 0)
             launchAngle.x *= -1;
 
-        //if titan to the left and launch to the left, flip x to right
+        //if missile to the left and launch to the left, flip x to right
         if (parentPos < this.transform.position.x && launchAngle.x < 0)
             launchAngle.x *= -1;
 
-        //launch the ragdoll
-        rb.AddForce(launchAngle * explosionForce);
+        rb.AddForce(launchAngle * explosionForce);  //launch the ragdoll
 
         firstDeath = true;
         reset = false;

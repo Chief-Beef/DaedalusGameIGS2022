@@ -54,13 +54,14 @@ public class SwarmScript : MonoBehaviour
         playerDirection = player.transform.position.x - this.transform.position.x;
         playerDistance = Vector2.Distance(player.transform.position, this.transform.position);
 
-        // if the player is close enought to be chased but not yet in attack distance
+        /* if the player is close enought to be chased but not yet in attack distance
         if (playerDistance < attackDistance && lungeTimer < 0f)
         {
             Lunge();    //Jump at and Attack Player
             Debug.Log("Lunge");
-        }
-        else if (playerDistance < engageDistance)
+        }*/
+
+        if (playerDistance < engageDistance)
         {
             //Missile launch stuff
             //instantiate missile and do the rest of the work in the missile code
@@ -121,7 +122,7 @@ public class SwarmScript : MonoBehaviour
     {
         
         Instantiate(missile, this.transform.position, Quaternion.identity, null);
-        Debug.Log("Missile Launch");
+        //Debug.Log("Missile Launch");
         missileTimer = 3.5f;
     }
 

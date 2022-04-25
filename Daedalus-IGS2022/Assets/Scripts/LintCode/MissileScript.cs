@@ -22,9 +22,9 @@ public class MissileScript : MonoBehaviour
     public Rigidbody2D rb;          //missile RB
 
     //timers and shit
-    private float timer;    
+    private float timer;            //
     public float attackTime;        //timers
-    public float deathTime;
+    public float deathTime;         //
 
     //rotation shit
     float angle;
@@ -37,7 +37,7 @@ public class MissileScript : MonoBehaviour
     void Start()
     {
        
-        Debug.Log("Missile Fired");
+        //Debug.Log("Missile Fired");
         timer = 0.0f;
 
         // find player location
@@ -75,10 +75,11 @@ public class MissileScript : MonoBehaviour
             speed = maxSpeed;   //inc speed to max speed
             transform.position = Vector2.MoveTowards(this.transform.position,lastLoc, speed * Time.deltaTime);
 
-            //Missile Hit Player
+            //Missile Hit Player Last Location
             if (Vector2.Distance(this.transform.position, lastLoc) <= .05f)
+            {
                 Destroy(this.gameObject);
-       
+            }
 
         }
         else    //start flying and slowly track player
@@ -97,8 +98,8 @@ public class MissileScript : MonoBehaviour
 
     private void OnDestroy()
     {
-        Instantiate(farticleEffect, this.transform.position, Quaternion.identity, null);
         //when the missile is destroyed create the explosion prefab
+        Instantiate(farticleEffect, this.transform.position, Quaternion.identity, null);
     }
 
 }

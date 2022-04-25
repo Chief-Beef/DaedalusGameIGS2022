@@ -6,12 +6,12 @@ public class NoisyBoi : MonoBehaviour
 {
 
     public static NoisyBoi Instance;
-    public AudioSource shootyNoise;
-    public AudioSource vineBoom;
-    public AudioSource windowsError;
-    public AudioSource tacoBell;
+    public AudioSource shootyNoise;     //CoD Hitmarker
+    public AudioSource vineBoom;        //annoying vine sound
+    public AudioSource windowsError;    //basic titan death sound
+    public AudioSource tacoBell;        //annoying tbell sound
 
-    //public AudioSource[] soundCollection = new AudioSource[4];
+    public AudioSource[] soundCollection = new AudioSource[4];
 
 
     // Start is called before the first frame update
@@ -19,15 +19,15 @@ public class NoisyBoi : MonoBehaviour
     {
         Instance = this;
 
-        //soundCollection[0] = shootyNoise;
-        //soundCollection[1] = vineBoom;
-        //soundCollection[2] = windowsError;
-        //soundCollection[3] = tacoBell;
+        soundCollection[0] = shootyNoise;
+        soundCollection[1] = vineBoom;
+        soundCollection[2] = windowsError;
+        soundCollection[3] = tacoBell;
 
     }
 
-    public void MakeNoise()
+    public void MakeNoise(int num)
     {
-        shootyNoise.Play();
+        soundCollection[num].Play();
     }
 }
