@@ -65,7 +65,7 @@ public class SwarmScript : MonoBehaviour
         {
             //Missile launch stuff
             //instantiate missile and do the rest of the work in the missile code
-            if (missileTimer < 0f)
+            if (missileTimer < 0f && playerDistance < attackDistance)
                 fireMissile();
 
             // Player is to the left
@@ -120,10 +120,9 @@ public class SwarmScript : MonoBehaviour
 
     public void fireMissile()
     {
-        
         Instantiate(missile, this.transform.position, Quaternion.identity, null);
         //Debug.Log("Missile Launch");
-        missileTimer = 3.5f;
+        missileTimer = 5f;
     }
 
 }

@@ -69,7 +69,7 @@ public class Titan_Spawner : MonoBehaviour
         int choice = Random.Range(0, 2);
         var lin = Instantiate(lintEnemy, Vector3.zero, Quaternion.identity, null);
         lin.transform.GetChild(0).GetComponent<Weakspot_Of_The_Forbidden_One>().survival = true;
-        lin.GetComponent<SwarmScript>().engageDistance = 1000;
+        lin.GetComponent<SwarmScript>().engageDistance = 1500;
 
         if (choice == 0)
         {

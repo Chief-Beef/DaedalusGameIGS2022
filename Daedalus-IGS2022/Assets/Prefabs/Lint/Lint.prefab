@@ -62,6 +62,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parentObject: {fileID: 8222413330014051424}
   species: 
+  survival: 0
 --- !u!1 &8222413330014051424
 GameObject:
   m_ObjectHideFlags: 0
@@ -136,7 +137,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 15
   m_Sprite: {fileID: 21300000, guid: 1dc7568afd75e014594f17c74d992d6a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -211,7 +212,7 @@ MonoBehaviour:
   lungeForce: 50
   speed: 8
   engageDistance: 50
-  attackDistance: 5
+  attackDistance: 40
   ground:
     serializedVersion: 2
     m_Bits: 768
@@ -282,3 +283,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parentObject: {fileID: 8222413330014051424}
   species: Lint
+  survival: 0
