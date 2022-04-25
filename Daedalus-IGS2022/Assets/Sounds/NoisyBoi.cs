@@ -13,6 +13,7 @@ public class NoisyBoi : MonoBehaviour
 
     //public AudioSource[] soundCollection = new AudioSource[4];
 
+    private int soundRand;
 
     // Start is called before the first frame update
     void Start()
