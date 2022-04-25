@@ -30,6 +30,8 @@ public class MissileScript : MonoBehaviour
     //rotation shit
     float angle;
     Vector2 targetPos;
+    Vector2 launchPos;
+    Vector2 diff;
 
     //Farticle Effect
     public GameObject farticleEffect;
@@ -60,6 +62,10 @@ public class MissileScript : MonoBehaviour
         else if (timer < attackTime && timer >= angleTime)
         {
             lastLoc = target.position;   //last known location before attackTime is met
+            launchPos = this.transform.position;
+
+            diff = lastLoc - launchPos;
+
             targetPos = new Vector2(target.position.x - this.transform.position.x, target.position.y - this.transform.position.y);
             angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg;
             this.transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(new Vector3(0, 0, angle - 90)), 0.1f);
@@ -80,7 +86,7 @@ public class MissileScript : MonoBehaviour
             this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
 
             speed = maxSpeed;   //inc speed to max speed
-            transform.position = Vector2.MoveTowards(this.transform.position,lastLoc, speed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(this.transform.position,this.transform.position + new Vector3(diff.x, diff.y, 0), speed * Time.deltaTime);
 
             //Missile Hit Player Last Location
             if (Vector2.Distance(this.transform.position, lastLoc) <= .05f)

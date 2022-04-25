@@ -14,11 +14,11 @@ public class FarticleEffect : MonoBehaviour
     public float explosionRange;    //range of explosion
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         NoisyBoi.Instance.MakeNoise(0);
 
-        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        target = GameObject.FindGameObjectWithTag("Player").transform;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
 
         //if missile blows up near the player then launch them a bit

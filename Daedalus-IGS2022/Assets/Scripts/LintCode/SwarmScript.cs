@@ -38,6 +38,10 @@ public class SwarmScript : MonoBehaviour
 
     public GameObject missile;
 
+    public Transform missileTube;
+
+    public GameObject fart;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -74,6 +78,8 @@ public class SwarmScript : MonoBehaviour
                 //give it speed and boxcast to detect walls
                 rb.AddForce(new Vector2(speed * -1f, 0));
                 wallRay = Physics2D.Raycast(this.transform.position, Vector2.left, 20f, ground);
+
+                transform.eulerAngles = Vector3.zero;
             }
             // Player is to the right
             else if (playerDirection > 0)
@@ -81,6 +87,8 @@ public class SwarmScript : MonoBehaviour
                 //give it speed and boxcast to detect walls
                 rb.AddForce(new Vector2(speed, 0));
                 wallRay = Physics2D.Raycast(this.transform.position, Vector2.right, 20f, ground);
+
+                transform.eulerAngles = Vector3.up * 180;
             }
         }
 
@@ -97,7 +105,11 @@ public class SwarmScript : MonoBehaviour
 
     }
 
-    
+    private void OnDestroy()
+    {
+        Instantiate(fart, this.transform.position, Quaternion.identity, null);
+    }
+
     //Lunge Attack
     public void Lunge()
     {
@@ -120,7 +132,7 @@ public class SwarmScript : MonoBehaviour
 
     public void fireMissile()
     {
-        Instantiate(missile, this.transform.position + Vector3.up * 2, Quaternion.identity, null);
+        Instantiate(missile, missileTube.position + Vector3.up * 1.5f, Quaternion.identity, null);
         //Debug.Log("Missile Launch");
         missileTimer = 7.5f;
     }

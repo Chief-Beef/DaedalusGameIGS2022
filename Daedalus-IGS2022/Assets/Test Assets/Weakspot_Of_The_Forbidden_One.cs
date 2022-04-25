@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Weakspot_Of_The_Forbidden_One : MonoBehaviour
 {
-    public GameObject parentObject;
     public string species;
     public bool survival;
 
@@ -22,7 +21,7 @@ public class Weakspot_Of_The_Forbidden_One : MonoBehaviour
                     GameObject.FindGameObjectWithTag("KillCounter").GetComponent<Titan_Spawner>().SpawnFlying();
             }
 
-            Destroy(parentObject.gameObject);
+            Destroy(this.transform.parent);
         }
     }
 }

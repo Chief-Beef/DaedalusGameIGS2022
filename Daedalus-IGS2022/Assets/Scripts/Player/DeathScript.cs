@@ -79,7 +79,8 @@ public class DeathScript : MonoBehaviour
 
             if (lives > 0)
             {
-                respawnText.text = "Press 'R' to respawn. Lives remaining: " + lives.ToString();
+                if (lives < 25)
+                    respawnText.text = "Press 'R' to respawn. Lives remaining: " + lives.ToString();
 
                 if (Input.GetKeyDown(KeyCode.R))
                 {
