@@ -4130,7 +4130,7 @@ MonoBehaviour:
   messages:
   - 'Objective: Survive'
   appearTime: 0.075
-  clearTime: 0.5
+  clearTime: 1.5
   continueTime: 0.5
   tutorialMessage: 0
   continueBox: {fileID: 501335370}
@@ -9803,9 +9803,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootyNoise: {fileID: 896368681}
-  vineBoom: {fileID: 896368680}
   windowsError: {fileID: 896368679}
-  tacoBell: {fileID: 896368678}
+  tacoBellBong: {fileID: 0}
+  vineBoom: {fileID: 896368680}
+  classicHurt: {fileID: 0}
 --- !u!4 &2006976095
 Transform:
   m_ObjectHideFlags: 0

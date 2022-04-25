@@ -47,7 +47,7 @@ public class SwarmScript : MonoBehaviour
     private void FixedUpdate()
     {
         //Reset Lunge Timer
-        lungeTimer -= Time.deltaTime;
+        //lungeTimer -= Time.deltaTime;
         missileTimer -= Time.deltaTime;
 
         //Find Player
@@ -120,9 +120,9 @@ public class SwarmScript : MonoBehaviour
 
     public void fireMissile()
     {
-        Instantiate(missile, this.transform.position, Quaternion.identity, null);
+        Instantiate(missile, this.transform.position + Vector3.up * 2, Quaternion.identity, null);
         //Debug.Log("Missile Launch");
-        missileTimer = 5f;
+        missileTimer = 7.5f;
     }
 
 }

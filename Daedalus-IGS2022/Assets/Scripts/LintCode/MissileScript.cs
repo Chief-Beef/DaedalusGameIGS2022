@@ -25,6 +25,7 @@ public class MissileScript : MonoBehaviour
     private float timer;            //
     public float attackTime;        //timers
     public float deathTime;         //
+    public float angleTime;
 
     //rotation shit
     float angle;
@@ -49,13 +50,19 @@ public class MissileScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        // Start the missile off by slowly moving upward before rotating toward player
+        if (timer < angleTime)
+        {
+            transform.position = Vector2.MoveTowards(this.transform.position, this.transform.position + Vector3.up, speed * Time.deltaTime);
+            this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        }
         //rotate the missile to go to look at the player
-        if (timer < attackTime)
+        else if (timer < attackTime && timer >= angleTime)
         {
             lastLoc = target.position;   //last known location before attackTime is met
             targetPos = new Vector2(target.position.x - this.transform.position.x, target.position.y - this.transform.position.y);
             angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg;
-            this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
+            this.transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(new Vector3(0, 0, angle - 90)), 0.1f);
         }
 
 
@@ -78,11 +85,11 @@ public class MissileScript : MonoBehaviour
             //Missile Hit Player Last Location
             if (Vector2.Distance(this.transform.position, lastLoc) <= .05f)
             {
-                Destroy(this.gameObject);
+                // I commented this out because it would often fall short and miss the player if they simply move backwards
+                //Destroy(this.gameObject);
             }
-
         }
-        else    //start flying and slowly track player
+        else if (timer >= angleTime)   //start flying and slowly track player
         {
             //start missile pointing at player
             transform.position = Vector2.MoveTowards(this.transform.position, target.position, speed * Time.deltaTime);
