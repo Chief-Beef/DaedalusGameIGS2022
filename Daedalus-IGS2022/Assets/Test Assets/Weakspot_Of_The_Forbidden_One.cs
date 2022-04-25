@@ -6,11 +6,22 @@ public class Weakspot_Of_The_Forbidden_One : MonoBehaviour
 {
     public GameObject parentObject;
     public string species;
+    public bool survival;
+
     private void OnTriggerEnter2D(Collider2D trigger)
     {
         if (trigger.gameObject.tag == "PlayerAttack")
         {
             ScoreBoard.Instance.kill(species);
+
+            if (survival)
+            {
+                if (species == "Lint")
+                    GameObject.FindGameObjectWithTag("KillCounter").GetComponent<Titan_Spawner>().SpawnLint();
+                else if (species == "Flying One")
+                    GameObject.FindGameObjectWithTag("KillCounter").GetComponent<Titan_Spawner>().SpawnFlying();
+            }
+
             Destroy(parentObject.gameObject);
         }
     }

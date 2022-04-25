@@ -30,7 +30,7 @@ Transform:
   m_LocalScale: {x: 1.3, y: 1.3, z: 1.2}
   m_Children: []
   m_Father: {fileID: 1198419327819356684}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1198419327322192347
 SpriteRenderer:
@@ -130,8 +130,8 @@ Transform:
   m_LocalPosition: {x: 200, y: 48, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1198419327322192344}
   - {fileID: 1026540408573326750}
+  - {fileID: 1198419327322192344}
   - {fileID: 2681407957576485522}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -371,7 +371,7 @@ Transform:
   m_LocalScale: {x: 1.9482, y: 1.9482, z: 1.9482}
   m_Children: []
   m_Father: {fileID: 1198419327819356684}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6398257538667927650
 MonoBehaviour:
@@ -387,6 +387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parentObject: {fileID: 1198419327819356685}
   species: Flying One
+  survival: 0
 --- !u!58 &9220953294650386729
 CircleCollider2D:
   m_ObjectHideFlags: 0
