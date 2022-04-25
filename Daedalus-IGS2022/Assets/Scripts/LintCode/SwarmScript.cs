@@ -101,11 +101,9 @@ public class SwarmScript : MonoBehaviour
         {
             climbWall();
         }
-
-
     }
 
-    private void OnDestroy()
+    public void Fart()
     {
         Instantiate(fart, this.transform.position, Quaternion.identity, null);
     }

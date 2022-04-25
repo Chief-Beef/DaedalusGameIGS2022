@@ -82,7 +82,7 @@ public class MissileScript : MonoBehaviour
         {
             
             targetPos = new Vector2(lastLoc.x - this.transform.position.x, lastLoc.y - this.transform.position.y);
-            angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg;
+            angle = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
             this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
 
             speed = maxSpeed;   //inc speed to max speed
