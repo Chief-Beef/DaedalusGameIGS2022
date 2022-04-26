@@ -35,12 +35,10 @@ public class SwarmScript : MonoBehaviour
     private float wallAngle;
 
     public Vector2 playerAngle;
-
     public GameObject missile;
-
     public Transform missileTube;
-
     public GameObject fart;
+    public Animator anm;
 
     // Start is called before the first frame update
     void Start()
@@ -76,23 +74,29 @@ public class SwarmScript : MonoBehaviour
                 fireMissile();
 
             // Player is to the left
-            if (playerDirection < 0)
+            if (playerDirection < 0 && playerDistance > 10f)
             {
                 //give it speed and boxcast to detect walls
                 rb.AddForce(new Vector2(speed * -1f, 0));
                 wallRay = Physics2D.Raycast(this.transform.position, Vector2.left, 20f, ground);
 
+                anm.Play("Walk");
+
                 transform.eulerAngles = Vector3.zero;
             }
             // Player is to the right
-            else if (playerDirection > 0)
+            else if (playerDirection > 0 && playerDistance > 10f)
             {
                 //give it speed and boxcast to detect walls
                 rb.AddForce(new Vector2(speed, 0));
                 wallRay = Physics2D.Raycast(this.transform.position, Vector2.right, 20f, ground);
 
+                anm.Play("Walk");
+
                 transform.eulerAngles = Vector3.up * 180;
             }
+            else
+                anm.Play("Idle");
         }
 
         playerAngle = new Vector2(player.transform.position.x - this.transform.position.x, player.transform.position.y - this.transform.position.y);

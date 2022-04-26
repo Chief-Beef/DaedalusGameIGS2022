@@ -25,8 +25,6 @@ public class FarticleEffect : MonoBehaviour
             //if missile blows up near the player then launch them a bit
             if (Vector2.Distance(this.transform.position, target.position) <= explosionRange)
             {
-                Debug.Log("Launch that MF");
-
                 Vector2 launchAngle = new Vector2(target.position.x - this.transform.position.x, target.position.y - this.transform.position.y);
                 Debug.DrawRay(this.transform.position, launchAngle * explosionForce / (Vector2.Distance(this.transform.position, target.position)), Color.cyan, 10f);
                 player.AddForce(launchAngle * explosionForce, ForceMode2D.Impulse);  //launch the player

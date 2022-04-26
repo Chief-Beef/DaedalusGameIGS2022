@@ -31,7 +31,7 @@ public class TheFlyingOne : MonoBehaviour
     private SpriteRenderer laserSpr;
     public GameObject gun;
     private float timer = 1f;
-
+    public GameObject fart;
     public bool test;
 
 
@@ -108,6 +108,7 @@ public class TheFlyingOne : MonoBehaviour
                         shooting = true;
                         timer = 1.5f;
                         StartCoroutine(ChargeUp());
+                        GetComponent<AudioPlay>().PlayWithPitch(0.8f);
                     }
                 }
 
@@ -169,6 +170,7 @@ public class TheFlyingOne : MonoBehaviour
             }  
         }
     }
+
     IEnumerator ChargeUp()
     {
         yield return new WaitForSeconds(2);
@@ -187,6 +189,12 @@ public class TheFlyingOne : MonoBehaviour
         }
         else
             laser.transform.localScale = Vector3.zero;
+    }
+
+    public void InstantiateDeathEffect()
+    {
+        var f = Instantiate(fart, this.transform.position, Quaternion.identity, null);
+        f.GetComponent<AudioSource>().pitch = 0.75f;
     }
 }
 

@@ -75,7 +75,10 @@ public class Basic_Titan : MonoBehaviour
         float scale = Random.Range(0.925f, 1.25f);
 
         if (!scalable)
+        {
             transform.localScale = new Vector3(scale, scale, 1);
+            anm.speed = 1 / transform.localScale.y;
+        }
         else
         {
             transform.localScale = new Vector3(scalePreset, scalePreset, 1);
