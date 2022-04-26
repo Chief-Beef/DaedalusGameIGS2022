@@ -118,7 +118,7 @@ public class TheFlyingOne : MonoBehaviour
 
                 if (shooting && !shot)
                 {
-                    if (timer > -0.25f)
+                    if (timer > -0.28f)
                     {
                         if (rayHit.collider != null)
                         {
