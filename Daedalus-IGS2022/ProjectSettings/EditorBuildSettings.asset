@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Testing/FlyingEnemyTesting.unity
     guid: a0435ea0570c49548a15bef8bb74fb13
   - enabled: 1
+    path: Assets/Scenes/Stages/Training.unity
+    guid: 24ec899165b26924eba2e9b0d3463c2e
+  - enabled: 1
     path: Assets/Scenes/AOT_Clone/AOT season 5.unity
     guid: 1129a476f399ae840bd9d83056e3c8bf
   m_configObjects: {}

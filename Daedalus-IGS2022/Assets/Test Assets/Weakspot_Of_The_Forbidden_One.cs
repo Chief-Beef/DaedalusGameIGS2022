@@ -17,10 +17,10 @@ public class Weakspot_Of_The_Forbidden_One : MonoBehaviour
             {
                 if (species == "Lint")
                 {
-                    GameObject.FindGameObjectWithTag("KillCounter").GetComponent<Titan_Spawner>().SpawnLint();
+                    GameObject.FindGameObjectWithTag("KillCounter").GetComponent<Titan_Spawner>().LintKill();
                 }
                 else if (species == "Flying One")
-                    GameObject.FindGameObjectWithTag("KillCounter").GetComponent<Titan_Spawner>().SpawnFlying();
+                    GameObject.FindGameObjectWithTag("KillCounter").GetComponent<Titan_Spawner>().FlyingKill();
             }
             else
             {

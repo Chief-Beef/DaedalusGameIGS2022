@@ -5,20 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class LoadScene : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
+    //// Start is called before the first frame update
+    //void Start()
+    //{
         
-    }
+    //}
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.I))
-            SceneManager.LoadScene(2);
-        if (Input.GetKeyDown(KeyCode.O))
-            SceneManager.LoadScene(3);
-        if (Input.GetKeyDown(KeyCode.P))
-            SceneManager.LoadScene(4);
-    }
+    //// Update is called once per frame
+    //void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.I))
+    //        SceneManager.LoadScene(2);
+    //    if (Input.GetKeyDown(KeyCode.O))
+    //        SceneManager.LoadScene(3);
+    //    if (Input.GetKeyDown(KeyCode.P))
+    //        SceneManager.LoadScene(4);
+    //}
 }

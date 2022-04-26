@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Titan_Spawner : MonoBehaviour
 {
@@ -25,9 +26,19 @@ public class Titan_Spawner : MonoBehaviour
     public Transform spawnPointA;
     public Transform spawnPointB;
 
+    // Prefabs of enemies that can spawn
     public GameObject titanEnemy;
     public GameObject lintEnemy;
     public GameObject flyingEnemy;
+
+    // Keeps track of player's kills
+    private int titanKills = 0;
+    private int lintKills = 0;
+    private int flyingKills = 0;
+
+    // Text keeps track of kills
+    public Text kills;
+    public Text record;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +46,44 @@ public class Titan_Spawner : MonoBehaviour
         StartCoroutine(IncreaseTitans());
         StartCoroutine(IncreaseLints());
         StartCoroutine(IncreaseFlying());
+
+        UpdateText();
+    }
+
+    // These are called when something is killed
+    public void TitanKill()
+    {
+        SpawnTitan();
+        titanKills++;
+        UpdateText();
+    }
+    public void LintKill()
+    {
+        SpawnLint();
+        lintKills++;
+        UpdateText();
+    }
+    public void FlyingKill()
+    {
+        SpawnFlying();
+        flyingKills++;
+        UpdateText();
+    }
+    // Updates kill text
+    public void UpdateText()
+    {
+        kills.text = "Current Kills:\n       Titan Kills: " + titanKills.ToString() + "\nRanged Enemy Kills: " + lintKills.ToString() + "\nFlying Enemy Kills: " + flyingKills.ToString();
+
+        if (titanKills > PlayerPrefs.GetInt("TitanKills", 0))
+            PlayerPrefs.SetInt("TitanKills", titanKills);
+
+        if (lintKills > PlayerPrefs.GetInt("LintKills", 0))
+            PlayerPrefs.SetInt("LintKills", lintKills);
+
+        if (titanKills > PlayerPrefs.GetInt("LintKills", 0))
+            PlayerPrefs.SetInt("TitanKills", titanKills);
+
+        record.text = "Personal Bests:\n       Titan Kills: " + titanKills.ToString() + "\nRanged Enemy Kills: " + lintKills.ToString() + "\nFlying Enemy Kills: " + flyingKills.ToString();
     }
 
     // Spawns a titan
