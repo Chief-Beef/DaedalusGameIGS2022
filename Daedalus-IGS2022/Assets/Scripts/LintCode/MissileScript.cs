@@ -54,7 +54,7 @@ public class MissileScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (player != null && player.gameObject.activeInHierarchy)
+        if (player != null)
         {
             // Start the missile off by slowly moving upward before rotating toward player
             if (timer < angleTime)
@@ -112,6 +112,7 @@ public class MissileScript : MonoBehaviour
                 transform.position = Vector2.MoveTowards(this.transform.position, target.position, speed * Time.deltaTime);
             }
         }
+        else if (player == null)
         {
             Explode();
             Destroy(this.gameObject);
