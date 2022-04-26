@@ -69,7 +69,8 @@ public class DeathScript : MonoBehaviour
     {
         if (!player.activeInHierarchy && alive)
         {
-            lives = player.GetComponent<Player_Script>().lives;
+            lives = player.GetComponent<Player_Script>().lives - 1;
+            player.GetComponent<Player_Script>().lives = lives;
             alive = false;
             lastPos = player.transform;
         }

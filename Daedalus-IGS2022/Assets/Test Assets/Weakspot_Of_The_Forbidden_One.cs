@@ -28,6 +28,8 @@ public class Weakspot_Of_The_Forbidden_One : MonoBehaviour
                 {
                     transform.parent.GetComponent<SwarmScript>().Fart();
                 }
+                else if (species == "Flying One")
+                    transform.parent.GetComponent<TheFlyingOne>().InstantiateDeathEffect();
             }
 
             Destroy(this.transform.parent.gameObject);

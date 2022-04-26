@@ -33,6 +33,8 @@ public class MissileScript : MonoBehaviour
     Vector2 launchPos;
     Vector2 diff;
 
+    private bool soundPlayed = false;
+
     //Farticle Effect
     public GameObject farticleEffect;
 
@@ -76,11 +78,18 @@ public class MissileScript : MonoBehaviour
 
         if (timer >= deathTime)//destroy missile if still alive after time x2
         {
+            Explode();
             Destroy(this.gameObject);
         }
         else if (timer >= attackTime)    //after time x1 fly at guy at max speed
         {
-            
+            if (!soundPlayed)
+            {
+                GetComponent<AudioPlay>().PlayWithPitch(0.9f);
+                GetComponent<CapsuleCollider2D>().enabled = true;
+                soundPlayed = true;
+            }
+
             targetPos = new Vector2(lastLoc.x - this.transform.position.x, lastLoc.y - this.transform.position.y);
             angle = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
             this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
@@ -106,10 +115,11 @@ public class MissileScript : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D col)
     {
+        Explode();
         Destroy(this.gameObject);
     }
 
-    private void OnDestroy()
+    private void Explode()
     {
         //when the missile is destroyed create the explosion prefab
         Instantiate(farticleEffect, this.transform.position, Quaternion.identity, null);
