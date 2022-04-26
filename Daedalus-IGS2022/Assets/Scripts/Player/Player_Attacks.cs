@@ -39,6 +39,8 @@ public class Player_Attacks : MonoBehaviour
                 canAttack = false;
                 dashRechargeTime = 0f;
 
+                playerScript.gSoundController.grappling = false;
+
                 rb.AddForce(Vector3.Normalize(playerScript.mousePos - this.transform.position) * lungeForce, ForceMode2D.Impulse);
                 anm.StopPlayback();
                 anm.Play("DashAttack");
