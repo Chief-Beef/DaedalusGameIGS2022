@@ -71,6 +71,9 @@ public class Player_Script : MonoBehaviour
     private bool alive = true;
     public int lives;
 
+    public AudioSource grappleSound;
+    public GrappleSound gSoundController;
+
     public float explosionForce;
 
 
@@ -214,6 +217,12 @@ public class Player_Script : MonoBehaviour
                     canReload = false;
                     isGrappling = true;
 
+                    grappleSound.Stop();
+                    GetComponent<AudioPlay>().ChangeVolume(0.3f);
+                    GetComponent<AudioPlay>().PlayClip(1);
+
+                    gSoundController.grappling = true;
+
                     if (grounded)
                     {
                         grounded = false;
@@ -240,6 +249,9 @@ public class Player_Script : MonoBehaviour
         else if (!canGrapple)
         {
             ResetGrapple();
+
+            gSoundController.grappling = false;
+
 
             if (GroundCheck()) // Checks if player is on ground when done grappling
                 Ground();

@@ -4592,7 +4592,7 @@ MonoBehaviour:
   movementMultpliersX:
   - 0.7
   movementMultipliersY:
-  - 0.2
+  - 0.15
   player: {fileID: 896046993}
   ragdoll: {fileID: 1826273835}
 --- !u!4 &835768028
