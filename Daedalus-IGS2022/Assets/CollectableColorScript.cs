@@ -26,7 +26,6 @@ public class CollectableColorScript : MonoBehaviour
         {
             float distance = Vector2.Distance(this.gameObject.transform.position, player.gameObject.transform.position);
             float color = ((150f - distance) / 150f);
-            Debug.Log("Distance: " + distance.ToString() + "  Color: " + color.ToString());
             UICollect.image.color = new Color(color, color, color);
         }
     
@@ -36,7 +35,6 @@ public class CollectableColorScript : MonoBehaviour
         if (trigger.tag == "Player")
         {
             colorRange = true;
-            Debug.Log("In range of collectable");
         }
     }
 

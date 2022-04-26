@@ -96,11 +96,9 @@ GameObject:
   - component: {fileID: 2681407957100657160}
   - component: {fileID: 6816369097615304843}
   - component: {fileID: 5036748269848232595}
-  - component: {fileID: 5084906746529867942}
-  - component: {fileID: 8411819911235698030}
   m_Layer: 11
   m_Name: The Forbidden One
-  m_TagString: TitanAttack
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -177,9 +175,11 @@ MonoBehaviour:
   PlayerFirstContact: {fileID: 0}
   waitTime: 5
   moveRight: 0
-  coroutineReset: 1
   laser: {fileID: 3935672726047737384}
   gun: {fileID: 1026601617269540529}
+  playerSpottingLayer:
+    serializedVersion: 2
+    m_Bits: 769
 --- !u!212 &6816369097615304843
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -257,38 +257,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 23.905256, y: 21.167578}
   m_EdgeRadius: 0
---- !u!70 &5084906746529867942
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1198419327819356685}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -13.944418, y: -7.021679}
-  m_Size: {x: 6, y: 11}
-  m_Direction: 0
---- !u!70 &8411819911235698030
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1198419327819356685}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 12.07, y: -7.021679}
-  m_Size: {x: 6, y: 11}
-  m_Direction: 0
 --- !u!1 &2112718231692763410
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,7 +347,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3935672726047737384}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 152, y: -0.4, z: 0}
+  m_LocalPosition: {x: 153.786, y: -0.4, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 5992763695411519419}
@@ -429,7 +397,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 300, y: 3.6}
+  m_Size: {x: 296.42804, y: 3.6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -453,7 +421,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 6.4, y: 3.6}
-    newSize: {x: 300, y: 3.6}
+    newSize: {x: 296.42804, y: 3.6}
     adaptiveTilingThreshold: 0.5
     drawMode: 2
     adaptiveTiling: 0
@@ -667,7 +635,8 @@ GameObject:
   - component: {fileID: 2606731730550987482}
   - component: {fileID: 2707845690141016201}
   - component: {fileID: 548709714616568731}
-  m_Layer: 0
+  - component: {fileID: 4951247742711832145}
+  m_Layer: 11
   m_Name: Printer_Man_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5460,6 +5429,22 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!70 &4951247742711832145
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7511110319313780112}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 10, y: 16.66667}
+  m_Direction: 0
 --- !u!1 &8534078526804471626
 GameObject:
   m_ObjectHideFlags: 0
@@ -5606,7 +5591,8 @@ GameObject:
   - component: {fileID: 7512314533392752426}
   - component: {fileID: 3365185939074330072}
   - component: {fileID: 6203147892123743503}
-  m_Layer: 0
+  - component: {fileID: 4000905561319093849}
+  m_Layer: 11
   m_Name: Printer_Man_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10399,3 +10385,19 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!70 &4000905561319093849
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8821860081327393669}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 10, y: 16.66667}
+  m_Direction: 0

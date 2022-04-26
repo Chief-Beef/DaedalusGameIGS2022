@@ -22,9 +22,7 @@ public class TheFlyingOne : MonoBehaviour
     public Transform PlayerFirstContact;
     [SerializeField] public float waitTime = 5;
     public bool moveRight;
-    private bool coroutineReset = false;
-    private Vector2 diff;
-    private Vector2 diffNorm;
+    private bool coroutineReset = true;
 
     private bool shooting = false;
     private bool shot = false;
@@ -33,13 +31,14 @@ public class TheFlyingOne : MonoBehaviour
     private SpriteRenderer laserSpr;
     public GameObject gun;
     private float timer = 1f;
+    public LayerMask playerSpottingLayer;
 
 
     void Awake()
     {
         firstMove = true;
         moveRight = false;
-        coroutineReset = true;
+
         body = TheForbiddenOne.GetComponent<Rigidbody2D>();
 
         laserCol = laser.GetComponent<BoxCollider2D>();
@@ -55,8 +54,6 @@ public class TheFlyingOne : MonoBehaviour
         if (Player != null)
         {
             isInRange = TheForbidenOneRange.inRange;
-            diff = Player.position - TheForbidenOne.position;
-            diff = (diff.normalized) * 2;
         }
 
 
@@ -100,7 +97,10 @@ public class TheFlyingOne : MonoBehaviour
 
         else if (canMove && isInRange)
         {
-            if (coroutineReset && !shot && Player.gameObject.activeInHierarchy == true)
+            var dif = Player.position - gun.transform.position;
+            var rayHit = Physics2D.Raycast(gun.transform.position, dif, playerSpottingLayer);
+
+            if (coroutineReset && !shot && Player.gameObject.activeInHierarchy == true && rayHit.collider.gameObject.tag == "Player")
             {
                 coroutineReset = false;
                 shooting = true;
@@ -118,12 +118,13 @@ public class TheFlyingOne : MonoBehaviour
 
                 if (shooting && !shot)
                 {
-                    if (timer > 0)
+                    if (timer > -0.25f)
                     {
                         Vector3 diff = Player.transform.position - gun.transform.position;
                         Vector3 rotatedDiff = Quaternion.Euler(0, 0, 90) * diff;
                         Quaternion targetAngle = Quaternion.LookRotation(Vector3.forward, rotatedDiff);
-                        gun.transform.rotation = Quaternion.RotateTowards(gun.transform.rotation, targetAngle, 25 * Time.deltaTime);
+                        gun.transform.rotation = Quaternion.RotateTowards(gun.transform.rotation, targetAngle, 100 * Time.deltaTime);
+
                         timer -= Time.deltaTime;
                         laserSpr.color = new Color(1 - timer, 0, 0);
                     }
@@ -132,16 +133,20 @@ public class TheFlyingOne : MonoBehaviour
                 }
                 else if (shot)
                 {
+                    // Laser shot and cooldown
                     if (timer > 0)
                     {
-                        timer -= Time.deltaTime;
-                        laserCol.enabled = true;
+                        if (timer < 0.5f)
+                            laserCol.enabled = false;
+                        else
+                            laserCol.enabled = true;
                         laser.transform.localScale = new Vector3(1, timer, 1);
                         laserSpr.color = new Color(timer, timer / 4, timer / 4);
+                        timer -= Time.deltaTime;
                     }
+                    // Ends laser shooting
                     else
                     {
-                        laserCol.enabled = false;
                         shot = false;
                         shooting = false;
                         laser.transform.localScale = Vector3.zero;
@@ -153,7 +158,7 @@ public class TheFlyingOne : MonoBehaviour
                     Vector3 rotatedDiff = Quaternion.Euler(0, 0, 90) * diff;
                     Quaternion targetAngle = Quaternion.LookRotation(Vector3.forward, rotatedDiff);
 
-                    gun.transform.rotation = Quaternion.RotateTowards(gun.transform.rotation, targetAngle, 50 * Time.deltaTime);
+                    gun.transform.rotation = Quaternion.RotateTowards(gun.transform.rotation, targetAngle, 150 * Time.deltaTime);
                 }
             }
            
