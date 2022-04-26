@@ -102,7 +102,7 @@ public class TheFlyingOne : MonoBehaviour
                     if (test)
                         Debug.Log(rayHit.collider.tag);
 
-                    if (coroutineReset && !shot && rayHit.collider.gameObject.tag == "Player")
+                    if (coroutineReset && !shot && rayHit.collider.gameObject.tag == "Player" && distanceFromPlayer < rangeRadius)
                     {
                         coroutineReset = false;
                         shooting = true;
