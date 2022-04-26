@@ -80,10 +80,10 @@ public class Titan_Spawner : MonoBehaviour
         if (lintKills > PlayerPrefs.GetInt("LintKills", 0))
             PlayerPrefs.SetInt("LintKills", lintKills);
 
-        if (titanKills > PlayerPrefs.GetInt("LintKills", 0))
-            PlayerPrefs.SetInt("TitanKills", titanKills);
+        if (flyingKills > PlayerPrefs.GetInt("FlyingKills", 0))
+            PlayerPrefs.SetInt("FlyingKills", titanKills);
 
-        record.text = "Personal Bests:\n       Titan Kills: " + titanKills.ToString() + "\nRanged Enemy Kills: " + lintKills.ToString() + "\nFlying Enemy Kills: " + flyingKills.ToString();
+        record.text = "Personal Bests:\n       Titan Kills: " + PlayerPrefs.GetInt("TitanKills", 0).ToString() + "\nRanged Enemy Kills: " + PlayerPrefs.GetInt("LintKills", 0).ToString() + "\nFlying Enemy Kills: " + PlayerPrefs.GetInt("FlyingKills", 0).ToString();
     }
 
     // Spawns a titan
