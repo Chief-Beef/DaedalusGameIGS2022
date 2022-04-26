@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1026601617269540529}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.37, y: 7.42, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -170,14 +170,14 @@ MonoBehaviour:
   TheForbidenOne: {fileID: 1198419327819356684}
   TheForbiddenOne: {fileID: 1198419327819356685}
   body: {fileID: 1198419327819356687}
-  rangeRadius: 150
+  rangeRadius: 100
   distanceFromPlayer: 0
   PlayerFirstContact: {fileID: 0}
   waitTime: 5
   moveRight: 0
   playerSpottingLayer:
     serializedVersion: 2
-    m_Bits: 17152
+    m_Bits: 17153
   laser: {fileID: 3935672726047737384}
   gun: {fileID: 1026601617269540529}
   test: 0
@@ -321,7 +321,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 150
+  m_Radius: 100
 --- !u!1 &3935672726047737384
 GameObject:
   m_ObjectHideFlags: 0
@@ -5440,7 +5440,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -5504,7 +5504,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -4}
@@ -10396,7 +10396,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

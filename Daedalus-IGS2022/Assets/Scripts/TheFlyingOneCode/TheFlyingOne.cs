@@ -55,69 +55,62 @@ public class TheFlyingOne : MonoBehaviour
         if (Player != null)
         {
             isInRange = TheForbidenOneRange.inRange;
-        }
-
-
-        //if x position of enemy is larger than the x position of the target position
-        if (transform.position.x > targetPos1.x)
-        {
-            transform.eulerAngles = Vector3.up * 180;
-            firstMove = false;
-            moveRight = false;
-        }
-        else if (transform.position.x < targetPos2.x)
-        {
-            transform.eulerAngles = Vector3.zero;
-            firstMove = true;
-            moveRight = true;
-        }
-
-        if (canMove && !isInRange && !shooting)
-        {
-
-            if (firstMove && moveRight)
-            {
-                //transform.position = Vector3.MoveTowards(transform.position, targetPos1, speed * Time.deltaTime);
-                body.AddForce(Vector2.right * speed);
-            }
-            else if (!moveRight)
-            {
-                //transform.position = Vector3.MoveTowards(transform.position, targetPos2, speed * Time.deltaTime);
-                body.AddForce(Vector2.left * speed);
-            }
-
-            if (transform.position.y > targetPos1.y)
-            {
-                body.AddForce(Vector2.down * speed);
-            }
-            else if (transform.position.y < targetPos2.y)
-            {
-                body.AddForce(Vector2.up * speed);
-            }
-        }
-
-        else if (canMove && isInRange)
-        {
+            distanceFromPlayer = Vector2.Distance(Player.position, transform.position);
             var dif = Player.position - gun.transform.position;
-            var rayHit = Physics2D.Raycast(gun.transform.position, dif, playerSpottingLayer);
+            var rayHit = Physics2D.Raycast(gun.transform.position, dif, Mathf.Infinity, playerSpottingLayer);
 
-            if (rayHit.collider != null)
+
+            //if x position of enemy is larger than the x position of the target position
+            if (transform.position.x > targetPos1.x)
             {
-                if (test)
-                    Debug.Log(rayHit.collider.tag);
+                firstMove = false;
+                moveRight = false;
+            }
+            else if (transform.position.x < targetPos2.x)
+            {
+                firstMove = true;
+                moveRight = true;
+            }
 
-                if (coroutineReset && !shot && Player.gameObject.activeInHierarchy == true && rayHit.collider.gameObject.tag == "Player")
+            if (canMove && rayHit.collider.tag != "Player" && !shooting)
+            {
+
+                if (firstMove && moveRight)
                 {
-                    coroutineReset = false;
-                    shooting = true;
-                    timer = 1.5f;
-                    StartCoroutine(ChargeUp());
+                    //transform.position = Vector3.MoveTowards(transform.position, targetPos1, speed * Time.deltaTime);
+                    body.AddForce(Vector2.right * speed);
+                }
+                else if (!moveRight)
+                {
+                    //transform.position = Vector3.MoveTowards(transform.position, targetPos2, speed * Time.deltaTime);
+                    body.AddForce(Vector2.left * speed);
+                }
+
+                if (transform.position.y > targetPos1.y)
+                {
+                    body.AddForce(Vector2.down * speed);
+                }
+                else if (transform.position.y < targetPos2.y)
+                {
+                    body.AddForce(Vector2.up * speed);
                 }
             }
-
-            if (Player != null)
+            else if (canMove && isInRange)
             {
-                distanceFromPlayer = Vector2.Distance(Player.position, transform.position);
+                if (rayHit.collider != null)
+                {
+                    if (test)
+                        Debug.Log(rayHit.collider.tag);
+
+                    if (coroutineReset && !shot && rayHit.collider.gameObject.tag == "Player")
+                    {
+                        coroutineReset = false;
+                        shooting = true;
+                        timer = 1.5f;
+                        StartCoroutine(ChargeUp());
+                    }
+                }
+
                 if (distanceFromPlayer > rangeRadius)
                 {
                     isInRange = false;
@@ -125,7 +118,7 @@ public class TheFlyingOne : MonoBehaviour
 
                 if (shooting && !shot)
                 {
-                    if (timer > -0.3f)
+                    if (timer > -0.25f)
                     {
                         if (rayHit.collider != null)
                         {
@@ -134,7 +127,7 @@ public class TheFlyingOne : MonoBehaviour
                                 Vector3 diff = Player.transform.position - gun.transform.position;
                                 Vector3 rotatedDiff = Quaternion.Euler(0, 0, 90) * diff;
                                 Quaternion targetAngle = Quaternion.LookRotation(Vector3.forward, rotatedDiff);
-                                gun.transform.rotation = Quaternion.RotateTowards(gun.transform.rotation, targetAngle, 100 * Time.deltaTime);
+                                gun.transform.rotation = Quaternion.RotateTowards(gun.transform.rotation, targetAngle, 150 * Time.deltaTime);
                             }
                         }
 
@@ -171,10 +164,9 @@ public class TheFlyingOne : MonoBehaviour
                     Vector3 rotatedDiff = Quaternion.Euler(0, 0, 90) * diff;
                     Quaternion targetAngle = Quaternion.LookRotation(Vector3.forward, rotatedDiff);
 
-                    gun.transform.rotation = Quaternion.RotateTowards(gun.transform.rotation, targetAngle, 500 * Time.deltaTime);
+                    gun.transform.rotation = Quaternion.RotateTowards(gun.transform.rotation, targetAngle, 150 * Time.deltaTime);
                 }
-            }
-           
+            }  
         }
     }
     IEnumerator ChargeUp()
