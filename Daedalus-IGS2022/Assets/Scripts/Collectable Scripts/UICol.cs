@@ -28,7 +28,6 @@ public class UICol : MonoBehaviour
         {
             //turn image red
             image.GetComponent<Image>().color = Color.white;
-            print("Hype");
             Destroy(collectable);
         }
     }

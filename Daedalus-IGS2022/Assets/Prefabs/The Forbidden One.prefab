@@ -175,11 +175,12 @@ MonoBehaviour:
   PlayerFirstContact: {fileID: 0}
   waitTime: 5
   moveRight: 0
-  laser: {fileID: 3935672726047737384}
-  gun: {fileID: 1026601617269540529}
   playerSpottingLayer:
     serializedVersion: 2
-    m_Bits: 769
+    m_Bits: 17152
+  laser: {fileID: 3935672726047737384}
+  gun: {fileID: 1026601617269540529}
+  test: 0
 --- !u!212 &6816369097615304843
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5439,11 +5440,11 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 10, y: 16.66667}
+  m_Size: {x: 10, y: 16}
   m_Direction: 0
 --- !u!1 &8534078526804471626
 GameObject:
@@ -5503,7 +5504,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -4}
@@ -10395,9 +10396,9 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 10, y: 16.66667}
+  m_Size: {x: 10, y: 16}
   m_Direction: 0

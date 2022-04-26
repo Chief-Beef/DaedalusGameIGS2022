@@ -23,7 +23,7 @@ public class TheFlyingOne : MonoBehaviour
     [SerializeField] public float waitTime = 5;
     public bool moveRight;
     private bool coroutineReset = true;
-
+    public LayerMask playerSpottingLayer;
     private bool shooting = false;
     private bool shot = false;
     public GameObject laser;
@@ -31,7 +31,8 @@ public class TheFlyingOne : MonoBehaviour
     private SpriteRenderer laserSpr;
     public GameObject gun;
     private float timer = 1f;
-    public LayerMask playerSpottingLayer;
+
+    public bool test;
 
 
     void Awake()
@@ -100,12 +101,18 @@ public class TheFlyingOne : MonoBehaviour
             var dif = Player.position - gun.transform.position;
             var rayHit = Physics2D.Raycast(gun.transform.position, dif, playerSpottingLayer);
 
-            if (coroutineReset && !shot && Player.gameObject.activeInHierarchy == true && rayHit.collider.gameObject.tag == "Player")
+            if (rayHit.collider != null)
             {
-                coroutineReset = false;
-                shooting = true;
-                timer = 1.5f;
-                StartCoroutine(ChargeUp());
+                if (test)
+                    Debug.Log(rayHit.collider.tag);
+
+                if (coroutineReset && !shot && Player.gameObject.activeInHierarchy == true && rayHit.collider.gameObject.tag == "Player")
+                {
+                    coroutineReset = false;
+                    shooting = true;
+                    timer = 1.5f;
+                    StartCoroutine(ChargeUp());
+                }
             }
 
             if (Player != null)
@@ -118,12 +125,18 @@ public class TheFlyingOne : MonoBehaviour
 
                 if (shooting && !shot)
                 {
-                    if (timer > -0.25f)
+                    if (timer > -0.3f)
                     {
-                        Vector3 diff = Player.transform.position - gun.transform.position;
-                        Vector3 rotatedDiff = Quaternion.Euler(0, 0, 90) * diff;
-                        Quaternion targetAngle = Quaternion.LookRotation(Vector3.forward, rotatedDiff);
-                        gun.transform.rotation = Quaternion.RotateTowards(gun.transform.rotation, targetAngle, 100 * Time.deltaTime);
+                        if (rayHit.collider != null)
+                        {
+                            if (rayHit.collider.tag == "Player")
+                            {
+                                Vector3 diff = Player.transform.position - gun.transform.position;
+                                Vector3 rotatedDiff = Quaternion.Euler(0, 0, 90) * diff;
+                                Quaternion targetAngle = Quaternion.LookRotation(Vector3.forward, rotatedDiff);
+                                gun.transform.rotation = Quaternion.RotateTowards(gun.transform.rotation, targetAngle, 100 * Time.deltaTime);
+                            }
+                        }
 
                         timer -= Time.deltaTime;
                         laserSpr.color = new Color(1 - timer, 0, 0);
@@ -136,7 +149,7 @@ public class TheFlyingOne : MonoBehaviour
                     // Laser shot and cooldown
                     if (timer > 0)
                     {
-                        if (timer < 0.5f)
+                        if (timer < 0.75f)
                             laserCol.enabled = false;
                         else
                             laserCol.enabled = true;
@@ -158,7 +171,7 @@ public class TheFlyingOne : MonoBehaviour
                     Vector3 rotatedDiff = Quaternion.Euler(0, 0, 90) * diff;
                     Quaternion targetAngle = Quaternion.LookRotation(Vector3.forward, rotatedDiff);
 
-                    gun.transform.rotation = Quaternion.RotateTowards(gun.transform.rotation, targetAngle, 150 * Time.deltaTime);
+                    gun.transform.rotation = Quaternion.RotateTowards(gun.transform.rotation, targetAngle, 500 * Time.deltaTime);
                 }
             }
            
