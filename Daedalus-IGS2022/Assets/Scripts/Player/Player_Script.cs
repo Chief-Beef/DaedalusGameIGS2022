@@ -71,8 +71,10 @@ public class Player_Script : MonoBehaviour
     private bool alive = true;
     public int lives;
 
+    // Audio stuff
     public AudioSource grappleSound;
     public GrappleSound gSoundController;
+    public AudioPlay soundPlayer;
 
     public float explosionForce;
 
@@ -92,10 +94,6 @@ public class Player_Script : MonoBehaviour
     // Collectables stuff
     public List<string> items;
     public Image miniMap;
-    //public SpriteRenderer mmBorder; //minimap border
-
-
-    public int frames;
 
     // Called once when a scene is loaded
     void Awake()
@@ -218,8 +216,8 @@ public class Player_Script : MonoBehaviour
                     isGrappling = true;
 
                     grappleSound.Stop();
-                    GetComponent<AudioPlay>().ChangeVolume(0.3f);
-                    GetComponent<AudioPlay>().PlayClip(1);
+                    soundPlayer.ChangeVolume(0.3f);
+                    soundPlayer.PlayClip(1);
 
                     gSoundController.grappling = true;
 
@@ -357,9 +355,9 @@ public class Player_Script : MonoBehaviour
 
             rb.AddForce(launchAngle * bounciness, ForceMode2D.Impulse);
 
-            //play hitmarker sound effect
-            //NoisyBoi.Instance.MakeNoise(4);
-
+            grappleSound.Stop();
+            soundPlayer.ChangeVolume(0.15f);
+            soundPlayer.PlayClip(2);
         }
 
         if (col.gameObject.tag == "missile")
@@ -402,13 +400,6 @@ public class Player_Script : MonoBehaviour
                 
             }
             
-        }
-
-        if (trigger.gameObject.tag == "ColRange")
-        {
-            
-            //miniMap.GetComponent<Image>().color = new Color32(166, 0, 5, 100);
-
         }
     }
 

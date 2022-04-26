@@ -54,63 +54,68 @@ public class MissileScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        // Start the missile off by slowly moving upward before rotating toward player
-        if (timer < angleTime)
+        if (player != null && player.gameObject.activeInHierarchy)
         {
-            transform.position = Vector2.MoveTowards(this.transform.position, this.transform.position + Vector3.up, speed * Time.deltaTime);
-            this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+            // Start the missile off by slowly moving upward before rotating toward player
+            if (timer < angleTime)
+            {
+                transform.position = Vector2.MoveTowards(this.transform.position, this.transform.position + Vector3.up, speed * Time.deltaTime);
+                this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+            }
+            //rotate the missile to go to look at the player
+            else if (timer < attackTime && timer >= angleTime)
+            {
+                lastLoc = target.position;   //last known location before attackTime is met
+                launchPos = this.transform.position;
+
+                diff = lastLoc - launchPos;
+
+                targetPos = new Vector2(target.position.x - this.transform.position.x, target.position.y - this.transform.position.y);
+                angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg;
+                this.transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(new Vector3(0, 0, angle - 90)), 0.1f);
+            }
+
+
+            timer += Time.deltaTime;
+
+            if (timer >= deathTime)//destroy missile if still alive after time x2
+            {
+                Explode();
+                Destroy(this.gameObject);
+            }
+            else if (timer >= attackTime)    //after time x1 fly at guy at max speed
+            {
+                if (!soundPlayed)
+                {
+                    GetComponent<AudioPlay>().PlayWithPitch(0.9f);
+                    GetComponent<CapsuleCollider2D>().enabled = true;
+                    soundPlayed = true;
+                }
+
+                targetPos = new Vector2(lastLoc.x - this.transform.position.x, lastLoc.y - this.transform.position.y);
+                angle = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
+                this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
+
+                speed = maxSpeed;   //inc speed to max speed
+                transform.position = Vector2.MoveTowards(this.transform.position, this.transform.position + new Vector3(diff.x, diff.y, 0), speed * Time.deltaTime);
+
+                //Missile Hit Player Last Location
+                if (Vector2.Distance(this.transform.position, lastLoc) <= .05f)
+                {
+                    // I commented this out because it would often fall short and miss the player if they simply move backwards
+                    //Destroy(this.gameObject);
+                }
+            }
+            else if (timer >= angleTime)   //start flying and slowly track player
+            {
+                //start missile pointing at player
+                transform.position = Vector2.MoveTowards(this.transform.position, target.position, speed * Time.deltaTime);
+            }
         }
-        //rotate the missile to go to look at the player
-        else if (timer < attackTime && timer >= angleTime)
-        {
-            lastLoc = target.position;   //last known location before attackTime is met
-            launchPos = this.transform.position;
-
-            diff = lastLoc - launchPos;
-
-            targetPos = new Vector2(target.position.x - this.transform.position.x, target.position.y - this.transform.position.y);
-            angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg;
-            this.transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(new Vector3(0, 0, angle - 90)), 0.1f);
-        }
-
-
-        timer += Time.deltaTime;
-
-        if (timer >= deathTime)//destroy missile if still alive after time x2
         {
             Explode();
             Destroy(this.gameObject);
         }
-        else if (timer >= attackTime)    //after time x1 fly at guy at max speed
-        {
-            if (!soundPlayed)
-            {
-                GetComponent<AudioPlay>().PlayWithPitch(0.9f);
-                GetComponent<CapsuleCollider2D>().enabled = true;
-                soundPlayed = true;
-            }
-
-            targetPos = new Vector2(lastLoc.x - this.transform.position.x, lastLoc.y - this.transform.position.y);
-            angle = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
-            this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
-
-            speed = maxSpeed;   //inc speed to max speed
-            transform.position = Vector2.MoveTowards(this.transform.position,this.transform.position + new Vector3(diff.x, diff.y, 0), speed * Time.deltaTime);
-
-            //Missile Hit Player Last Location
-            if (Vector2.Distance(this.transform.position, lastLoc) <= .05f)
-            {
-                // I commented this out because it would often fall short and miss the player if they simply move backwards
-                //Destroy(this.gameObject);
-            }
-        }
-        else if (timer >= angleTime)   //start flying and slowly track player
-        {
-            //start missile pointing at player
-            transform.position = Vector2.MoveTowards(this.transform.position, target.position, speed * Time.deltaTime);
-        }
-
-        
     }
 
     public void OnCollisionEnter2D(Collision2D col)

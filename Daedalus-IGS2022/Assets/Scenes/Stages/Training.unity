@@ -901,12 +901,12 @@ MonoBehaviour:
   titanCount: 4
   lintCount: 0
   flyingCount: 0
-  titanIncreaseTime: 40
-  lintIncreaseTime: 50
-  flyingIncreaseTime: 60
+  titanIncreaseTime: 45
+  lintIncreaseTime: 60
+  flyingIncreaseTime: 90
   maxTitans: 24
-  maxLints: 8
-  maxFlying: 8
+  maxLints: 6
+  maxFlying: 4
   spawnPointA: {fileID: 1675484445}
   spawnPointB: {fileID: 1051545602}
   titanEnemy: {fileID: 7860391418139569039, guid: 221a2d814fed97a408e3af8c9876291b,

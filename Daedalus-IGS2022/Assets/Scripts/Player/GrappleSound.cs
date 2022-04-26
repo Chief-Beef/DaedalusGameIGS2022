@@ -17,7 +17,7 @@ public class GrappleSound : MonoBehaviour
         if (grappling)
         {
             grappleSounds.enabled = true;
-            grappleSounds.volume = rb.velocity.magnitude / 250;
+            grappleSounds.volume = Mathf.Clamp(rb.velocity.magnitude / 200, 0, 0.5f);
             reset = false;
         }
         else if (!grappling && !reset)

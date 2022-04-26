@@ -81,7 +81,7 @@ public class Titan_Spawner : MonoBehaviour
             PlayerPrefs.SetInt("LintKills", lintKills);
 
         if (flyingKills > PlayerPrefs.GetInt("FlyingKills", 0))
-            PlayerPrefs.SetInt("FlyingKills", titanKills);
+            PlayerPrefs.SetInt("FlyingKills", flyingKills);
 
         record.text = "Personal Bests:\n       Titan Kills: " + PlayerPrefs.GetInt("TitanKills", 0).ToString() + "\nRanged Enemy Kills: " + PlayerPrefs.GetInt("LintKills", 0).ToString() + "\nFlying Enemy Kills: " + PlayerPrefs.GetInt("FlyingKills", 0).ToString();
     }

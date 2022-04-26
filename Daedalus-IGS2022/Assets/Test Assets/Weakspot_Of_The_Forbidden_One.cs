@@ -13,23 +13,19 @@ public class Weakspot_Of_The_Forbidden_One : MonoBehaviour
         {
             ScoreBoard.Instance.kill(species);
 
-            if (survival)
+            if (species == "Lint")
             {
-                if (species == "Lint")
-                {
+                transform.parent.GetComponent<SwarmScript>().Fart();
+
+                if (survival)
                     GameObject.FindGameObjectWithTag("KillCounter").GetComponent<Titan_Spawner>().LintKill();
-                }
-                else if (species == "Flying One")
-                    GameObject.FindGameObjectWithTag("KillCounter").GetComponent<Titan_Spawner>().FlyingKill();
             }
-            else
+            else if (species == "Flying One")
             {
-                if (species == "Lint")
-                {
-                    transform.parent.GetComponent<SwarmScript>().Fart();
-                }
-                else if (species == "Flying One")
-                    transform.parent.GetComponent<TheFlyingOne>().InstantiateDeathEffect();
+                transform.parent.GetComponent<TheFlyingOne>().InstantiateDeathEffect();
+
+                if (survival)
+                    GameObject.FindGameObjectWithTag("KillCounter").GetComponent<Titan_Spawner>().FlyingKill();
             }
 
             Destroy(this.transform.parent.gameObject);

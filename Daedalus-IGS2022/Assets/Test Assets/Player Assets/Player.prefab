@@ -270,7 +270,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 76a537e7dda942246a5febfb72d6697d, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -893,13 +893,13 @@ MonoBehaviour:
   lives: 0
   grappleSound: {fileID: 3834208464083241596}
   gSoundController: {fileID: 5603568715492056676}
+  soundPlayer: {fileID: 7640158430013013625}
   explosionForce: 0
   crosshair: {fileID: 5428042358575965871}
   activeColor: {r: 0, g: 1, b: 0.11449838, a: 0.78431374}
   inactiveColor: {r: 0.8460461, g: 1, b: 0, a: 0.78431374}
   items: []
   miniMap: {fileID: 0}
-  frames: 0
 --- !u!50 &3193559472410470518
 Rigidbody2D:
   serializedVersion: 4
@@ -1174,6 +1174,7 @@ MonoBehaviour:
   sounds:
   - {fileID: 8300000, guid: a671930ea8d0ea74cacf62369ce447df, type: 3}
   - {fileID: 8300000, guid: 45a29d151fa6c674e891cc75615799b1, type: 3}
+  - {fileID: 8300000, guid: 49f9d81bbc459df40a6535c9b59729c7, type: 3}
   asource: {fileID: 2195212768841686384}
 --- !u!1 &3193559473748459628
 GameObject:
