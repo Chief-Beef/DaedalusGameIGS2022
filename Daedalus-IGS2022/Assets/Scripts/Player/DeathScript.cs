@@ -234,6 +234,7 @@ public class DeathScript : MonoBehaviour
     public void DeathLaunch(Vector2 launchPoint, float parentPos, float explosionForce)
     {
 
+        ScoreBoard.Instance.killStreak = 0;
 
         //tp ragdoll to player
         this.transform.position = playerPos.position;
