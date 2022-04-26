@@ -1595,7 +1595,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7860391418139569039}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 167.3, y: 18.04, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6377759024173198008}
@@ -1710,6 +1710,7 @@ MonoBehaviour:
     type: 3}
   bloodSpot: {fileID: 5097298216676385155}
   killCount: 0
+  survival: 0
   scalable: 0
   scalePreset: 0
 --- !u!95 &7860391418139569026

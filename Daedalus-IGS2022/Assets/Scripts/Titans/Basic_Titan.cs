@@ -23,7 +23,7 @@ public class Basic_Titan : MonoBehaviour
     // Bool to control whether or not titan is moving
     private bool chasing = true;
     // Stores direction titan is facing (-1 = left, +1 = right)
-    private int chaseDirection = -1;
+    public int chaseDirection;
     // Time it takes for titan to turn around fully
     public float turnTime;
     // Attacking
@@ -62,9 +62,10 @@ public class Basic_Titan : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        if (GameObject.FindGameObjectWithTag("Player") != null)
+            player = GameObject.FindGameObjectWithTag("Player");
 
         if (player.transform.position.x < this.transform.position.x)
             chaseDirection = -1;
@@ -85,14 +86,12 @@ public class Basic_Titan : MonoBehaviour
         // Reverses direction if player is behind titan
         if (player.transform.position.x > this.transform.position.x && chaseDirection == -1)
         {
-            StopCoroutine(ReverseDirection());
-            StartCoroutine(ReverseDirection());
+            transform.eulerAngles = new Vector3 (0, 180, 0);
         }
         // Reverses direction if player is behind titan
         else if (player.transform.position.x < this.transform.position.x && chaseDirection == 1)
         {
-            StopCoroutine(ReverseDirection());
-            StartCoroutine(ReverseDirection());
+            transform.eulerAngles = Vector3.zero;
         }
     }
 
@@ -191,12 +190,12 @@ public class Basic_Titan : MonoBehaviour
             anm.SetBool("attackingHigh", true);
         }
         // Attacks low when player is lower down
-        else if (player.transform.position.y <= this.transform.position.y && player.transform.position.y > this.transform.position.y - 12f * scalePreset)
+        else if (player.transform.position.y <= this.transform.position.y && player.transform.position.y > this.transform.position.y - 12f * transform.localScale.y)
         {
             anm.SetBool("attackingLow", true);
         }
         // Kicks at player if they're really low
-        else if (player.transform.position.y <= this.transform.position.y - 12f * scalePreset)
+        else if (player.transform.position.y <= this.transform.position.y - 12f * transform.localScale.y)
         {
             anm.SetBool("attackingFeet", true);
         }
@@ -221,7 +220,7 @@ public class Basic_Titan : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
-        else
+        else if (player != null)
         {
             if (transform.eulerAngles == Vector3.up * 180)
                 eye.transform.localPosition = (player.transform.position - eye.transform.position).normalized * new Vector2(-1, 1);

@@ -55,8 +55,11 @@ public class SwarmScript : MonoBehaviour
         missileTimer -= Time.deltaTime;
 
         //Find Player
-        playerDirection = player.transform.position.x - this.transform.position.x;
-        playerDistance = Vector2.Distance(player.transform.position, this.transform.position);
+        if (player != null)
+        {
+            playerDirection = player.transform.position.x - this.transform.position.x;
+            playerDistance = Vector2.Distance(player.transform.position, this.transform.position);
+        }
 
         /* if the player is close enought to be chased but not yet in attack distance
         if (playerDistance < attackDistance && lungeTimer < 0f)

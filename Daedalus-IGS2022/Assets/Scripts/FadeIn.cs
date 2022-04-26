@@ -11,6 +11,8 @@ public class FadeIn : MonoBehaviour
     private bool fadingIn = true;
     private bool fadingOut = false;
 
+    public GameObject pauseMenu;
+
     // Set variables and initialize
     private void Start()
     {
@@ -52,7 +54,32 @@ public class FadeIn : MonoBehaviour
                 UnityEngine.SceneManagement.SceneManager.LoadScene(0);
             }
         }
+        // Game can be paused when not fading in or out
+        if (!fadingIn && !fadingOut)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                // Disable menu
+                if (pauseMenu.activeInHierarchy)
+                {
+                    pauseMenu.SetActive(false);
+                    Time.timeScale = 1;
+                }
+                // Enable menu
+                else
+                {
+                    pauseMenu.SetActive(true);
+                    Time.timeScale = 0;
+                }
+            }
+            else if (pauseMenu.activeInHierarchy && Input.GetKeyDown(KeyCode.R))
+            {
+                pauseMenu.SetActive(false);
+                Time.timeScale = 1;
 
+                FadeOut(0);
+            }
+        }
 
     }
 }

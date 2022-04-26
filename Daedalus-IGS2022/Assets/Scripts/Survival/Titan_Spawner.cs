@@ -105,10 +105,13 @@ public class Titan_Spawner : MonoBehaviour
         {
             tit.transform.position = spawnPointA.position + (Vector3.up * 20);
             tit.transform.eulerAngles = new Vector3(0, 180, 0);
+            titScript.chaseDirection = 1;
         }
         else
         {
             tit.transform.position = spawnPointB.position + (Vector3.up * 20);
+            tit.transform.eulerAngles = Vector3.zero;
+            titScript.chaseDirection = -1;
         }
     }
 
