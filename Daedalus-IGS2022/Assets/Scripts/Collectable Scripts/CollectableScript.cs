@@ -18,6 +18,9 @@ public class CollectableScript : MonoBehaviour
     //public CollectableSounds allCollected;
     //public bool collected = false;
 
+    public AudioSource collectibleSoundPlayer;
+    public AudioClip shine;
+
     private void Start()
     {
         UICollect = UICollect.GetComponent<UICol>();
@@ -28,13 +31,17 @@ public class CollectableScript : MonoBehaviour
 
         //FnafYay.PlayOneShot(clip, volume);
         //allCollected = allCollected.GetComponent<CollectableSounds>();
+    }
 
+    // Play pickup sound
+    public void PlaySound()
+    {
+        if (player.items.Count != 7)
+            collectibleSoundPlayer.PlayOneShot(shine);
     }
 
     private void Update()
     {
-
-
         if (isPickedUp == true)
         {
             //figure out what type of item has been picked up and set it to collected
@@ -88,8 +95,6 @@ public class CollectableScript : MonoBehaviour
                     }
                 }
             }
-
-
         }
 
     }

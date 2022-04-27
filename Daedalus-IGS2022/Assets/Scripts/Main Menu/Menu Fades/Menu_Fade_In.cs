@@ -14,16 +14,22 @@ public class Menu_Fade_In : MonoBehaviour
     public Image fadeScreen;
     // Menu music
     public AudioSource menuMusic;
+    private float musicVolume;
     // Bools determine how to load a scene
     private bool loadingByIndex = false;
     private bool loadingByName = false;
     // Stores scene info for scene that's being loaded
     private int levelIndex = 0;
     private string levelName = " ";
+    // Sounds and stuff
+    public AudioSource menuSounds;
+    public AudioClip click;
 
     private void Start()
     {
         Cursor.visible = true;
+        if (menuMusic != null)
+            musicVolume = menuMusic.volume;
     }
 
     private void Update()
@@ -35,7 +41,7 @@ public class Menu_Fade_In : MonoBehaviour
             fadeIn -= Time.deltaTime * 4;
 
             if (menuMusic != null)
-                menuMusic.volume = 1.0f - fadeIn;
+                menuMusic.volume = (1.0f - fadeIn) * musicVolume;
         }
         // Done fading in
         else if (fadingIn && fadeIn <= 0.0f)
@@ -45,7 +51,7 @@ public class Menu_Fade_In : MonoBehaviour
             fadeScreen.enabled = false;
 
             if (menuMusic != null)
-                menuMusic.volume = 1.0f;
+                menuMusic.volume = musicVolume;
         }
         // Begin fading out
         if (fadingOut && fadeIn < 1.1f)
@@ -57,7 +63,7 @@ public class Menu_Fade_In : MonoBehaviour
             fadeIn += Time.deltaTime * 4;
 
             if (menuMusic != null)
-                menuMusic.volume = 1.0f - fadeIn;
+                menuMusic.volume = (1.0f - fadeIn) * musicVolume;
         }
         // Done fading out
         else if (fadingOut && fadeIn >= 1.1f)
@@ -73,6 +79,8 @@ public class Menu_Fade_In : MonoBehaviour
     // Load scene by build index (int)
     public void BeginLoadSceneByIndex(int sceneIndex)
     {
+        menuSounds.PlayOneShot(click);
+
         loadingByIndex = true;
         levelIndex = sceneIndex;
 
@@ -81,6 +89,8 @@ public class Menu_Fade_In : MonoBehaviour
     // Load scene by name (string)
     public void BeginLoadSceneByName(string sceneName)
     {
+        menuSounds.PlayOneShot(click);
+
         loadingByName = true;
         levelName = sceneName;
 

@@ -16,6 +16,7 @@ TagManager:
   - RespawnText
   - missile
   - ColRange
+  - TextScrollSound
   layers:
   - Default
   - TransparentFX

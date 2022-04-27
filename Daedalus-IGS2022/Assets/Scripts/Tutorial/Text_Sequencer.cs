@@ -36,6 +36,14 @@ public class Text_Sequencer : MonoBehaviour
 
     public bool noMoreMessages;
 
+    // Plays sound when text appears
+    public AudioSource textSound;
+
+    private void Awake()
+    {
+        textSound = GameObject.FindGameObjectWithTag("TextScrollSound").GetComponent<AudioSource>();
+    }
+
     private void Update()
     {
         if (tutorialMessage)
@@ -91,8 +99,11 @@ public class Text_Sequencer : MonoBehaviour
     IEnumerator TextAppear()
     {
         yield return new WaitForSeconds(appearTime);
-        // Adds the next character to the text box
+
+        // Adds the next character to the text box and plays a sound
         messageText.text = messageText.text + messages[index][textIndex];
+        textSound.Play();
+
         // Will call coroutine again if there are still characters to display
         if (textIndex < messages[index].Length - 1)
         {

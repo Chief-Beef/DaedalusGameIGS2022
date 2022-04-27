@@ -94,9 +94,6 @@ public class Player_Script : MonoBehaviour
     // Collectables stuff
     public List<string> items;
     public Image miniMap;
-    public AudioSource PickUpSound;
-    public AudioClip clip2;
-    public float volume = 1f;
 
     // Called once when a scene is loaded
     void Awake()
@@ -118,9 +115,6 @@ public class Player_Script : MonoBehaviour
         items = new List<string>();
         //miniMap = GameObject.Find("MiniMapBorder").GetComponent<SpriteRenderer>();
         //mmBorder = mmBorder.GetComponent<SpriteRenderer>();
-
-        PickUpSound = PickUpSound.GetComponent<AudioSource>();
-        PickUpSound.clip = clip2;
     }
 
     // Update called once per physics update
@@ -364,7 +358,7 @@ public class Player_Script : MonoBehaviour
             rb.AddForce(launchAngle * bounciness, ForceMode2D.Impulse);
 
             // grappleSound.Stop();
-            soundPlayer.ChangeVolume(0.075f);
+            soundPlayer.ChangeVolume(0.025f);
             soundPlayer.PlayClip(2);
         }
 
@@ -396,14 +390,13 @@ public class Player_Script : MonoBehaviour
             var itemScript = trigger.gameObject.GetComponent<CollectableScript>();
             if (itemScript.isPickedUp == false)
             {
-                PickUpSound.PlayOneShot(clip2, volume);
                 string itemType = trigger.gameObject.GetComponent<CollectableScript>().itemType;
                 //print("You have collected a: " + itemType);
  
                 items.Add(itemType);
 
                 itemScript.isPickedUp = true;
-                
+                itemScript.PlaySound();
             }
             
         }

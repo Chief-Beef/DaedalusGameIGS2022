@@ -900,6 +900,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tc: {fileID: 1644814384}
+  breakSound: {fileID: 4159583642481549855, guid: 82054623d3d567647b45a82d2da32a46,
+    type: 3}
 --- !u!1 &118992439
 GameObject:
   m_ObjectHideFlags: 0
@@ -3338,7 +3340,7 @@ MonoBehaviour:
   messageText: {fileID: 1905100171}
   messages:
   - Hello and welcome!
-  - To begin, you can move right and left with 'A' & 'D'
+  - To begin, you can move right and left with 'A' and 'D'
   - To grapple, simply hold 'RMB'
   - You can hold the grapple button and it will latch onto the first thing it can
     reach
@@ -3349,8 +3351,8 @@ MonoBehaviour:
     situation
   - Now that you know the basics, destroy these magical floating targets.
   appearTime: 0.01
-  clearTime: 0
-  continueTime: 1.5
+  clearTime: 0.1
+  continueTime: 0.15
   tutorialMessage: 1
   continueBox: {fileID: 1127111112}
   noMoreMessages: 0
@@ -5680,6 +5682,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tc: {fileID: 1644814384}
+  breakSound: {fileID: 4159583642481549855, guid: 82054623d3d567647b45a82d2da32a46,
+    type: 3}
 --- !u!1 &540372767
 GameObject:
   m_ObjectHideFlags: 0
@@ -5792,6 +5796,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tc: {fileID: 1644814384}
+  breakSound: {fileID: 4159583642481549855, guid: 82054623d3d567647b45a82d2da32a46,
+    type: 3}
 --- !u!1 &566167925
 GameObject:
   m_ObjectHideFlags: 0
@@ -12872,6 +12878,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tc: {fileID: 1644814384}
+  breakSound: {fileID: 4159583642481549855, guid: 82054623d3d567647b45a82d2da32a46,
+    type: 3}
 --- !u!1 &1357720842
 GameObject:
   m_ObjectHideFlags: 0
@@ -15595,6 +15603,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tc: {fileID: 1644814384}
+  breakSound: {fileID: 4159583642481549855, guid: 82054623d3d567647b45a82d2da32a46,
+    type: 3}
 --- !u!1 &1681978078
 GameObject:
   m_ObjectHideFlags: 0
@@ -18212,6 +18222,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tc: {fileID: 1644814384}
+  breakSound: {fileID: 4159583642481549855, guid: 82054623d3d567647b45a82d2da32a46,
+    type: 3}
 --- !u!1 &1968030477 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7860391418139569039, guid: 221a2d814fed97a408e3af8c9876291b,
