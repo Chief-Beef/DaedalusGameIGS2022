@@ -923,6 +923,7 @@ MonoBehaviour:
   volume1: 0.025
   volume2: 0.075
   volume3: 0.08
+  player: {fileID: 896046995}
 --- !u!4 &92423954
 Transform:
   m_ObjectHideFlags: 0
@@ -3066,6 +3067,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1473616562665285410, guid: 8bf70f3806c41704d9ec3c5ec5346afe,
+        type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1473616563509628453, guid: 8bf70f3806c41704d9ec3c5ec5346afe,
         type: 3}
       propertyPath: m_Name
@@ -4332,7 +4338,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -766, y: 328}
+  m_AnchoredPosition: {x: -750, y: 328}
   m_SizeDelta: {x: 360, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &705151867
@@ -4646,7 +4652,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -766, y: 450}
+  m_AnchoredPosition: {x: -750, y: 450}
   m_SizeDelta: {x: 360, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &824227201

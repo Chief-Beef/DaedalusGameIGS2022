@@ -53,7 +53,7 @@ public class SwarmScript : MonoBehaviour
         missileTimer -= Time.deltaTime;
 
         //Find Player
-        if (player != null)
+        if (player.activeInHierarchy && player != null)
         {
             playerDirection = player.transform.position.x - this.transform.position.x;
             playerDistance = Vector2.Distance(player.transform.position, this.transform.position);
@@ -137,7 +137,7 @@ public class SwarmScript : MonoBehaviour
 
     public void fireMissile()
     {
-        if (player != null)
+        if (player.activeInHierarchy && player != null)
         {
             Instantiate(missile, missileTube.position + Vector3.up * 1.5f, Quaternion.identity, null);
             //Debug.Log("Missile Launch");

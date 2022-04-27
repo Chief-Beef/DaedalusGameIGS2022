@@ -53,9 +53,17 @@ public class Titan_Spawner : MonoBehaviour
     public float volume2;
     public float volume3;
 
+    // Player
+    public GameObject player;
+
     // Start is called before the first frame update
     void Start()
     {
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+        }
+
         StartCoroutine(IncreaseTitans());
         StartCoroutine(IncreaseLints());
         StartCoroutine(IncreaseFlying());
@@ -69,22 +77,25 @@ public class Titan_Spawner : MonoBehaviour
     // Timer for music
     IEnumerator MusicTimer()
     {
-        yield return new WaitForSeconds(30);
-
-        time++;
-
-        if (time == 3)
+        if (player.activeInHierarchy)
         {
-            track1.volume = 0;
-            track2.volume = volume2;
-        }
-        else if (time == 6)
-        {
-            track2.volume = 0;
-            track3.volume = volume3;
-        }
+            yield return new WaitForSeconds(30);
 
-        StartCoroutine(MusicTimer());
+            time++;
+
+            if (time == 3)
+            {
+                track1.volume = 0;
+                track2.volume = volume2;
+            }
+            else if (time == 6)
+            {
+                track2.volume = 0;
+                track3.volume = volume3;
+            }
+
+            StartCoroutine(MusicTimer());
+        }
     }
 
     // These are called when something is killed
@@ -126,70 +137,79 @@ public class Titan_Spawner : MonoBehaviour
     // Spawns a titan
     public void SpawnTitan()
     {
-        int choice = Random.Range(0, 2);
-        var tit = Instantiate(titanEnemy, Vector3.zero, Quaternion.identity, null);
-        var titScript = tit.GetComponent<Basic_Titan>();
-        titScript.survival = true;
-        titScript.engageDistance = 10000;
+        if (player.activeInHierarchy)
+        {
+            int choice = Random.Range(0, 2);
+            var tit = Instantiate(titanEnemy, Vector3.zero, Quaternion.identity, null);
+            var titScript = tit.GetComponent<Basic_Titan>();
+            titScript.survival = true;
+            titScript.engageDistance = 10000;
 
-        if (titanCount >= maxTitans - 4)
-        {
-            titScript.scalable = true;
-            titScript.scalePreset = Random.Range(0.9f, 2f);
-        }
+            if (titanCount >= maxTitans - 4)
+            {
+                titScript.scalable = true;
+                titScript.scalePreset = Random.Range(0.9f, 2f);
+            }
 
-        if (choice == 0)
-        {
-            tit.transform.position = spawnPointA.position + (Vector3.up * 20);
-            tit.transform.eulerAngles = new Vector3(0, 180, 0);
-            titScript.chaseDirection = 1;
-        }
-        else
-        {
-            tit.transform.position = spawnPointB.position + (Vector3.up * 20);
-            tit.transform.eulerAngles = Vector3.zero;
-            titScript.chaseDirection = -1;
+            if (choice == 0)
+            {
+                tit.transform.position = spawnPointA.position + (Vector3.up * 20);
+                tit.transform.eulerAngles = new Vector3(0, 180, 0);
+                titScript.chaseDirection = 1;
+            }
+            else
+            {
+                tit.transform.position = spawnPointB.position + (Vector3.up * 20);
+                tit.transform.eulerAngles = Vector3.zero;
+                titScript.chaseDirection = -1;
+            }
         }
     }
 
     // Spawns a lint
     public void SpawnLint()
     {
-        int choice = Random.Range(0, 2);
-        var lin = Instantiate(lintEnemy, Vector3.zero, Quaternion.identity, null);
-        lin.transform.GetChild(0).GetComponent<Weakspot_Of_The_Forbidden_One>().survival = true;
-        lin.GetComponent<SwarmScript>().engageDistance = 1500;
+        if (player.activeInHierarchy)
+        {
+            int choice = Random.Range(0, 2);
+            var lin = Instantiate(lintEnemy, Vector3.zero, Quaternion.identity, null);
+            lin.transform.GetChild(0).GetComponent<Weakspot_Of_The_Forbidden_One>().survival = true;
+            lin.GetComponent<SwarmScript>().engageDistance = 1500;
 
-        if (choice == 0)
-        {
-            lin.transform.position = spawnPointA.position;
-        }
-        else
-        {
-            lin.transform.position = spawnPointB.position;
+            if (choice == 0)
+            {
+                lin.transform.position = spawnPointA.position;
+            }
+            else
+            {
+                lin.transform.position = spawnPointB.position;
+            }
         }
     }
 
     // Spawns a flying enemy
     public void SpawnFlying()
     {
-        int choice = Random.Range(0, 2);
-        var fly = Instantiate(flyingEnemy, Vector3.zero, Quaternion.identity, null);
-        fly.transform.GetChild(0).GetComponent<Weakspot_Of_The_Forbidden_One>().survival = true;
-
-        var flyScript = fly.GetComponent<TheFlyingOne>();
-        flyScript.targetPos1 = new Vector3(900, 85, 0);
-        flyScript.targetPos1 = new Vector3(-300, 85, 0);
-
-        //if (choice == 0)
-        //{
-        //    fly.transform.position = spawnPointA.position + (Vector3.up * 100);
-        //    flyScript.moveRight = true;
-        //}
-        //else
+        if (player.activeInHierarchy)
         {
-            fly.transform.position = spawnPointB.position + (Vector3.up * 85);
-            flyScript.moveRight = false;
+            int choice = Random.Range(0, 2);
+            var fly = Instantiate(flyingEnemy, Vector3.zero, Quaternion.identity, null);
+            fly.transform.GetChild(0).GetComponent<Weakspot_Of_The_Forbidden_One>().survival = true;
+
+            var flyScript = fly.GetComponent<TheFlyingOne>();
+            flyScript.targetPos1 = new Vector3(900, 85, 0);
+            flyScript.targetPos1 = new Vector3(-300, 85, 0);
+
+            //if (choice == 0)
+            //{
+            //    fly.transform.position = spawnPointA.position + (Vector3.up * 100);
+            //    flyScript.moveRight = true;
+            //}
+            //else
+            {
+                fly.transform.position = spawnPointB.position + (Vector3.up * 85);
+                flyScript.moveRight = false;
+            }
         }
     }
 

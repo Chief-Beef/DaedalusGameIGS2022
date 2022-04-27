@@ -72,6 +72,8 @@ public class TheFlyingOne : MonoBehaviour
             {
                 if (distanceFromPlayer < rangeRadius && rayHit.collider.tag == "Player")
                     canShoot = true;
+                else if ((shooting || shot) && distanceFromPlayer > rangeRadius)
+                    ResetLaser();
 
                 if (moveRight)
                 {
@@ -110,7 +112,7 @@ public class TheFlyingOne : MonoBehaviour
                 if (distanceFromPlayer > rangeRadius)
                 {
                     isInRange = false;
-                    canShoot = false;
+                    ResetLaser();
                 }
 
                 if (shooting && !shot)
@@ -165,6 +167,20 @@ public class TheFlyingOne : MonoBehaviour
                 }
             }  
         }
+    }
+
+    // Resets laser variables when player exits range
+    private void ResetLaser()
+    {
+        StopAllCoroutines();
+        shot = false;
+        shooting = false;
+        canShoot = false;
+        laser.transform.localScale = Vector3.zero;
+        laserCol.enabled = false;
+        coroutineReset = true;
+
+        GetComponent<AudioPlay>().asource.Stop();
     }
 
     IEnumerator ChargeUp()
