@@ -31283,7 +31283,7 @@ PrefabInstance:
     - target: {fileID: 8854685190570390320, guid: 8bf70f3806c41704d9ec3c5ec5346afe,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8bf70f3806c41704d9ec3c5ec5346afe, type: 3}
@@ -38378,7 +38378,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 4be12bb95daf4da4d93ab636761227ae, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.1
+  m_Volume: 0.05
   m_Pitch: 0.75
   Loop: 1
   Mute: 0
@@ -49094,6 +49094,7 @@ MonoBehaviour:
   tutorialMessage: 0
   continueBox: {fileID: 0}
   noMoreMessages: 0
+  textSound: {fileID: 0}
 --- !u!61 &1899189589
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -53411,7 +53412,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.05
+  m_Volume: 0.03
   m_Pitch: 1
   Loop: 0
   Mute: 0
