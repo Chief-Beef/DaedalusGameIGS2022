@@ -10,7 +10,6 @@ public class TheFlyingOne : MonoBehaviour
     [SerializeField] public float speed = 1f;
     [SerializeField] public float attackSpeed = 1f;
     public bool canMove;
-    public bool firstMove;
     public FlyingEnemyPlayerDetectionScript TheForbidenOneRange;
     public bool isInRange;
     public Transform Player;
@@ -37,7 +36,6 @@ public class TheFlyingOne : MonoBehaviour
 
     void Awake()
     {
-        firstMove = true;
         moveRight = false;
 
         body = TheForbiddenOne.GetComponent<Rigidbody2D>();
@@ -63,19 +61,17 @@ public class TheFlyingOne : MonoBehaviour
             //if x position of enemy is larger than the x position of the target position
             if (transform.position.x > targetPos1.x)
             {
-                firstMove = false;
                 moveRight = false;
             }
             else if (transform.position.x < targetPos2.x)
             {
-                firstMove = true;
                 moveRight = true;
             }
 
             if (canMove && rayHit.collider.tag != "Player" && !shooting)
             {
 
-                if (firstMove && moveRight)
+                if (moveRight)
                 {
                     //transform.position = Vector3.MoveTowards(transform.position, targetPos1, speed * Time.deltaTime);
                     body.AddForce(Vector2.right * speed);

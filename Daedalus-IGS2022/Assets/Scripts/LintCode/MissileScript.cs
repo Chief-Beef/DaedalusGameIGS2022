@@ -45,8 +45,11 @@ public class MissileScript : MonoBehaviour
         //Debug.Log("Missile Fired");
         timer = 0.0f;
 
-        // find player location
-        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        if (GameObject.FindGameObjectWithTag("Player") != null)
+        {
+            // find player location
+            target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        }
         
         
     }

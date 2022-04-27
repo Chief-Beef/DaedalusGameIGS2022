@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: daca4392bdb85f8409b22168b6ddc2a4
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - shootyNoise: {fileID: 3085752946704174146, guid: 3146678a557b0694ab35fab2ac7713b0,
+      type: 3}
+  - windowsError: {fileID: 595649846995553619, guid: c7690a49f0a229341bcb6b107c1d4895,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

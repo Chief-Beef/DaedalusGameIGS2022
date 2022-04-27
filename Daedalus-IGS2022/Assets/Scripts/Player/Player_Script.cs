@@ -376,8 +376,6 @@ public class Player_Script : MonoBehaviour
         {
 
             launchPoint = trigger.ClosestPoint(this.transform.position);
-            
-            //Debug.Log("LaunchPoint:\t" + launchPoint);
 
             //RagDoll Death Script Function Call then destroy the player bc they are dead
             DeathScript.Instance.DeathLaunch(launchPoint, trigger.gameObject.transform.position.x);
@@ -394,7 +392,6 @@ public class Player_Script : MonoBehaviour
                 //print("You have collected a: " + itemType);
  
                 items.Add(itemType);
-                print("Inventory length:" + items.Count);
 
                 itemScript.isPickedUp = true;
                 

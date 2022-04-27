@@ -221,7 +221,6 @@ public class ScoreBoard : MonoBehaviour
                     mkText = "either 1 kill or more than 10 kills or error";
                     break;
             }
-            Debug.Log(mkText);
         }
         else
             multiKillEnd();
@@ -300,7 +299,6 @@ public class ScoreBoard : MonoBehaviour
                 medalDisplay(thirtySpree);
                 break;
             default:
-                Debug.Log("Get More Kills");
                 break;
         }
     }

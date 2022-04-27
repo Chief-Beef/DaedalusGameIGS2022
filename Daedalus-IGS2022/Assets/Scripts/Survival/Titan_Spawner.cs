@@ -40,6 +40,19 @@ public class Titan_Spawner : MonoBehaviour
     public Text kills;
     public Text record;
 
+    // Music stuff
+    public AudioSource track1;
+    public AudioSource track2;
+    public AudioSource track3;
+
+    // Timer to control music
+    private int time = 0;
+
+    // Music volume
+    public float volume1;
+    public float volume2;
+    public float volume3;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,7 +60,31 @@ public class Titan_Spawner : MonoBehaviour
         StartCoroutine(IncreaseLints());
         StartCoroutine(IncreaseFlying());
 
+        track1.volume = volume1;
+        StartCoroutine(MusicTimer());
+
         UpdateText();
+    }
+
+    // Timer for music
+    IEnumerator MusicTimer()
+    {
+        yield return new WaitForSeconds(30);
+
+        time++;
+
+        if (time == 3)
+        {
+            track1.volume = 0;
+            track2.volume = volume2;
+        }
+        else if (time == 6)
+        {
+            track2.volume = 0;
+            track3.volume = volume3;
+        }
+
+        StartCoroutine(MusicTimer());
     }
 
     // These are called when something is killed

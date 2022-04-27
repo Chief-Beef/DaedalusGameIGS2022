@@ -908,7 +908,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 8222413330014051429}
   lungeForce: 50
-  speed: 8
+  speed: 20
   engageDistance: 50
   attackDistance: 40
   ground:
