@@ -4421,6 +4421,7 @@ MonoBehaviour:
   tutorialMessage: 0
   continueBox: {fileID: 501335370}
   noMoreMessages: 0
+  textSound: {fileID: 0}
 --- !u!61 &712326218
 BoxCollider2D:
   m_ObjectHideFlags: 0

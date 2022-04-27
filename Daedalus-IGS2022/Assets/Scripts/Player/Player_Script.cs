@@ -95,12 +95,20 @@ public class Player_Script : MonoBehaviour
     public List<string> items;
     public Image miniMap;
 
+    // White rope for darker stages
+    public bool lightRope;
+
     // Called once when a scene is loaded
     void Awake()
     {
         if (cam == null)
             cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 
+        if (lightRope)
+        {
+            rope.startColor = new Color(0.75f, 0.75f, 0.75f);
+            rope.endColor = new Color(0.75f, 0.75f, 0.75f);
+        }
 
         currentStamina = grappleStamina;
 

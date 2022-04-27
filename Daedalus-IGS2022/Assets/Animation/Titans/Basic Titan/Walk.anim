@@ -2863,9 +2863,9 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 2
-    functionName: PlayClip
+    functionName: PlayWithPitch
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
+    floatParameter: 0.8
     intParameter: 0
     messageOptions: 0

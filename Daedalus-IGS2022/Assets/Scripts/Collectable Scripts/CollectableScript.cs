@@ -86,13 +86,8 @@ public class CollectableScript : MonoBehaviour
                 //ready2PlayFnaf = true;
                 if (ready2PlayFnaf)
                 {
-                    Debug.Log("Play Fnaf Sound");
-                    FnafYay.PlayOneShot(clip, volume);
+                    FnafYay.PlayOneShot(clip, 0.075f);
                     ready2PlayFnaf = false;
-                    if (ready2PlayFnaf == false)
-                    {
-                        Debug.Log("ready2PlayFnaf is false");
-                    }
                 }
             }
         }
