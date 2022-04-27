@@ -15,7 +15,7 @@ public class Enable_Button : MonoBehaviour
     private void Start()
     {
         // Progression int is used to keep track of how far player has progressed
-        int progression = PlayerPrefs.GetInt("Level", 0);
+        int progression = PlayerPrefs.GetInt("Level", -1);
 
         if (requiredLevel <= progression)
         {
