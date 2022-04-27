@@ -903,8 +903,8 @@ MonoBehaviour:
   flyingCount: 0
   titanIncreaseTime: 45
   lintIncreaseTime: 60
-  flyingIncreaseTime: 12
-  maxTitans: 24
+  flyingIncreaseTime: 90
+  maxTitans: 20
   maxLints: 6
   maxFlying: 4
   spawnPointA: {fileID: 1675484445}

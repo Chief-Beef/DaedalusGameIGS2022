@@ -909,8 +909,8 @@ MonoBehaviour:
   rb: {fileID: 8222413330014051429}
   lungeForce: 50
   speed: 20
-  engageDistance: 50
-  attackDistance: 40
+  engageDistance: 125
+  attackDistance: 75
   ground:
     serializedVersion: 2
     m_Bits: 768

@@ -355,7 +355,7 @@ public class Player_Script : MonoBehaviour
 
             rb.AddForce(launchAngle * bounciness, ForceMode2D.Impulse);
 
-            grappleSound.Stop();
+            // grappleSound.Stop();
             soundPlayer.ChangeVolume(0.075f);
             soundPlayer.PlayClip(2);
         }

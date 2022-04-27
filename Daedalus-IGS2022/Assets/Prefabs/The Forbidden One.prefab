@@ -181,7 +181,6 @@ MonoBehaviour:
   laser: {fileID: 3935672726047737384}
   gun: {fileID: 1026601617269540529}
   fart: {fileID: 861854431766076844, guid: 16525ee86cb57a74bb91f05795603ee4, type: 3}
-  test: 0
 --- !u!212 &6816369097615304843
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5726,7 +5725,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: a270b5dc9dfd9b1459526a5b2122018a, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.2
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 1
   Mute: 0

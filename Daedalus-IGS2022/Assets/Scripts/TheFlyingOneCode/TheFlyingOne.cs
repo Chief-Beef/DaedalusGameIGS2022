@@ -31,7 +31,7 @@ public class TheFlyingOne : MonoBehaviour
     public GameObject gun;
     private float timer = 1f;
     public GameObject fart;
-    public bool test;
+    private bool canShoot = false;
 
 
     void Awake()
@@ -68,8 +68,10 @@ public class TheFlyingOne : MonoBehaviour
                 moveRight = true;
             }
 
-            if (canMove && rayHit.collider.tag != "Player" && !shooting)
+            if (canMove && !shooting && !canShoot)
             {
+                if (distanceFromPlayer < rangeRadius && rayHit.collider.tag == "Player")
+                    canShoot = true;
 
                 if (moveRight)
                 {
@@ -95,9 +97,6 @@ public class TheFlyingOne : MonoBehaviour
             {
                 if (rayHit.collider != null)
                 {
-                    if (test)
-                        Debug.Log(rayHit.collider.tag);
-
                     if (coroutineReset && !shot && rayHit.collider.gameObject.tag == "Player" && distanceFromPlayer < rangeRadius)
                     {
                         coroutineReset = false;
@@ -111,6 +110,7 @@ public class TheFlyingOne : MonoBehaviour
                 if (distanceFromPlayer > rangeRadius)
                 {
                     isInRange = false;
+                    canShoot = false;
                 }
 
                 if (shooting && !shot)
@@ -169,10 +169,13 @@ public class TheFlyingOne : MonoBehaviour
 
     IEnumerator ChargeUp()
     {
-        yield return new WaitForSeconds(2);
-        shot = true;
-        timer = 1f;
-        StartCoroutine(ShootDelay());
+        if (Player != null)
+        {
+            yield return new WaitForSeconds(2);
+            shot = true;
+            timer = 1f;
+            StartCoroutine(ShootDelay());
+        }
     }
 
     IEnumerator ShootDelay()

@@ -178,17 +178,17 @@ public class Titan_Spawner : MonoBehaviour
         fly.transform.GetChild(0).GetComponent<Weakspot_Of_The_Forbidden_One>().survival = true;
 
         var flyScript = fly.GetComponent<TheFlyingOne>();
-        flyScript.targetPos1 = new Vector3(900, 100, 0);
-        flyScript.targetPos1 = new Vector3(-300, 100, 0);
+        flyScript.targetPos1 = new Vector3(900, 85, 0);
+        flyScript.targetPos1 = new Vector3(-300, 85, 0);
 
-        if (choice == 0)
+        //if (choice == 0)
+        //{
+        //    fly.transform.position = spawnPointA.position + (Vector3.up * 100);
+        //    flyScript.moveRight = true;
+        //}
+        //else
         {
-            fly.transform.position = spawnPointA.position + (Vector3.up * 100);
-            flyScript.moveRight = true;
-        }
-        else
-        {
-            fly.transform.position = spawnPointB.position + (Vector3.up * 100);
+            fly.transform.position = spawnPointB.position + (Vector3.up * 85);
             flyScript.moveRight = false;
         }
     }
