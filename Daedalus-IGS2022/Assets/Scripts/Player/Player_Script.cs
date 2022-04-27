@@ -269,8 +269,10 @@ public class Player_Script : MonoBehaviour
 
     private void Update()
     {
+        Vector2 dynamicSensitivity = new Vector2(Screen.width / 1920, Screen.height / 1080);
+
         // Mouse position
-        mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+        mousePos = cam.ScreenToWorldPoint(Input.mousePosition * dynamicSensitivity);
 
         // Sets crosshair position
         crosshair.transform.position = new Vector2(mousePos.x, mousePos.y);
